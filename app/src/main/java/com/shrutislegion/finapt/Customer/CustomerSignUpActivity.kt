@@ -14,6 +14,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Modules.Customers
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.SignInActivity
 import com.shrutislegion.finapt.databinding.ActivityCustomerSignUpBinding
 
 @Suppress("DEPRECATION")
@@ -51,6 +52,9 @@ class CustomerSignUpActivity : AppCompatActivity() {
                                 Log.d(TAG, "Email sent.")
                                 database.getReference().child("Customers").child(id.toString()).setValue(customer)
                                 Toast.makeText(this, "Registered Successfully, Please Verify Your Account and login!", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, SignInActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
                             else {
                                 Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()

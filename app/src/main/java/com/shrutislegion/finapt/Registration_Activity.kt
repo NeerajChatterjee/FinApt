@@ -29,5 +29,11 @@ class Registration_Activity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        signIn.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
