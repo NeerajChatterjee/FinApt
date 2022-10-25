@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "261654979953",
+    "project_id": "finapt-6fcb9",
+    "storage_bucket": "finapt-6fcb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261654979953:android:76be677c528531732e02d0",
+        "android_client_info": {
+          "package_name": "com.shrutislegion.finapt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261654979953-v9u7sjvkstratadfafgblkpd1l4hojvs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shrutislegion.finapt",
+            "certificate_hash": "d33c0c49a4b6bf3dceda5530ec6d3dd00449ca77"
+          }
+        },
+        {
+          "client_id": "261654979953-iq7ue0bqbd39j8475ls2ffre1tl0dgt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWG_YaUN1YJWEhXzfmFdAVGZOjmQJRC0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261654979953-iq7ue0bqbd39j8475ls2ffre1tl0dgt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
