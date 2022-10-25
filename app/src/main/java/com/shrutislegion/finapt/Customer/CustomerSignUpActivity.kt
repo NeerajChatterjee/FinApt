@@ -63,6 +63,7 @@ class CustomerSignUpActivity : AppCompatActivity() {
 
                 }
                 else {
+                    dialog.dismiss()
                     Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
                 }
             }
