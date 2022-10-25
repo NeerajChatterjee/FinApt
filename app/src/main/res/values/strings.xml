@@ -5,4 +5,8 @@
     <string name="register_as_shopkeeper">Register as Shopkeeper</string>
     <string name="register_as_customer">Register as Customer</string>
     <string name="sign_in">Sign In</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_email_address">Enter Email Address</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
