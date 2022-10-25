@@ -13,6 +13,13 @@
         android:theme="@style/Theme.FinApt"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerDashboard"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ShopSignUpActivity"
             android:exported="false">
             <meta-data

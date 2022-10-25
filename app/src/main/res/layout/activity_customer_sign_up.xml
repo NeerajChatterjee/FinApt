@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".Customer.CustomerSignUpActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
