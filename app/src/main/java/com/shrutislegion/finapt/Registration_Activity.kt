@@ -16,8 +16,8 @@ class Registration_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         database = FirebaseDatabase.getInstance()
-        var myRef = database.getReference("message")
-        myRef.setValue("Value")
+//        var myRef = database.getReference("message")
+//        myRef.setValue("Value")
         shop.setOnClickListener {
             val intent = Intent(this, ShopSignUpActivity::class.java)
             startActivity(intent)
