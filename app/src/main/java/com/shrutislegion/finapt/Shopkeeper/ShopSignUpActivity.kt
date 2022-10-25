@@ -2,6 +2,7 @@ package com.shrutislegion.finapt.Shopkeeper
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.shrutislegion.finapt.R
 
 class ShopSignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
