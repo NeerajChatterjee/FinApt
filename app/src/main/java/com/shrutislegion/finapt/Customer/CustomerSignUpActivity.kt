@@ -12,7 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.shrutislegion.finapt.Customer.Modules.Customers
+import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.SignInActivity
 import com.shrutislegion.finapt.databinding.ActivityCustomerSignUpBinding
@@ -42,9 +42,9 @@ class CustomerSignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
                 if(it.isSuccessful()){
                     dialog.dismiss()
-                    val customer: Customers = Customers(binding.custname.text.toString(), binding.email.text.toString(), binding.password.text.toString())
                     val id = it.result.user?.uid
                     val user = Firebase.auth.currentUser
+                    val customer: CustomerInfo = CustomerInfo(binding.email.text.toString(), binding.password.text.toString(), user!!.uid)
 
                     user!!.sendEmailVerification()
                         .addOnCompleteListener { task ->

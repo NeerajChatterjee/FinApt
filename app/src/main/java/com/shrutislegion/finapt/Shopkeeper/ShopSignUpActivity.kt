@@ -11,9 +11,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.shrutislegion.finapt.Customer.Modules.Customers
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Shopkeeper.Modules.Shop
+import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.databinding.ActivityShopSignUpBinding
 import kotlinx.android.synthetic.main.activity_registration.*
 
@@ -44,9 +43,9 @@ class ShopSignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
                 if(it.isSuccessful()){
                     dialog.dismiss()
-                    val shopkeeper: Shop = Shop(binding.shopkeeperName.text.toString(), binding.email.text.toString(), binding.password.text.toString())
                     val id = it.result.user?.uid
                     val user = Firebase.auth.currentUser
+                    val shopkeeper: ShopkeeperInfo = ShopkeeperInfo(binding.email.text.toString(), binding.password.text.toString(), user!!.uid)
 
                     user!!.sendEmailVerification()
                         .addOnCompleteListener { task ->

@@ -88,7 +88,9 @@ class MainActivity : AppCompatActivity() {
                 this?.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
-                        R.drawable.indicator_inactive
+                        R.drawable.ic_launcher_background
+//                        R.drawable.indicator_inactive
+
                     )
                 )
                 this?.layoutParams = layoutParams

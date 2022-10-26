@@ -2,6 +2,7 @@ package com.shrutislegion.finapt
 
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
@@ -22,17 +24,15 @@ import com.shrutislegion.finapt.databinding.ActivitySignInBinding
 
 @Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
-    lateinit var binding: ActivitySignInBinding
-    lateinit var auth: FirebaseAuth
-    lateinit var database: FirebaseDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        binding = ActivitySignInBinding.inflate(layoutInflater)
+        val binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = Firebase.auth
-        database = Firebase.database
+        val auth = Firebase.auth
+        val database = Firebase.database
 
         val dialog = ProgressDialog(this)
         // Creating a dialog while the user is being Signed In
@@ -53,50 +53,12 @@ class SignInActivity : AppCompatActivity() {
                         val id = auth.currentUser!!.uid
                         val custReference = database.reference.child("Customers")
                         Toast.makeText(this@SignInActivity, id, Toast.LENGTH_SHORT).show()
+
+                        custReference.child(auth.currentUser!!.uid).child("emailVerified").setValue(true)
+
                         // Read from the database
-                        custReference.addValueEventListener(object : ValueEventListener {
+                        checkLoginType(id)
 
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                if (snapshot.child(id).exists()) {
-                                    found = true
-                                    Toast.makeText(
-                                        this@SignInActivity,
-                                        "Signed In as Customers",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent =
-                                        Intent(this@SignInActivity, CustomerDashboard::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.w(TAG, "Failed to read value.", error.toException())
-                            }
-
-                        })
-                        val shopReference = database.reference.child("Shopkeepers")
-                        shopReference.addValueEventListener(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                if (snapshot.child(id).exists()) {
-                                    found = true
-                                    Toast.makeText(
-                                        this@SignInActivity,
-                                        "Signed In as Shopkeepers",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent =
-                                        Intent(this@SignInActivity, ShopkeeperDashboard::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.w(TAG, "Failed to read value.", error.toException())
-                            }
-                        })
                     } else {
                         Toast.makeText(this, "Please Verify Your Email Address", Toast.LENGTH_SHORT)
                             .show()
@@ -107,5 +69,53 @@ class SignInActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun checkLoginType(id: String){
+
+        val database = Firebase.database
+        val custReference = database.reference.child("Customers")
+        custReference.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(id).exists()) {
+                    Toast.makeText(
+                        this@SignInActivity,
+                        "Signed In as Customers",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val intent =
+                        Intent(this@SignInActivity, CustomerDashboard::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+
+        })
+
+        val shopReference = database.reference.child("Shopkeepers")
+        shopReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(id).exists()) {
+                    Toast.makeText(
+                        this@SignInActivity,
+                        "Signed In as Shopkeepers",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val intent =
+                        Intent(this@SignInActivity, ShopkeeperDashboard::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
     }
 }

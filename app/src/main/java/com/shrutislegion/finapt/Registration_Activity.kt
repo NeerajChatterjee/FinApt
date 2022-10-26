@@ -21,19 +21,16 @@ class Registration_Activity : AppCompatActivity() {
         shop.setOnClickListener {
             val intent = Intent(this, ShopSignUpActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         cust.setOnClickListener {
             val intent = Intent(this, CustomerSignUpActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         signIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }
