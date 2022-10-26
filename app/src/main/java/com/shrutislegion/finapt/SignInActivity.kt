@@ -54,8 +54,6 @@ class SignInActivity : AppCompatActivity() {
                         val custReference = database.reference.child("Customers")
                         Toast.makeText(this@SignInActivity, id, Toast.LENGTH_SHORT).show()
 
-                        custReference.child(auth.currentUser!!.uid).child("emailVerified").setValue(true)
-
                         // Read from the database
                         checkLoginType(id)
 
@@ -79,6 +77,9 @@ class SignInActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(id).exists()) {
+
+                    custReference.child(Firebase.auth.currentUser!!.uid).child("emailVerified").setValue(true)
+
                     Toast.makeText(
                         this@SignInActivity,
                         "Signed In as Customers",
@@ -101,6 +102,9 @@ class SignInActivity : AppCompatActivity() {
         shopReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(id).exists()) {
+
+                    shopReference.child(Firebase.auth.currentUser!!.uid).child("emailVerified").setValue(true)
+
                     Toast.makeText(
                         this@SignInActivity,
                         "Signed In as Shopkeepers",
