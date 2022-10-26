@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cnb_unselectedColor="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/track"
+        android:title="Track"
+        android:icon="@drawable/ic_track"
+        app:cnb_backgroundColor = "@color/white"
+        app:cnb_iconColor = "#000000"
+        app:cnb_textColor = "#000000"
+        />
+
+    <item
+        android:id="@+id/request"
+        android:title="Requests"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor = "@color/white"
+        app:cnb_iconColor = "#000000"
+        app:cnb_textColor = "#000000"
+        />
+    <item
+        android:id="@+id/expense"
+        android:title="Expenses"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor = "@color/white"
+        app:cnb_iconColor = "#000000"
+        app:cnb_textColor = "#000000"
+        />
+
+    <item
+        android:id="@+id/chat"
+        android:title="Chat"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor = "@color/white"
+        app:cnb_iconColor = "#000000"
+        app:cnb_textColor = "#000000"
+        />
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor = "@color/white"
+        app:cnb_iconColor = "#000000"
+        app:cnb_textColor = "#000000"
+        />
+</menu>
