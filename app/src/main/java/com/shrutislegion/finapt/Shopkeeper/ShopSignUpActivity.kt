@@ -22,6 +22,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
+import com.shrutislegion.finapt.SignInActivity
 import com.shrutislegion.finapt.databinding.ActivityShopSignUpBinding
 import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.android.synthetic.main.activity_shop_sign_up.*
@@ -69,6 +70,9 @@ class ShopSignUpActivity : AppCompatActivity() {
                                 Log.d(ContentValues.TAG, "Email sent.")
                                 database.getReference().child("Shopkeepers").child(id.toString()).setValue(shopkeeper)
                                 Toast.makeText(this, "Registered Successfully, Please Verify Your Account and login!", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, SignInActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
                             else {
                                 Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
