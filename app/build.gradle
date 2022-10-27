@@ -105,5 +105,4 @@ dependencies {
 
     // for bottom nav bar
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.3.4'
-
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "546172382232",
+    "firebase_url": "https://finapt-7ed40-default-rtdb.firebaseio.com",
     "project_id": "finapt-7ed40",
     "storage_bucket": "finapt-7ed40.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "546172382232-cqg99mh9m8qkjbpdn06qm626jjusmqg5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shrutislegion.finapt",
+            "certificate_hash": "9b20271c916e7619e07a792ccecbf213cc09092e"
+          }
+        },
         {
           "client_id": "546172382232-dnmvp68l05evc8ifj7ijpcrcc4c88gcd.apps.googleusercontent.com",
           "client_type": 3
