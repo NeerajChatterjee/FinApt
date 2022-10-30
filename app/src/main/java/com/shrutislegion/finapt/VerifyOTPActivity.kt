@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import com.shrutislegion.finapt.databinding.ActivityVerifyOtpactivityBinding
+import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.android.synthetic.main.activity_shopkeeper_create_profile.*
 import kotlinx.android.synthetic.main.activity_verify_otpactivity.*
 import java.util.concurrent.TimeUnit
@@ -72,7 +75,7 @@ class VerifyOTPActivity : AppCompatActivity() {
         dialog.setCanceledOnTouchOutside(false)
 
         // callback
-        val auth = FirebaseAuth.getInstance()
+        val auth = Firebase.auth
 
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -152,23 +155,60 @@ class VerifyOTPActivity : AppCompatActivity() {
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 val user = task.result?.user
-
                                 auth.signOut()
 
-                                auth.signInWithEmailAndPassword(customerInfo.mail!!,
-                                    customerInfo.password!!
-                                ).addOnCompleteListener {
-                                    if(it.isSuccessful){
-                                        saveDataAndLogin(type, customerInfo, shopkeeperInfo, binding)
+//                                val data = Firebase.auth.currentUser!!.providerData
+//
+//                                for(info in data){
+//                                    Toast.makeText(this, info.providerId, Toast.LENGTH_LONG).show()
+//                                }
+
+                                if(type == "Customers"){
+                                    if(customerInfo.password.isEmpty()){
+
+                                        val firebaseCredential = GoogleAuthProvider.getCredential(customerInfo.idToken, null)
+                                        firebaseLogin(auth, type, customerInfo, shopkeeperInfo, binding, firebaseCredential)
                                     }
                                     else{
-                                        Toast.makeText(this, getString(R.string.some_error_occurred), Toast.LENGTH_LONG).show()
-                                        auth.signOut()
-                                        startActivity(Intent(this, SignInActivity::class.java))
-                                        finish()
+                                        // custom registration was made previously
+                                        auth.signInWithEmailAndPassword(customerInfo.mail!!,
+                                            customerInfo.password
+                                        ).addOnCompleteListener {
+                                            if(it.isSuccessful){
+                                                saveDataAndLogin(type, customerInfo, shopkeeperInfo, binding)
+                                            }
+                                            else{
+                                                Toast.makeText(this, getString(R.string.some_error_occurred), Toast.LENGTH_LONG).show()
+                                                auth.signOut()
+                                                startActivity(Intent(this, SignInActivity::class.java))
+                                                finish()
+                                            }
+                                        }
                                     }
                                 }
+                                else if(type == "Shopkeepers"){
+                                    if(shopkeeperInfo.password.isEmpty()){
+                                        val firebaseCredential = GoogleAuthProvider.getCredential(shopkeeperInfo.idToken, null)
 
+                                        firebaseLogin(auth, type, customerInfo, shopkeeperInfo, binding, firebaseCredential)
+                                    }
+                                    else{
+                                        // custom registration was made previously
+                                        auth.signInWithEmailAndPassword(shopkeeperInfo.mail!!,
+                                            shopkeeperInfo.password
+                                        ).addOnCompleteListener {
+                                            if(it.isSuccessful){
+                                                saveDataAndLogin(type, customerInfo, shopkeeperInfo, binding)
+                                            }
+                                            else{
+                                                Toast.makeText(this, getString(R.string.some_error_occurred), Toast.LENGTH_LONG).show()
+                                                auth.signOut()
+                                                startActivity(Intent(this, SignInActivity::class.java))
+                                                finish()
+                                            }
+                                        }
+                                    }
+                                }
 
                             } else {
                                 dialog.dismiss()
@@ -182,6 +222,26 @@ class VerifyOTPActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun firebaseLogin(
+        auth: FirebaseAuth,
+        type: String,
+        customerInfo: CustomerInfo,
+        shopkeeperInfo: ShopkeeperInfo,
+        binding: ActivityVerifyOtpactivityBinding,
+        firebaseCredential: AuthCredential
+    ) {
+        FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
+            .addOnSuccessListener {
+                saveDataAndLogin(type, customerInfo, shopkeeperInfo, binding)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, getString(R.string.some_error_occurred), Toast.LENGTH_LONG).show()
+                auth.signOut()
+                startActivity(Intent(this, SignInActivity::class.java))
+                finish()
+            }
     }
 
     private fun saveDataAndLogin(type: String?, customerInfo: CustomerInfo, shopkeeperInfo: ShopkeeperInfo, binding: ActivityVerifyOtpactivityBinding) {
@@ -199,13 +259,13 @@ class VerifyOTPActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.profile_created_unsuccessfully), Toast.LENGTH_SHORT).show()
                 }
 
-//            FirebaseDatabase.getInstance().reference.child("AllUsers").child(
-//                customerInfo.id!!
-//            ).setValue(customerInfo)
-//
-//            FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers").child(
-//                customerInfo.phone!!
-//            ).setValue(customerInfo.id!!)
+            FirebaseDatabase.getInstance().reference.child("AllUsers").child(
+                customerInfo.id!!
+            ).setValue(customerInfo)
+
+            FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers").child(
+                customerInfo.phone!!
+            ).setValue(customerInfo.id!!)
 
             dialog.dismiss()
 
@@ -226,13 +286,13 @@ class VerifyOTPActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.profile_created_unsuccessfully), Toast.LENGTH_SHORT).show()
                 }
 
-//            FirebaseDatabase.getInstance().reference.child("AllUsers").child(
-//                shopkeeperInfo.id!!
-//            ).setValue(customerInfo)
-//
-//            FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers").child(
-//                shopkeeperInfo.phone!!
-//            ).setValue(shopkeeperInfo.id!!)
+            FirebaseDatabase.getInstance().reference.child("AllUsers").child(
+                shopkeeperInfo.id!!
+            ).setValue(shopkeeperInfo)
+
+            FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers").child(
+                shopkeeperInfo.phone!!
+            ).setValue(shopkeeperInfo.id!!)
 
             dialog.dismiss()
 

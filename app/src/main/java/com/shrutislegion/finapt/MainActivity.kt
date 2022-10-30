@@ -1,18 +1,18 @@
 package com.shrutislegion.finapt
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
-import com.shrutislegion.finapt.Customer.CustomerSignUpActivity
 import com.shrutislegion.finapt.IntroSlideAdapters.IntroSlide
 import com.shrutislegion.finapt.IntroSlideAdapters.IntroSliderAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     private val introSliderAdapter = IntroSliderAdapter(
@@ -121,3 +121,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
+//fun onClick(v: View) {
+//    when (v.getId()) {
+//        R.id.sign_in_button -> signIn()
+//    }
+//}

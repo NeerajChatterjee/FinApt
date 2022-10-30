@@ -50,11 +50,12 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
     var address: String = ""
     var phoneNumber: String = ""
     var mail: String? = null
-    var password: String? = null
+    var password: String = ""
     var profilePic: String = ""
     var gstin: String = ""
     var phoneVerified: Boolean = false
     var emailVerified: Boolean = false
+    var idToken: String = ""
     lateinit var currUser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -243,7 +244,9 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
                                     // Set other dialog properties
                                     alertDialog.setCancelable(false)
                                     dialogPhone.dismiss()
-                                    alertDialog.show()
+                                    if(!this@ShopkeeperCreateProfileActivity.isFinishing){
+                                        alertDialog.show()
+                                    }
                                 }
                                 else{
                                     updatePhoneUI(binding)
@@ -291,6 +294,7 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
                     emailVerified = dataSnapshot.child("emailVerified").value as Boolean
                     phoneVerified = dataSnapshot.child("phoneVerified").value as Boolean
                     profilePic = dataSnapshot.child("profilePic").value.toString()
+                    idToken = dataSnapshot.child("idToken").value.toString()
                 }
             }
 
@@ -345,7 +349,7 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
                 shopName = binding.shopkeeperName.text.toString().trim()
                 gstin = binding.shopkeeperGSTIn.text.toString().trim()
 
-                val info: ShopkeeperInfo = ShopkeeperInfo(gender = gender, shopName = shopName, gstIn = gstin ,state = state, city = city, address = address, phone = phoneNumber, name = name, pincode = pincode, id = currUser, mail = mail, password = password, profilePic = profilePic, emailVerified = emailVerified, phoneVerified = phoneVerified)
+                val info: ShopkeeperInfo = ShopkeeperInfo(gender = gender, shopName = shopName, gstIn = gstin ,state = state, city = city, address = address, phone = phoneNumber, name = name, pincode = pincode, id = currUser, mail = mail, password = password, profilePic = profilePic, emailVerified = emailVerified, phoneVerified = phoneVerified, idToken = idToken)
 
 
                 // Open Verify OTP Activity and use shared resources

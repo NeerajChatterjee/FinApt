@@ -25,10 +25,12 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.VerifyOTPActivity
@@ -57,10 +59,11 @@ class CustomerCreateProfileActivity : AppCompatActivity() {
     var address: String = ""
     var phoneNumber: String = ""
     var mail: String? = null
-    var password: String? = null
+    var password: String = ""
     var profilePic: String = ""
     var phoneVerified: Boolean = false
     var emailVerified: Boolean = false
+    var idToken: String = ""
     lateinit var currUser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -311,6 +314,7 @@ class CustomerCreateProfileActivity : AppCompatActivity() {
                     emailVerified = dataSnapshot.child("emailVerified").value as Boolean
                     phoneVerified = dataSnapshot.child("phoneVerified").value as Boolean
                     profilePic = dataSnapshot.child("profilePic").value.toString()
+                    idToken = dataSnapshot.child("idToken").value.toString()
                 }
             }
 
@@ -363,7 +367,7 @@ class CustomerCreateProfileActivity : AppCompatActivity() {
                 address = binding.customerAddress.text.toString().trim()
                 phoneNumber = binding.customerPhoneNumber.text.toString().trim()
 
-                val info: CustomerInfo = CustomerInfo(gender = gender, dob = dob, state = state, city = city, address = address, phone = phoneNumber, name = name, pincode = pincode, id = currUser, mail = mail, password = password, profilePic = profilePic, emailVerified = emailVerified, phoneVerified = phoneVerified)
+                val info: CustomerInfo = CustomerInfo(gender = gender, dob = dob, state = state, city = city, address = address, phone = phoneNumber, name = name, pincode = pincode, id = currUser, mail = mail, password = password, profilePic = profilePic, emailVerified = emailVerified, phoneVerified = phoneVerified, idToken = idToken)
 
 
                 // Open Verify OTP Activity and use shared resources

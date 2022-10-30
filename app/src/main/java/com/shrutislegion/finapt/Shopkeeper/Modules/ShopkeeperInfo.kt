@@ -2,7 +2,7 @@ package com.shrutislegion.finapt.Shopkeeper.Modules
 
 data class ShopkeeperInfo(
     var mail:String? = null,
-    var password:String? = null,
+    var password:String = "",
     var id:String? = null,
     var name: String = "",
     var gender: String = "",
@@ -16,4 +16,5 @@ data class ShopkeeperInfo(
     var city: String = "",
     var pincode: String = "",
     var address: String = "",
-)
+    var idToken: String = ""
+) : java.io.Serializable

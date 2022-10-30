@@ -146,6 +146,7 @@ class SplashScreen : AppCompatActivity() {
                                 }
                             }
                             else{
+                                Firebase.auth.signOut()
                                 val intent = Intent(this@SplashScreen, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
@@ -153,6 +154,7 @@ class SplashScreen : AppCompatActivity() {
                         }
 
                         override fun onCancelled(error: DatabaseError) {
+                            Firebase.auth.signOut()
                             val intent = Intent(this@SplashScreen, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -162,6 +164,7 @@ class SplashScreen : AppCompatActivity() {
 
             }
             else {
+                Firebase.auth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
