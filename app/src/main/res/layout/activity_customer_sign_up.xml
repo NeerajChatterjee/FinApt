@@ -82,6 +82,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
+            android:id="@id/orLinearLayout"
             >
 
             <View
@@ -105,6 +106,16 @@
                 android:background="@color/slate_300"
                 />
         </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/orLinearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
