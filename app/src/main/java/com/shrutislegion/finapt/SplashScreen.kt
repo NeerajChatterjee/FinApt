@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
+import com.shrutislegion.finapt.Customer.CustomerCreateProfileActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 
 class SplashScreen : AppCompatActivity() {
@@ -31,6 +32,21 @@ class SplashScreen : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
+        if(user == null){
+            Toast.makeText(
+                this@SplashScreen,
+                "null",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            Toast.makeText(
+                this@SplashScreen,
+                auth.currentUser!!.uid,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         if (user != null && user.isEmailVerified) {
 
             val id = auth.currentUser!!.uid
@@ -41,11 +57,6 @@ class SplashScreen : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child(id).exists()) {
-                        Toast.makeText(
-                            this@SplashScreen,
-                            "Signed In as Customers",
-                            Toast.LENGTH_SHORT
-                        ).show()
                         isCust = true
                     }
                 }
@@ -60,11 +71,6 @@ class SplashScreen : AppCompatActivity() {
             shopReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child(id).exists()) {
-                        Toast.makeText(
-                            this@SplashScreen,
-                            "Signed In as Shopkeepers",
-                            Toast.LENGTH_SHORT
-                        ).show()
                         isShop = true
                     }
                 }
@@ -79,19 +85,84 @@ class SplashScreen : AppCompatActivity() {
 
             // pass the value player to the next activity and then open the Home activity according to the boolean value
             if (isCust) {
-                val intent = Intent(this@SplashScreen, CustomerDashboard::class.java)
-                startActivity(intent)
-                finish()
+
+                FirebaseDatabase.getInstance().reference.child("Customers").child(Firebase.auth.currentUser!!.uid).child("phoneVerified")
+                    .addListenerForSingleValueEvent(object: ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if(snapshot.exists()){
+                                if(snapshot.value == true){
+                                    Toast.makeText(
+                                        this@SplashScreen,
+                                        "Signed In as Customers",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(this@SplashScreen, CustomerDashboard::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                else{
+                                    Firebase.auth.signOut()
+                                    val intent = Intent(this@SplashScreen, SignInActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                            else{
+                                val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
+                    })
+
             }
             else if (isShop) {
-                val intent = Intent(this@SplashScreen, ShopkeeperDashboard::class.java)
-                startActivity(intent)
-                finish()
+                FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(Firebase.auth.currentUser!!.uid).child("phoneVerified")
+                    .addListenerForSingleValueEvent(object: ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if(snapshot.exists()){
+                                if(snapshot.value == true){
+                                    Toast.makeText(
+                                        this@SplashScreen,
+                                        "Signed In as Shopkeepers",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(this@SplashScreen, ShopkeeperDashboard::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                else{
+                                    Firebase.auth.signOut()
+                                    val intent = Intent(this@SplashScreen, SignInActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                            else{
+                                val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
+                    })
 
             }
             else {
                 val intent = Intent(this, MainActivity::class.java)
-                //intent.putExtra(MainActivity.EXTRA_LOGINTYPE, "$player")
                 startActivity(intent)
                 finish()
             }

@@ -37,7 +37,7 @@ class CustomerSignUpActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
-        binding.Signup.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             dialog.show()
             auth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
                 if(it.isSuccessful()){

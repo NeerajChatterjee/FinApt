@@ -40,10 +40,10 @@ class ShopSignUpActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
-        binding.Signup.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             dialog.show()
             auth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
-                if(it.isSuccessful()){
+                if(it.isSuccessful){
                     dialog.dismiss()
                     val id = it.result.user?.uid
                     val user = Firebase.auth.currentUser

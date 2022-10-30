@@ -9,6 +9,10 @@ data class CustomerInfo (
     var dob: String = "",
     var profilePic: String = "",
     var phone: String = "",
+    var state: String = "",
+    var city: String = "",
+    var pincode: String = "",
+    var address: String = "",
     var phoneVerified: Boolean = false,
-    var emailVerified: Boolean = false,
-)
+    var emailVerified: Boolean = false
+) : java.io.Serializable
