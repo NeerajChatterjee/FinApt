@@ -57,4 +57,6 @@
     <string name="helper_text">Required*</string>
     <string name="or">OR</string>
     <string name="google_sign_in">Google Sign In</string>
+    <string name="customer_logout">Customer Logout</string>
+    <string name="shopkeeper_logout">Shopkeeper Logout</string>
 </resources>

@@ -36,7 +36,6 @@ import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.VerifyOTPActivity
 import com.shrutislegion.finapt.databinding.ActivityCustomerCreateProfileBinding
 import kotlinx.android.synthetic.main.activity_customer_create_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.*

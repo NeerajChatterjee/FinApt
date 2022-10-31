@@ -4,17 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Shopkeeper.DashboardFragments.ShopProfileFragment">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_shopProfile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+    tools:context=".Customer.DashboardFragments.CustomerProfileFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signOut"
@@ -24,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/shopkeeper_logout"
+        android:text="@string/customer_logout"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

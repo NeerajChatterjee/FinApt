@@ -11,7 +11,6 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.shrutislegion.finapt.Customer.DashboardFragments.*
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Registration_Activity
-import com.shrutislegion.finapt.databinding.ActivityShopSignUpBinding
 import kotlinx.android.synthetic.main.activity_customer_dashboard.*
 
 @Suppress("DEPRECATION")
@@ -32,35 +31,35 @@ class CustomerDashboard : AppCompatActivity() {
         var frag = intent.getStringExtra(CustomerDashboard.EXTRA_FRAGMENT)
 
         if(frag == "1") {
-            bottomNav.setItemSelected(R.id.track, true)
+            bottomNav.setItemSelected(R.id.customerHome, true)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TrackFragment()).commitAllowingStateLoss()
+                .replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Track"
         }
         else if(frag == "2"){
-            bottomNav.setItemSelected(R.id.request,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, RequestFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.customerPendingRequest,true)
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Requests"
         }
         else if(frag == "3"){
-            bottomNav.setItemSelected(R.id.expense,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ExpenseFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.customerPastBills,true)
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Requests"
         }
         else if(frag == "4"){
-            bottomNav.setItemSelected(R.id.chat,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ChatFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.customerChat,true)
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Requests"
         }
         else if(frag == "5"){
-            bottomNav.setItemSelected(R.id.profile,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProfileFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.customerProfile,true)
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Requests"
         }
         // By default the home page should be selected on opening the app
         else if(savedInstanceState==null){
-            bottomNav.setItemSelected(R.id.track,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TrackFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.customerHome,true)
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Track"
         }
 
@@ -68,24 +67,24 @@ class CustomerDashboard : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener {
             var fragment: Fragment? = null
             when(it){
-                R.id.track ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TrackFragment()).commitAllowingStateLoss()
+                R.id.customerHome ->{
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Track"
                 }
-                R.id.request -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, RequestFragment()).commitAllowingStateLoss()
+                R.id.customerPendingRequest -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Requests"
                 }
-                R.id.expense -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ExpenseFragment()).commitAllowingStateLoss()
+                R.id.customerPastBills -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Requests"
                 }
-                R.id.chat -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ChatFragment()).commitAllowingStateLoss()
+                R.id.customerChat -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Chats"
                 }
-                R.id.profile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProfileFragment()).commitAllowingStateLoss()
+                R.id.customerProfile -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Profile"
                 }
             }

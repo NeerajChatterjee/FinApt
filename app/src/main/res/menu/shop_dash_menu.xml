@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
-        android:title="Track"
+        android:id="@+id/shopHome"
+        android:title="Home"
         android:icon="@drawable/ic_track"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
@@ -13,7 +13,7 @@
         />
 
     <item
-        android:id="@+id/pendingRequest"
+        android:id="@+id/shopPendingRequest"
         android:title="Requests"
         android:icon="@drawable/ic_home"
         app:cnb_backgroundColor = "@color/white"
@@ -21,8 +21,8 @@
         app:cnb_textColor = "#000000"
         />
     <item
-        android:id="@+id/pastBills"
-        android:title="Expenses"
+        android:id="@+id/shopPastBills"
+        android:title="Bills"
         android:icon="@drawable/ic_home"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"

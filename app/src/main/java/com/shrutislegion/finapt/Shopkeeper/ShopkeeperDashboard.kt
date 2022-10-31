@@ -8,12 +8,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
-import com.shrutislegion.finapt.Customer.CustomerDashboard
-import com.shrutislegion.finapt.Customer.DashboardFragments.*
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Registration_Activity
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.*
-import kotlinx.android.synthetic.main.activity_customer_dashboard.*
 
 class ShopkeeperDashboard : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -29,72 +25,65 @@ class ShopkeeperDashboard : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_nav)
 
-        var frag = intent.getStringExtra(CustomerDashboard.EXTRA_FRAGMENT)
+        var frag = intent.getStringExtra(ShopkeeperDashboard.EXTRA_FRAGMENT)
 
         if(frag == "1") {
-            bottomNav.setItemSelected(R.id.home, true)
+            bottomNav.setItemSelected(R.id.shopHome, true)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment()).commitAllowingStateLoss()
+                .replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Home"
         }
         else if(frag == "2"){
-            bottomNav.setItemSelected(R.id.pendingRequest,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PendingRequestFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.shopPendingRequest,true)
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Requests"
         }
         else if(frag == "3"){
-            bottomNav.setItemSelected(R.id.pastBills,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PastBillsFragment()).commitAllowingStateLoss()
+            bottomNav.setItemSelected(R.id.shopPastBills,true)
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Past Bills"
         }
         else if(frag == "4"){
             bottomNav.setItemSelected(R.id.shopChat,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopChatFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Chat"
         }
         else if(frag == "5"){
             bottomNav.setItemSelected(R.id.shopProfile,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
             supportActionBar!!.title = "Profile"
         }
         // By default the home page should be selected on opening the app
         else if(savedInstanceState==null){
-            bottomNav.setItemSelected(R.id.track,true)
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, TrackFragment()).commitAllowingStateLoss()
-            supportActionBar!!.title = "Track"
+            bottomNav.setItemSelected(R.id.shopHome,true)
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
+            supportActionBar!!.title = "Home"
         }
 
         // Listener on the bottomNav, and selecting the fragment according to their ids
         bottomNav.setOnItemSelectedListener {
             var fragment: Fragment? = null
             when(it){
-                R.id.home ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commitAllowingStateLoss()
+                R.id.shopHome ->{
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Home"
                 }
-                R.id.pendingRequest -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PendingRequestFragment()).commitAllowingStateLoss()
+                R.id.shopPendingRequest -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Requests"
                 }
-                R.id.pastBills -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PastBillsFragment()).commitAllowingStateLoss()
-                    supportActionBar!!.title = "Past Bills"
+                R.id.shopPastBills -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment()).commitAllowingStateLoss()
+                    supportActionBar!!.title = "Bills"
                 }
-                R.id.chat -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopChatFragment()).commitAllowingStateLoss()
+                R.id.shopChat -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Chats"
                 }
-                R.id.profile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
+                R.id.shopProfile -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
                     supportActionBar!!.title = "Profile"
                 }
-            }
-
-            signOut.setOnClickListener {
-                auth.signOut()
-                val intent = Intent(this@ShopkeeperDashboard, Registration_Activity::class.java)
-                startActivity(intent)
-                finish()
             }
         }
     }
