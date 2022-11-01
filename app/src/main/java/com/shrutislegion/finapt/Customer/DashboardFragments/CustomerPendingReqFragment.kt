@@ -5,7 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.FirebaseDatabase
+import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
+import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.Customer.Modules.CustomerPendingRequestDetails
 import com.shrutislegion.finapt.R
+import kotlinx.android.synthetic.main.fragment_customer_pending_req.*
+import kotlinx.android.synthetic.main.fragment_customer_pending_req.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +44,28 @@ class CustomerPendingReqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_pending_req, container, false)
+        val view = inflater.inflate(R.layout.fragment_customer_pending_req, container, false)
+        var customerPendingRequestView = view.findViewById<RecyclerView>(R.id.customerPendingRequestView)
+
+        //var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.VERTICAL, true)
+        view.customerPendingRequestView.layoutManager = LinearLayoutManager(view.context)
+
+        val list = ArrayList<CustomerPendingRequestDetails>()
+
+        val req: CustomerPendingRequestDetails = CustomerPendingRequestDetails(
+        "ShopName",
+        "category",
+        12
+        )
+        for (i in 1..20) {
+            list.add(CustomerPendingRequestDetails("Shopname", "category",12))
+        }
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomerPendingRequestAdapter(list)
+
+        // Setting the Adapter with the recyclerview
+        customerPendingRequestView.adapter = adapter
+        return view
     }
 
     companion object {

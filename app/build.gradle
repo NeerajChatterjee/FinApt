@@ -111,4 +111,7 @@ dependencies {
 
     // dependency for Pin Code
     implementation 'com.chaos.view:pinview:1.4.3'
+
+    // For circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

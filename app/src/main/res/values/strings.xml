@@ -59,4 +59,15 @@
     <string name="google_sign_in">Google Sign In</string>
     <string name="customer_logout">Customer Logout</string>
     <string name="shopkeeper_logout">Shopkeeper Logout</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="category">Category</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="view_bill">View Bill</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="address">Address</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="email">Email</string>
+    <string name="state">State</string>
+    <string name="pin_code">Pin Code</string>
 </resources>
