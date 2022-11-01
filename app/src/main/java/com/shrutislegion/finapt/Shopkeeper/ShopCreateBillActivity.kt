@@ -122,3 +122,13 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
     }
 }
+//        - Bills
+//            - Shopkeeper uid#1
+//                    - Bill key#1
+//                        - senTo: String
+//                        - rest bill details
+//                    - Bill key#2
+//            - Shopkeeper uid#2
+//                    - Bill key#1
+//                        - senTo: String
+//                        - rest details

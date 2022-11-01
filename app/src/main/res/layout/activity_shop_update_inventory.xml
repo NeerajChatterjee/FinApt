@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Shopkeeper.DashboardFragments.ShopHomeFragment">
+    tools:context=".Shopkeeper.ShopUpdateInventoryActivity">
+
+    <FrameLayout
+        android:id="@+id/shop_updateInventory_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/shopHomeScrollView"
+        android:id="@+id/shopUpdateInventoryScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +31,7 @@
             android:paddingVertical="40dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/createBillForOwnCardView"
+                android:id="@+id/checkItemsCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
@@ -47,15 +56,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/create_bill"
+                        android:text="@string/check_item_s"
                         android:textSize="25sp"
                         android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/you_can_create_bill_for_your_store"
-                        android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
@@ -68,7 +71,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/sendBillToCusCardView"
+                android:id="@+id/addItemsCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
@@ -79,7 +82,7 @@
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/createBillForOwnCardView"
+                app:layout_constraintTop_toBottomOf="@+id/checkItemsCardView"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -93,15 +96,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/send_bill"
+                        android:text="ADD ITEM(S)"
                         android:textSize="25sp"
                         android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/create_and_send_bill_to_a_number"
-                        android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
@@ -114,7 +111,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/updateInventoryCardView"
+                android:id="@+id/editItemsCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
@@ -125,7 +122,7 @@
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendBillToCusCardView"
+                app:layout_constraintTop_toBottomOf="@+id/addItemsCardView"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -139,15 +136,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/update_inventory"
+                        android:text="EDIT ITEM(S)"
                         android:textSize="25sp"
                         android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_remove_or_update_your_stocks"
-                        android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
@@ -160,7 +151,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/billHistoryCardView"
+                android:id="@+id/removeItemsCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
@@ -173,7 +164,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/shopHomeInnerConsLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/updateInventoryCardView"
+                app:layout_constraintTop_toBottomOf="@+id/editItemsCardView"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -187,15 +178,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/billing_history"
+                        android:text="@string/remove_item_s"
                         android:textSize="25sp"
                         android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/check_your_billing_history_and_update_them"
-                        android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
@@ -210,6 +195,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

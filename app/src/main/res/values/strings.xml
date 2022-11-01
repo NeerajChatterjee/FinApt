@@ -82,4 +82,6 @@
     <string name="invoice_number">Invoice Number</string>
     <string name="total_amount2">Total Amount</string>
     <string name="submit">Submit</string>
+    <string name="check_item_s">CHECK ITEM(S)</string>
+    <string name="remove_item_s">REMOVE ITEM(S)</string>
 </resources>
