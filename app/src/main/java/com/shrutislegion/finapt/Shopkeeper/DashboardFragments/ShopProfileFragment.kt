@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Registration_Activity
+import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.databinding.FragmentShopProfileBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +45,7 @@ class ShopProfileFragment : Fragment() {
         binding.signOut.setOnClickListener {
             auth.signOut()
 
-            val intent = Intent(context, Registration_Activity::class.java)
+            val intent = Intent(context, RegistrationActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }

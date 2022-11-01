@@ -59,4 +59,12 @@
     <string name="google_sign_in">Google Sign In</string>
     <string name="customer_logout">Customer Logout</string>
     <string name="shopkeeper_logout">Shopkeeper Logout</string>
+    <string name="create_bill">CREATE BILL</string>
+    <string name="you_can_create_bill_for_your_store">You can create bill for your store</string>
+    <string name="send_bill">SEND BILL</string>
+    <string name="create_and_send_bill_to_a_number">Create and send bill to a number</string>
+    <string name="update_inventory">UPDATE INVENTORY</string>
+    <string name="add_remove_or_update_your_stocks">Add, remove or update your stocks</string>
+    <string name="billing_history">BILLING HISTORY</string>
+    <string name="check_your_billing_history_and_update_them">Check your billing history and update them</string>
 </resources>

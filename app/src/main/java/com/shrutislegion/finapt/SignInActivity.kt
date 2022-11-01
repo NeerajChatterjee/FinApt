@@ -1,7 +1,6 @@
 package com.shrutislegion.finapt
 
 import android.app.ProgressDialog
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -27,7 +25,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
 import com.shrutislegion.finapt.Customer.CustomerCreateProfileActivity
-import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperCreateProfileActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import com.shrutislegion.finapt.databinding.ActivitySignInBinding
@@ -170,7 +167,7 @@ class SignInActivity : AppCompatActivity() {
                                             binding.loadingAnimation.visibility = View.GONE
                                             binding.loadingAnimation.cancelAnimation()
 
-                                            startActivity(Intent(this, Registration_Activity::class.java))
+                                            startActivity(Intent(this, RegistrationActivity::class.java))
                                             finish()
                                         }
                                         .addOnFailureListener {
