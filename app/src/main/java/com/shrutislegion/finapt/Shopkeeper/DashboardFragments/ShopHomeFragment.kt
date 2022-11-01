@@ -1,11 +1,17 @@
 package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.Shopkeeper.ShopCreateBillActivity
+import com.shrutislegion.finapt.databinding.FragmentCustomerProfileBinding
+import com.shrutislegion.finapt.databinding.FragmentShopHomeBinding
+import kotlinx.android.synthetic.main.fragment_shop_home.*
+import kotlinx.android.synthetic.main.fragment_shop_home.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +41,12 @@ class ShopHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_home, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_shop_home, container, false)
+        view.createBillForOwnCardView.setOnClickListener {
+            val intent = Intent (context, ShopCreateBillActivity::class.java)
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {

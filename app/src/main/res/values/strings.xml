@@ -78,4 +78,8 @@
     <string name="add_remove_or_update_your_stocks">Add, remove or update your stocks</string>
     <string name="billing_history">BILLING HISTORY</string>
     <string name="check_your_billing_history_and_update_them">Check your billing history and update them</string>
+    <string name="create_n_bill">Create\nBill</string>
+    <string name="invoice_number">Invoice Number</string>
+    <string name="total_amount2">Total Amount</string>
+    <string name="submit">Submit</string>
 </resources>
