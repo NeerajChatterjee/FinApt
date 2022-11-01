@@ -57,13 +57,13 @@ class MainActivity : AppCompatActivity() {
                 introSliderViewPager.currentItem += 1
             }
             else {
-                startActivity(Intent(this, Registration_Activity::class.java))
+                startActivity(Intent(this, RegistrationActivity::class.java))
                 finish()
             }
         }
         text2.setOnClickListener{
 
-            startActivity(Intent(this, Registration_Activity::class.java))
+            startActivity(Intent(this, RegistrationActivity::class.java))
             finish()
 
         }

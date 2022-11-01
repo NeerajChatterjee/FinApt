@@ -2,18 +2,22 @@ package com.shrutislegion.finapt.Shopkeeper
 
 import android.app.Fragment
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.*
+
 
 class ShopkeeperDashboard : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var bottomNav: ChipNavigationBar
+
+    var registrationActivityObject: RegistrationActivity = RegistrationActivity()
 
     companion object {
         const val EXTRA_FRAGMENT = "name_extra"
@@ -22,6 +26,13 @@ class ShopkeeperDashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopkeeper_dashboard)
         auth = Firebase.auth
+
+//        if(registrationActivityObject.registrationActivity != null){
+//            registrationActivityObject.registrationActivity!!.finish()
+//        }
+
+        val intent = Intent("finish_activity")
+        sendBroadcast(intent)
 
         bottomNav = findViewById(R.id.bottom_nav)
 

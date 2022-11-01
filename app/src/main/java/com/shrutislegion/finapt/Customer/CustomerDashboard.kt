@@ -10,7 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.shrutislegion.finapt.Customer.DashboardFragments.*
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Registration_Activity
+import com.shrutislegion.finapt.RegistrationActivity
 import kotlinx.android.synthetic.main.activity_customer_dashboard.*
 
 @Suppress("DEPRECATION")
@@ -29,6 +29,9 @@ class CustomerDashboard : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_nav)
 
         var frag = intent.getStringExtra(CustomerDashboard.EXTRA_FRAGMENT)
+
+        val intent = Intent("finish_activity")
+        sendBroadcast(intent)
 
         if(frag == "1") {
             bottomNav.setItemSelected(R.id.customerHome, true)
@@ -92,7 +95,7 @@ class CustomerDashboard : AppCompatActivity() {
         }
         signOut.setOnClickListener {
             auth.signOut()
-            val intent = Intent(this@CustomerDashboard, Registration_Activity::class.java)
+            val intent = Intent(this@CustomerDashboard, RegistrationActivity::class.java)
             startActivity(intent)
             finish()
         }
