@@ -88,6 +88,10 @@
                 android:elevation="7dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTint="@null"
+                android:clickable="false"
+                app:boxStrokeWidth="0dp"
                 android:hint="@string/mobile_number"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -95,11 +99,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:elevation="7dp"
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/mobile_number"
                     android:textSize="20dp"
                     />
@@ -117,6 +120,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:hint="@string/email"
+                app:startIconDrawable="@drawable/ic_mail"
+                app:startIconTint="@null"
+                app:boxStrokeWidth="0dp"
                 android:backgroundTint="#5990FF"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +133,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/email"
                     android:textSize="20dp"
                     />
@@ -144,7 +150,10 @@
                 android:elevation="7dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:startIconDrawable="@drawable/ic_gender"
+                app:startIconTint="@null"
                 android:hint="@string/gender"
+                app:boxStrokeWidth="0dp"
                 android:backgroundTint="#5990FF"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -155,7 +164,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/gender"
                     android:textSize="20dp"
                     />
@@ -172,6 +181,9 @@
                 android:elevation="7dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:startIconDrawable="@drawable/ic_dob"
+                app:startIconTint="@null"
+                app:boxStrokeWidth="0dp"
                 android:hint="@string/date_of_birth"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -182,7 +194,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/date_of_birth"
                     android:textSize="20dp"
                     />
@@ -199,6 +211,9 @@
                 android:elevation="7dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:startIconDrawable="@drawable/ic_address"
+                app:startIconTint="@null"
+                app:boxStrokeWidth="0dp"
                 android:hint="@string/address"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -209,7 +224,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/address"
                     android:textSize="20dp"
                     />
@@ -226,6 +241,9 @@
                 android:elevation="7dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:startIconDrawable="@drawable/ic_state"
+                app:startIconTint="@null"
+                app:boxStrokeWidth="0dp"
                 android:hint="@string/state"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -236,7 +254,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/state"
                     android:textSize="20dp"
                     />
@@ -254,6 +272,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:hint="@string/pin_code"
+                app:startIconDrawable="@drawable/ic_pincode"
+                app:startIconTint="@null"
+                app:boxStrokeWidth="0dp"
                 android:backgroundTint="#5990FF"
                 android:padding="5dp">
                 <com.google.android.material.textfield.TextInputEditText
@@ -264,7 +285,7 @@
                     android:editable="false"
                     android:textColor="@color/color_primary_variant"
                     android:fontFamily="@font/nunito_bold"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/fui_transparent"
                     android:text="@string/pin_code"
                     android:textSize="20dp"
                     />
@@ -273,6 +294,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signOut"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/pinCodeLayout"

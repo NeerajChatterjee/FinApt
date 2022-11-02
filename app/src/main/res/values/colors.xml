@@ -13,4 +13,5 @@
     <color name="color_primary_secondary_variant">#121866</color>
     <color name="slate_300">#cbd5e1</color>
     <color name="color_helper_text">#A60606</color>
+    <color name="nude"></color>
 </resources>

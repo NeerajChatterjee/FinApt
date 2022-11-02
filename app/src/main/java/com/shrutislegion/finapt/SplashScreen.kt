@@ -1,3 +1,4 @@
+// Launcher Activity that displays for 2.5 seconds while we check the current user.
 package com.shrutislegion.finapt
 
 import android.content.ContentValues
@@ -7,7 +8,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -19,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
 import com.shrutislegion.finapt.Customer.CustomerCreateProfileActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreen : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -32,6 +37,26 @@ class SplashScreen : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
+        // hinding Action Bar
+        supportActionBar!!.hide()
+
+        // Adding Animations
+        val topAnim = AnimationUtils.loadAnimation(this, R.anim.topanim)
+        val rightAnim = AnimationUtils.loadAnimation(this, R.anim.rightanim)
+        val leftAnim = AnimationUtils.loadAnimation(this, R.anim.leftanim)
+        val image = findViewById<ShapeableImageView>(R.id.lightening)
+        image.setAnimation(topAnim)
+        finText.visibility = View.GONE
+        aptText.visibility = View.GONE
+        Handler(Looper.getMainLooper()).postDelayed({
+            finText.visibility = View.VISIBLE
+            finText.setAnimation(rightAnim)
+            aptText.visibility = View.VISIBLE
+            aptText.setAnimation(leftAnim)
+        },500)
+
+
+        // Check if the user is null and direct it to Registration Activity
         if(user == null){
             Toast.makeText(
                 this@SplashScreen,
@@ -47,6 +72,7 @@ class SplashScreen : AppCompatActivity() {
             ).show()
         }
 
+        // If the user is not null, and if user is email verified then direct it to the respective DashBoards.
         if (user != null && user.isEmailVerified) {
 
             val id = auth.currentUser!!.uid

@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Customer.DashboardFragments
 
+import android.content.Intent
 import android.icu.text.MessageFormat.format
 import android.os.Bundle
 import android.text.format.DateFormat.format
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.animation.fadeIn
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
@@ -17,7 +19,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.databinding.FragmentCustomerProfileBinding
+import kotlinx.android.synthetic.main.activity_customer_dashboard.*
 import okhttp3.internal.Util.format
 import okhttp3.internal.http.HttpDate.format
 import java.lang.String.format
@@ -34,6 +38,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CustomerProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@Suppress("DEPRECATION")
 class CustomerProfileFragment : Fragment() {
     lateinit var user: CustomerInfo
 
@@ -80,6 +85,13 @@ class CustomerProfileFragment : Fragment() {
             }
 
         })
+
+        binding.signOut.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(context, RegistrationActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish();
+        }
 
 
         return binding.root
