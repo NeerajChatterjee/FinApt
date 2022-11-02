@@ -1,3 +1,5 @@
+// For Creating Customer Profile :- Getting Customer Information and Storing it in Firebase Database
+
 package com.shrutislegion.finapt.Shopkeeper
 
 import android.animation.Animator
@@ -37,6 +39,7 @@ import java.util.concurrent.TimeUnit
 @Suppress("DEPRECATION")
 class ShopkeeperCreateProfileActivity : AppCompatActivity() {
 
+    // Initialising required Variables
     lateinit var mRequestQueue: RequestQueue
     lateinit var dialog: ProgressDialog
     lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks

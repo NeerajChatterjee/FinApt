@@ -1,3 +1,5 @@
+// Data Class for Storing Bill Information
+
 package com.shrutislegion.finapt.Modules
 
 data class BillInfo (

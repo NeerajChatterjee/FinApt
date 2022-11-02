@@ -1,3 +1,5 @@
+// Data Class for pending request details
+
 package com.shrutislegion.finapt.Customer.Modules
 
 data class CustomerPendingRequestDetails(

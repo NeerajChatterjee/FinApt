@@ -1,3 +1,5 @@
+// This Fragment Displays the Profile Details of Shopkeeper fetch from the Firebase Database.
+
 package com.shrutislegion.finapt.Customer.DashboardFragments
 
 import android.content.Intent
@@ -52,17 +54,19 @@ class CustomerProfileFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-
         val binding: FragmentCustomerProfileBinding = FragmentCustomerProfileBinding.inflate(inflater, container, false)
 
+        // getting auth and database instances
         val auth = Firebase.auth
         val database = Firebase.database
         val custReference = database.reference.child("Customers").child(auth.currentUser!!.uid)
-        // check if the user is already signed i
+        // finding user in database
         custReference.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    // fetching user data from the database
                     user = (snapshot.getValue<CustomerInfo>() as CustomerInfo?)!!
+                    // setting user data to the respective views in layout
                     binding.customerName.setText(user.name)
                     binding.mobileNumber.setText(user.phone)
                     binding.customerEmail.setText(user.mail)
@@ -73,6 +77,7 @@ class CustomerProfileFragment : Fragment() {
                     binding.state.setText(user.state)
                     binding.pinCode.setText(user.pincode)
                     if(user.profilePic != ""){
+                        // Setting profile pic using Glide Library
                         context?.let { Glide.with(it).load(user.profilePic).into(binding.profilePic) }
                         //Toast.makeText(context, user.profilePic, Toast.LENGTH_SHORT)
                     }
@@ -86,6 +91,7 @@ class CustomerProfileFragment : Fragment() {
 
         })
 
+        // implementing logout button for the user
         binding.signOut.setOnClickListener {
             auth.signOut()
             val intent = Intent(context, RegistrationActivity::class.java)

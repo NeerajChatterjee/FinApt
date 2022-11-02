@@ -1,3 +1,5 @@
+// It allows user to choose the type of registration and redirects user to the chosen Activity
+
 package com.shrutislegion.finapt
 
 import android.app.Activity

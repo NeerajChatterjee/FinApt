@@ -1,3 +1,5 @@
+// User gets directed here after creating profile, it contains the Bottom Navigation
+
 package com.shrutislegion.finapt.Customer
 
 import android.app.Fragment

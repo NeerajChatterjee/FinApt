@@ -1,3 +1,5 @@
+// Data Class for storing Customer Information
+
 package com.shrutislegion.finapt.Customer.Modules
 
 data class CustomerInfo (

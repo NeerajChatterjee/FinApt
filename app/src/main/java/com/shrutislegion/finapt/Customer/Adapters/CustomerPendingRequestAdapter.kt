@@ -1,3 +1,5 @@
+// Adapter For Customer Pending Request Recycler View
+
 package com.shrutislegion.finapt.Customer.Adapters
 
 import android.content.Context

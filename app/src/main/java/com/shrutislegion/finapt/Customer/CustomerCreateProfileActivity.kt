@@ -1,3 +1,5 @@
+// For Creating Customer Profile :- Getting Customer Information and Storing it in Firebase Database
+
 package com.shrutislegion.finapt.Customer
 
 import android.annotation.SuppressLint
@@ -46,6 +48,7 @@ import javax.net.ssl.*
 @Suppress("DEPRECATION")
 class CustomerCreateProfileActivity : AppCompatActivity() {
 
+    // Initialising required Variables
     lateinit var mRequestQueue: RequestQueue
     lateinit var dialog: ProgressDialog
     lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks

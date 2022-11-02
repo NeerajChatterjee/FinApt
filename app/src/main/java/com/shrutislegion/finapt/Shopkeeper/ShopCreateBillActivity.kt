@@ -1,3 +1,5 @@
+// Shopkeeper Creates Bill for own Reference
+
 package com.shrutislegion.finapt.Shopkeeper
 
 import android.app.ProgressDialog
@@ -30,6 +32,7 @@ import kotlin.collections.ArrayList
 @Suppress("DEPRECATION")
 class ShopCreateBillActivity : AppCompatActivity() {
 
+    // Initialising required Variables
     private lateinit var binding: ActivityShopCreateBillBinding
     lateinit var shopkeeper: ShopkeeperInfo
     val billID: String = ""
@@ -54,6 +57,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
         val adapter_category = ArrayAdapter(this, R.layout.list_item, items_category)
         (binding.textCategory as? AutoCompleteTextView)?.setAdapter(adapter_category)
 
+        // adding items to the category dropdown
         binding.textCategory.setOnItemClickListener { parent, view, position, id ->
 
             val item:String = parent.getItemAtPosition(position).toString()
@@ -61,6 +65,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
         }
 
+        // getting current date
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         val currentDate = sdf.format(Date())
         val timeStamp = SimpleDateFormat("dd/M/yyyy hh:mm:ss").parse(currentDate)!!.time
@@ -68,6 +73,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
         items.add(0, "one")
         items.add(1, "one")
         items.add(2, "one")
+        // creating auth and database instances
         val auth = Firebase.auth
         val database = Firebase.database
         shopkeeperUid = auth.currentUser!!.uid
@@ -100,13 +106,15 @@ class ShopCreateBillActivity : AppCompatActivity() {
             }
             else {
                 dialog.show()
+                // generating random key
                 val key = database.reference.child("Bills").child(shopkeeperUid).push().key
+                // getting data from user
                 invoice = binding.invoiceNo.getText().toString().trim()
                 totalAmount = binding.totalAmount.text.toString().trim()
                 GSTIN = binding.shopkeeperGSTIn.text.toString().trim()
                 val bill: BillInfo = BillInfo (
                     billID = key, pending = false, sentTo = shopkeeperUid, date = date, totalAmount = totalAmount, shopkeeperUid = shopkeeperUid,  category = category , invoice = invoice, GSTIN = GSTIN, items = items)
-
+                // uploading data to Firebase Database
                 database.reference.child("Bills").child(shopkeeperUid).child(key!!).setValue(bill).addOnCompleteListener {
                     if (it.isSuccessful) {
                         dialog.dismiss()

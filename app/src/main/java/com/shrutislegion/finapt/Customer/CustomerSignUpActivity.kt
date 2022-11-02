@@ -1,3 +1,5 @@
+// Customer Sign Up 1) via email and password 2) Google Sign In
+
 package com.shrutislegion.finapt.Customer
 
 import android.app.ProgressDialog

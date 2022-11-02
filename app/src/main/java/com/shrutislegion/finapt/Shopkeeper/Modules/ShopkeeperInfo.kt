@@ -1,3 +1,5 @@
+// Data Class for Storing Shopkeeper Information
+
 package com.shrutislegion.finapt.Shopkeeper.Modules
 
 data class ShopkeeperInfo(

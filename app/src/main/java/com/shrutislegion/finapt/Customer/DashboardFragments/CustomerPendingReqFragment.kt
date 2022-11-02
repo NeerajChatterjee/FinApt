@@ -1,3 +1,5 @@
+// This Fragment Displays the Pending Request sent by the Shopkeeper to the logged in customer.
+
 package com.shrutislegion.finapt.Customer.DashboardFragments
 
 import android.os.Bundle

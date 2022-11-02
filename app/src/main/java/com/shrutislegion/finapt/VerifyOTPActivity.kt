@@ -1,3 +1,5 @@
+// OTP Verification Activity for both Shopkeeper and Customer for phone number validation
+
 package com.shrutislegion.finapt
 
 import android.animation.Animator

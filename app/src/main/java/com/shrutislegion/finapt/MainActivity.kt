@@ -1,3 +1,5 @@
+// This opens up for a new user or not logged in user, it contains IntroSlider
+
 package com.shrutislegion.finapt
 
 import android.content.Intent

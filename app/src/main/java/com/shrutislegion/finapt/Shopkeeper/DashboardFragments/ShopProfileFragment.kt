@@ -1,3 +1,5 @@
+// This Fragment Displays the Profile Details of Shopkeeper fetch from the Firebase Database.
+
 package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
 import android.content.Intent
@@ -47,18 +49,20 @@ class ShopProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         val binding: FragmentShopProfileBinding =
             FragmentShopProfileBinding.inflate(inflater, container, false)
 
+        // getting auth and database instances
         auth = Firebase.auth
         val database = Firebase.database
         val shopkeeperReference = database.reference.child("Shopkeepers").child(auth.currentUser!!.uid)
-        // check if the user is already signed i
+        // Check the data of the current user in database
         shopkeeperReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    // fetching the user data from database
                     user = (snapshot.getValue<ShopkeeperInfo>() as ShopkeeperInfo?)!!
+                    // setting the data to the respective views in the layout
                     binding.shopkeeperName.setText(user.name)
                     binding.shopName.setText(user.shopName)
                     binding.gstIn.setText(user.gstIn)
@@ -69,6 +73,7 @@ class ShopProfileFragment : Fragment() {
                     binding.state.setText(user.state)
                     binding.pinCode.setText(user.pincode)
                     if(user.profilePic != ""){
+                        // setting Profile Pic using Glide Library
                         context?.let { Glide.with(it).load(user.profilePic).into(binding.profilePic) }
                         //Toast.makeText(context, user.profilePic, Toast.LENGTH_SHORT)
                     }
@@ -81,6 +86,7 @@ class ShopProfileFragment : Fragment() {
             }
         })
 
+            // implementing logout button for the user
             binding.signOut.setOnClickListener {
             auth.signOut()
 

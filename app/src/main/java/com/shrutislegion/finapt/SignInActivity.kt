@@ -1,3 +1,5 @@
+// For Customer and Shopkeeper Sign in - 1) via email and password 2) via Google Sign in
+
 package com.shrutislegion.finapt
 
 import android.app.ProgressDialog
