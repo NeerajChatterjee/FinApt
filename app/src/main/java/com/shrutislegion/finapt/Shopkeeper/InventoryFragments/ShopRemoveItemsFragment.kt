@@ -5,7 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.Shopkeeper.Adapters.InventoryRemoveAdapter
+import com.shrutislegion.finapt.Shopkeeper.Adapters.inventoryViewAdapter
+import kotlinx.android.synthetic.main.fragment_shop_check_items.view.*
+import kotlinx.android.synthetic.main.fragment_shop_remove_items.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +35,9 @@ class ShopRemoveItemsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var itemList: ArrayList<ItemInfo>
+    lateinit var adapter: InventoryRemoveAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +51,36 @@ class ShopRemoveItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_remove_items, container, false)
+        val view = inflater.inflate(R.layout.fragment_shop_remove_items, container, false)
+        view.removeView.layoutManager = LinearLayoutManager(view.context)
+        val auth = Firebase.auth
+        itemList = ArrayList<ItemInfo>()
+        val ref = FirebaseDatabase.getInstance().reference
+            .child("All Items").child(auth.currentUser!!.uid)
+        if(ref != null) {
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (dss in snapshot.children) {
+                        val value = (dss.getValue<ItemInfo>() as ItemInfo?)!!
+                        //Toast.makeText(context, "value " + item.toString(), Toast.LENGTH_LONG).show()
+                        itemList.add(value)
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+        // This will pass the ArrayList to our Adapter
+        adapter = InventoryRemoveAdapter(itemList)
+        // Setting the Adapter with the recyclerview
+        view.removeView.adapter = adapter
+        //Toast.makeText(context, "itemList is" + itemList.toString(), Toast.LENGTH_LONG).show()
+
+
+        return view
     }
 
     companion object {
