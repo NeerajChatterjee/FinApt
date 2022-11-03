@@ -1,6 +1,5 @@
 package com.shrutislegion.finapt.Shopkeeper.Adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +7,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Shopkeeper.InventoryFragments.ShopRemoveItemsFragment
 
 class InventoryRemoveAdapter (val options: ArrayList<ItemInfo>) : RecyclerView.Adapter<InventoryRemoveAdapter.myViewHolder>(){
 

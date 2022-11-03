@@ -1,14 +1,12 @@
 package com.shrutislegion.finapt.Shopkeeper
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.Shopkeeper.InventoryFragments.ShopAddItemsFragment
-import com.shrutislegion.finapt.Shopkeeper.InventoryFragments.ShopCheckItemsFragment
-import com.shrutislegion.finapt.Shopkeeper.InventoryFragments.ShopEditItemsFragment
-import com.shrutislegion.finapt.Shopkeeper.InventoryFragments.ShopRemoveItemsFragment
+import com.shrutislegion.finapt.Shopkeeper.InventoryActivities.*
 import com.shrutislegion.finapt.databinding.ActivityShopUpdateInventoryBinding
 
 
@@ -32,44 +30,34 @@ class ShopUpdateInventoryActivity : AppCompatActivity() {
 
 
         binding.checkItemsCardView.setOnClickListener {
-            // set an id to the layout
-            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
-
-            // set the layout as Activity content
-            setContentView(fragmentLayout)
-            fragmentManager
-                .add(R.id.shop_updateInventory_fragment_container, ShopCheckItemsFragment()).commit()
-            supportActionBar!!.title = "Check Items"
+            val intent = Intent(this, ShopCheckItemsActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         binding.addItemsCardView.setOnClickListener {
-            // set an id to the layout
-            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
-
-            // set the layout as Activity content
-            setContentView(fragmentLayout)
-            fragmentManager.add(R.id.shop_updateInventory_fragment_container, ShopAddItemsFragment()).commit()
-            supportActionBar!!.title = "Add Items"
+            val intent = Intent(this, ShopAddItemsActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         binding.editItemsCardView.setOnClickListener {
-            // set an id to the layout
-            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
-
-            // set the layout as Activity content
-            setContentView(fragmentLayout)
-            fragmentManager.add(R.id.shop_updateInventory_fragment_container, ShopEditItemsFragment()).commit()
-            supportActionBar!!.title = "Edit Items"
+            val intent = Intent(this, ShopEditItemsActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         binding.removeItemsCardView.setOnClickListener {
-            // set an id to the layout
-            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
-
-            // set the layout as Activity content
-            setContentView(fragmentLayout)
-            fragmentManager.replace(R.id.shop_updateInventory_fragment_container, ShopRemoveItemsFragment()).commit()
-            supportActionBar!!.title = "Remove Items"
+            val intent = Intent(this, ShopRemoveItemsActivity::class.java)
+            startActivity(intent)
+            finish()
+//            // set an id to the layout
+//            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
+//
+//            // set the layout as Activity content
+//            setContentView(fragmentLayout)
+//            fragmentManager.replace(R.id.shop_updateInventory_fragment_container, ShopRemoveItemsFragment()).commit()
+//            supportActionBar!!.title = "Remove Items"
         }
 
     }
