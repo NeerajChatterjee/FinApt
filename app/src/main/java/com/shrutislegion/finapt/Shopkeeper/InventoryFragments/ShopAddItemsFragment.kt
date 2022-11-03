@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
+import kotlinx.android.synthetic.main.fragment_shop_add_items.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +42,40 @@ class ShopAddItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_add_items, container, false)
+        val view = inflater.inflate(R.layout.fragment_shop_add_items, container, false)
+
+        view.addItem.setOnClickListener {
+            if (view.itemName.text.toString() == "" || view.price.text.toString() == "" || view.quantity.text.toString() == "") {
+                Toast.makeText(context, "Please fill all the required details.", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val auth = Firebase.auth
+                val database = Firebase.database
+                val reference = database.reference
+                val key = reference.child("AllItems").child(auth.currentUser!!.uid).push().key
+                // getting data from user
+                val itemInfo: ItemInfo = ItemInfo(
+                    itemID = key!!,
+                    itemName = view.itemName.text.toString(),
+                    itemPrice = Integer.parseInt(view.price.text.toString()),
+                    itemQuantity = Integer.parseInt((view.quantity.text.toString()))
+                )
+                // uploading data on Firebase
+                reference.child("All Items").child(auth.currentUser!!.uid).child(key).setValue(itemInfo).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(context, "Item Added Successfully", Toast.LENGTH_LONG).show()
+                        view.itemName.setText(null)
+                        view.price.setText(null)
+                        view.quantity.setText(null)
+                    }
+                    else {
+                        Toast.makeText(context, "Error Occurred, Please Try Again", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        return view
     }
 
     companion object {

@@ -85,4 +85,10 @@
     <string name="check_item_s">CHECK ITEM(S)</string>
     <string name="remove_item_s">REMOVE ITEM(S)</string>
     <string name="gstin">GSTIN</string>
+    <string name="add_item">Add Item</string>
+    <string name="item_name">Item Name</string>
+    <string name="price_per_item">Price Per Item</string>
+    <string name="enter_quantity">Enter Quantity</string>
+    <string name="your_inventory">Your Inventory</string>
+    <string name="quantity">Quantity</string>
 </resources>
