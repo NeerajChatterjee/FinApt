@@ -61,11 +61,6 @@ dependencies {
     // Also add the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
     // firebase
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
-//    implementation platform('com.google.firebase:firebase-bom:28.4.2')
-//    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-//    implementation 'com.google.firebase:firebase-database-ktx'
-//    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
@@ -74,7 +69,7 @@ dependencies {
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
     // Firebase Pagination
-    //implementation"androidx.paging:paging-runtime-ktx:3.1.0"
+    // implementation"androidx.paging:paging-runtime-ktx:3.1.1"
 
     // Kotlin components
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -95,13 +90,9 @@ dependencies {
 
     // Material ui
     implementation 'com.google.android.material:material:1.7.0'
-    implementation("androidx.compose.material3:material3:1.0.0-alpha10")
 
     // For Lottie Animations
     implementation 'com.airbnb.android:lottie:3.4.0'
-
-    // Dynamic Sizes
-    //implementation 'com.github.MrNouri:DynamicSizes_support:1.0'
 
     // for bottom nav bar
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.3.4'
@@ -119,4 +110,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.4.0'
+
+    // custom FABs
+    implementation 'com.robertlevonyan.view:CustomFloatingActionButton:2.1.0'
 }

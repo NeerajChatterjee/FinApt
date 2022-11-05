@@ -85,4 +85,9 @@
     <string name="check_item_s">CHECK ITEM(S)</string>
     <string name="remove_item_s">REMOVE ITEM(S)</string>
     <string name="gstin">GSTIN</string>
+    <string name="unable_to_fetch">Unable to fetch. Please try again</string>
+    <string name="message">Message</string>
+    <string name="no_chat_history_start_by_clicking_on_the_icon_below">No chat history\nStart by clicking on the icon below</string>
+    <string name="send">Send</string>
+    <string name="type_a_message">Type a message...</string>
 </resources>
