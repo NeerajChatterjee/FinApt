@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.Modules.LoggedInUserInfo
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import com.shrutislegion.finapt.databinding.ActivityVerifyOtpactivityBinding
@@ -269,6 +270,11 @@ class VerifyOTPActivity : AppCompatActivity() {
                 customerInfo.phone!!
             ).setValue(customerInfo.id!!)
 
+            val loggedInUserInfo = LoggedInUserInfo(customerInfo.name, customerInfo.mail, customerInfo.id, customerInfo.profilePic, "")
+
+            FirebaseDatabase.getInstance().reference.child("Logged In Users").child(customerInfo.id!!)
+                .setValue(loggedInUserInfo)
+
             dialog.dismiss()
 
             showSuccessAnimation(type, binding)
@@ -295,6 +301,11 @@ class VerifyOTPActivity : AppCompatActivity() {
             FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers").child(
                 shopkeeperInfo.phone!!
             ).setValue(shopkeeperInfo.id!!)
+
+            val loggedInUserInfo = LoggedInUserInfo(shopkeeperInfo.name, shopkeeperInfo.mail, shopkeeperInfo.id, shopkeeperInfo.profilePic, "")
+
+            FirebaseDatabase.getInstance().reference.child("Logged In Users").child(shopkeeperInfo.id!!)
+                .setValue(loggedInUserInfo)
 
             dialog.dismiss()
 

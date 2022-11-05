@@ -93,4 +93,9 @@
     <string name="quantity">Quantity</string>
     <string name="remove_items">Remove Items</string>
     <string name="edit_item_details">Edit Item Details</string>
+    <string name="unable_to_fetch">Unable to fetch. Please try again</string>
+    <string name="message">Message</string>
+    <string name="no_chat_history_start_by_clicking_on_the_icon_below">No chat history\nStart by clicking on the icon below</string>
+    <string name="send">Send</string>
+    <string name="type_a_message">Type a message...</string>
 </resources>
