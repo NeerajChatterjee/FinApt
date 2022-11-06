@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Shopkeeper.ShopkeeperCreateProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/createProfileScrollView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="40dp"
+            >
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createProfileTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="30dp"
+                android:text="@string/create_profile"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="35sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/originalCredTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createProfileTextView"
+                android:layout_marginHorizontal="30dp"
+                android:text="@string/use_your_original_credentials"
+                android:textStyle="normal"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperNameLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/enter_your_name"
+                app:helperText="@string/helper_text"
+                app:startIconDrawable="@drawable/ic_baseline_perm_identity_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:endIconMode="clear_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/originalCredTextView"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    tools:ignore="InvalidId" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperGenderLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:helperText="@string/helper_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                android:hint="@string/gender"
+                android:layout_marginHorizontal="30dp"
+                app:startIconDrawable="@drawable/ic_baseline_supervised_user_circle_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shopkeeperNameLayout"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_txt_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperShopNameLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/enter_your_shop_name"
+                app:helperText="@string/helper_text"
+                app:startIconDrawable="@drawable/ic_baseline_shopping_bag_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:endIconMode="clear_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperGenderLayout"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperShopName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    tools:ignore="InvalidId" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperStateLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:helperText="@string/helper_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                android:hint="@string/select_your_state"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shopkeeperShopNameLayout"
+                android:layout_marginHorizontal="30dp"
+                app:startIconDrawable="@drawable/ic_baseline_flag_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_txt_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperPinCodeLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/enter_pincode"
+                app:errorEnabled="true"
+                app:helperText="@string/helper_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/ic_baseline_fiber_pin_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:endIconMode="custom"
+                app:endIconContentDescription="Incorrect Pincode"
+                app:boxStrokeColor="@color/color_primary"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperStateLayout"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperPinCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="6"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperAddressLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/enter_shop_address"
+                app:helperText="@string/helper_text"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_baseline_location_city_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:helperTextTextColor="@color/color_helper_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperPinCodeLayout"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:inputType="textPostalAddress"
+                    tools:ignore="InvalidId" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperGSTInLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/enter_your_gstin"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_baseline_approval_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperAddressLayout"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="2dp"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperGSTIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:inputType="textPostalAddress"
+                    tools:ignore="InvalidId" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shopkeeperPhoneNumberLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:hint="@string/enter_your_phone_number"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:errorEnabled="true"
+                app:helperText="@string/helper_text"
+                app:helperTextTextColor="@color/color_helper_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
+                app:startIconTint="?attr/colorControlNormal"
+                app:endIconMode="custom"
+                app:endIconContentDescription="Already Exists"
+                app:boxStrokeColor="@color/color_primary"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperGSTInLayout"
+                app:prefixText="+91"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopkeeperPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createProfileSubmit"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginBottom="40dp"
+                android:elevation="2dp"
+                android:padding="15dp"
+                android:textSize="15sp"
+                android:text="@string/save_and_proceed"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_primary"
+                app:icon="@drawable/ic_baseline_save_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopkeeperPhoneNumberLayout"
+                app:rippleColor="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

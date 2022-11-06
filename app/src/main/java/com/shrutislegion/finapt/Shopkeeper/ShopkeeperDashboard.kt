@@ -45,7 +45,7 @@ class ShopkeeperDashboard : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_nav)
 
-        binding.messageShopFragmentFAB.setOnClickListener {
+        binding.messageShopFragmentFAB!!.setOnClickListener {
 
             //  show all the users excluding the current signed in user
             val transaction = supportFragmentManager.beginTransaction()

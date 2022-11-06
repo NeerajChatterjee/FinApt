@@ -80,7 +80,7 @@ class ShopChatFragment : Fragment() {
 
         var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.VERTICAL, false)
 
-        binding.shopChatFragmentRV.layoutManager = linearLayoutManager
+        binding.shopChatFragmentRV!!.layoutManager = linearLayoutManager
         binding.shopChatFragmentRV.isNestedScrollingEnabled = false
 
         FirebaseDatabase.getInstance().reference
@@ -137,8 +137,8 @@ class ShopChatFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
 
             if(storeUsers.isEmpty()){
-                binding.noChatHistoryTextView.visibility = View.VISIBLE
-                binding.progressBarShopChat.visibility = View.GONE
+                binding.noChatHistoryTextView!!.visibility = View.VISIBLE
+                binding.progressBarShopChat!!.visibility = View.GONE
             }
             else {
                 adapter = ShopChatUserFragmentAdapter(storeUsers, container!!.context)
@@ -146,7 +146,7 @@ class ShopChatFragment : Fragment() {
 
                 adapter.notifyDataSetChanged()
 
-                binding.progressBarShopChat.visibility = View.GONE
+                binding.progressBarShopChat!!.visibility = View.GONE
                 binding.shopChatFragmentRV.visibility = View.VISIBLE
             }
 

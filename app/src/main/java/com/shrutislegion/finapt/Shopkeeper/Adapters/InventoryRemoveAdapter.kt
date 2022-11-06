@@ -49,6 +49,7 @@ class InventoryRemoveAdapter (val options: ArrayList<ItemInfo>) : RecyclerView.A
                         "Item removed!",
                         Toast.LENGTH_SHORT
                     ).show()
+                    options.removeAt(position)
                     notifyItemRemoved(position)
                 }
 
