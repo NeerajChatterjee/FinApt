@@ -6,32 +6,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Shopkeeper.DashboardFragments.ShopHomeFragment">
 
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintHeight_percent="0.18"-->
+<!--        android:outlineSpotShadowColor="@color/slate_300"-->
+<!--        android:outlineAmbientShadowColor="@color/color_primary"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:src="@drawable/rectangle2"/>-->
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/helloText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="35dp"
+        android:text="@string/hello"
+        android:fontFamily="@font/nunito_bold"
+        android:textSize="20dp"
+        android:textColor="@color/color_primary"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/helloText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="user"
+        android:fontFamily="@font/nunito_extrabold"
+        android:textSize="40dp"
+        android:textColor="@color/color_primary"
+        />
     <ScrollView
         android:id="@+id/shopHomeScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/nameText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shopHomeInnerConsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="40dp">
+            android:paddingVertical="20dp"
+            android:paddingBottom="10dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/createBillForOwnCardView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="20dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/purple_200"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/slate_300"
@@ -47,7 +88,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/create_bill"
+                        android:text="@string/create_n_bill"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -69,7 +110,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/sendBillToCusCardView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginVertical="20dp"
@@ -78,8 +120,9 @@
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/createBillForOwnCardView"
+                app:layout_constraintStart_toEndOf="@id/createBillForOwnCardView"
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="@color/teal_200"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -93,7 +136,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/send_bill"
+                        android:text="@string/send_nbill"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -115,17 +158,19 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/updateInventoryCardView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendBillToCusCardView"
+                app:layout_constraintTop_toBottomOf="@+id/createBillForOwnCardView"
+                android:backgroundTint="#EF5A8D"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -139,7 +184,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/update_inventory"
+                        android:text="@string/update_n_inventory"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -161,19 +206,20 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/billHistoryCardView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="50dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
-                app:layout_constraintBottom_toBottomOf="@+id/shopHomeInnerConsLayout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/updateInventoryCardView"
+                app:layout_constraintStart_toEndOf="@id/updateInventoryCardView"
+                app:layout_constraintTop_toBottomOf="@+id/sendBillToCusCardView"
+                android:backgroundTint="#FFC107"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -187,7 +233,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/billing_history"
+                        android:text="@string/billing_n_history"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -207,7 +253,35 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/recentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/updateInventoryCardView"
+                android:layout_marginTop="30dp"
+                android:text="Recently Uploaded Bills"
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="20dp"
+                android:textColor="@color/color_primary"
+                android:layout_marginStart="30dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentBills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/recentText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="250dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </ScrollView>
 

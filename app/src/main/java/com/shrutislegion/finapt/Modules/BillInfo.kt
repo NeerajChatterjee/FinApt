@@ -12,5 +12,5 @@ data class BillInfo (
     var category: String = "",
     var invoice: String = "",
     var GSTIN: String? = null,
-    var items: ArrayList<String>
+    var items: ArrayList<ItemInfo>
 )

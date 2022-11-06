@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -32,6 +33,21 @@ class RegistrationActivity : AppCompatActivity() {
 
 //        var myRef = database.getReference("message")
 //        myRef.setValue("Value")
+
+        // Adding Animations
+        val topAnim = AnimationUtils.loadAnimation(this , R.anim.topanim)
+        val rightAnim = AnimationUtils.loadAnimation(this, R.anim.rightanim)
+        val leftAnim = AnimationUtils.loadAnimation(this, R.anim.leftanim)
+        val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottomanimation)
+
+        // Setting Animations
+        profileAnim.animation = topAnim
+        track.animation = topAnim
+        welcome.animation = topAnim
+        shop.animation = rightAnim
+        cust.animation = leftAnim
+        signIn.animation = bottomAnim
+
         shop.setOnClickListener {
             val intent = Intent(this, ShopSignUpActivity::class.java)
             startActivity(intent)

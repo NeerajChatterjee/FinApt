@@ -4,62 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".Shopkeeper.ShopSignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/signInConstraintLayout"
+        android:id="@+id/shopSignUpConstraintLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/profileAnim"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            app:lottie_rawRes="@raw/signinprofile"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="visible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/helloText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/profileAnim"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            android:text="@string/hello_again"
-            android:fontFamily="@font/nunito_bold"
-            android:textSize="30dp"
-            android:textColor="@color/color_primary"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/missedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/helloText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/you_have_been_missed"
-            android:fontFamily="@font/nunito_semibold"
-            android:textSize="15dp"
-            android:textColor="@color/color_primary"/>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/enter_email_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/missedText"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="50dp"
@@ -99,13 +61,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInButton"
+            android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:padding="15dp"
             app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
-            android:text="@string/sign_in"
+            android:text="@string/sign_up"
             app:rippleColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -114,7 +76,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/signInButton"
+            app:layout_constraintTop_toBottomOf="@+id/signUpButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="20dp"
@@ -145,9 +107,8 @@
                 />
         </LinearLayout>
 
-
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/googleSignIn"
+            android:id="@+id/googleSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/orLinearLayout"
@@ -172,5 +133,6 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

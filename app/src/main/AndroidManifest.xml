@@ -71,7 +71,8 @@
         </activity>
         <activity
             android:name=".Shopkeeper.ShopUpdateInventoryActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Update Inventory">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

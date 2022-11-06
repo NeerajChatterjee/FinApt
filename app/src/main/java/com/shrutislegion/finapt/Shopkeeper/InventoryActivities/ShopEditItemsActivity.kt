@@ -44,7 +44,7 @@ class ShopEditItemsActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().reference
             .child("All Items").child(auth.currentUser!!.uid)
         if(ref != null) {
-            ref.addValueEventListener(object : ValueEventListener {
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (dss in snapshot.children) {
                         val value = (dss.getValue<ItemInfo>() as ItemInfo?)!!

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +44,26 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Adding Animations
+        val topAnim = AnimationUtils.loadAnimation(this , R.anim.topanim)
+        val rightAnim = AnimationUtils.loadAnimation(this, R.anim.rightanim)
+        val leftAnim = AnimationUtils.loadAnimation(this, R.anim.leftanim)
+        val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottomanimation)
+
+        // Setting Animations
+        binding.profileAnim.animation = topAnim
+        binding.helloText.animation = topAnim
+        binding.missedText.animation = topAnim
+        binding.emailLayout.animation = rightAnim
+        binding.passwordLayout.animation = leftAnim
+        binding.signInButton.animation = bottomAnim
+        binding.orLinearLayout.animation = bottomAnim
+        binding.googleSignIn.animation = bottomAnim
+
         val auth = Firebase.auth
 
         val dialog = ProgressDialog(this)
@@ -55,7 +74,7 @@ class SignInActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
-
+        // Sign in with Email and Password
         binding.signInButton.setOnClickListener {
 
             this.currentFocus?.let { view ->
@@ -77,6 +96,7 @@ class SignInActivity : AppCompatActivity() {
                 ).addOnCompleteListener {
                     dialog.dismiss()
                     if (it.isSuccessful) {
+                        // Checking if email is verified or not
                         if (auth.currentUser!!.isEmailVerified) {
                             val id = auth.currentUser!!.uid
                             Toast.makeText(this@SignInActivity, id, Toast.LENGTH_SHORT).show()

@@ -68,6 +68,8 @@ class InventoryEditAdapter (val options: ArrayList<ItemInfo>) : RecyclerView.Ada
                     .setValue(value).addOnSuccessListener {
                         dialogPlus.dismiss()
                         Toast.makeText(holder.itemName.context, "Item Details Updated.", Toast.LENGTH_SHORT).show()
+                        options[position] = value
+                        notifyItemChanged(position)
                     }
             }
 
