@@ -5,7 +5,6 @@ package com.shrutislegion.finapt.Shopkeeper
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -37,6 +36,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
     lateinit var shopkeeper: ShopkeeperInfo
     val billID: String = ""
     val pending: Boolean = false
+    val accepted: Boolean = true
     var sentTo: String = ""
     var date: String = ""
     var totalAmount: String = ""
@@ -83,31 +83,11 @@ class ShopCreateBillActivity : AppCompatActivity() {
         }
 
         binding.addMoreItems!!.setOnClickListener {
-//            if(option.size  == 1) {
-//                val params: ViewGroup.LayoutParams = binding.addItemView!!.getLayoutParams()
-//                val initial = params.height
-//                params.height = (initial + 1000)
-//                binding.addItemView!!.setLayoutParams(params)
-//            }
-//            else {
-//                val params: ViewGroup.LayoutParams = binding.addItemView!!.getLayoutParams()
-//                val initial = params.height
-//                params.height = (initial + 500)
-//                binding.addItemView!!.setLayoutParams(params)
-//            }
             option.add("view")
             adapter.notifyDataSetChanged()
         }
         binding.removeItems!!.setOnClickListener {
-            if(option.size == 2) {
-                option.removeAt(option.size - 1)
-                adapter.notifyDataSetChanged()
-            }
-            else if (option.size > 2) {
-//                val params: ViewGroup.LayoutParams = binding.addItemView!!.getLayoutParams()
-//                val initial = params.height
-//                params.height = (initial - 500)
-//                binding.addItemView!!.setLayoutParams(params)
+            if(option.size >1) {
                 option.removeAt(option.size - 1)
                 adapter.notifyDataSetChanged()
             }
@@ -169,7 +149,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
                 GSTIN = binding.shopkeeperGSTIn.text.toString().trim()
                 Toast.makeText(this, itemList.toString(),Toast.LENGTH_SHORT).show()
                 val bill: BillInfo = BillInfo (
-                    billID = key, pending = false, sentTo = shopkeeperUid, date = date, totalAmount = totalAmount, shopkeeperUid = shopkeeperUid,  category = category , invoice = invoice, GSTIN = GSTIN, items = itemList)
+                    billID = key, pending = false, accepted = true, sentTo = shopkeeperUid, date = date, totalAmount = totalAmount, shopkeeperUid = shopkeeperUid,  category = category , invoice = invoice, GSTIN = GSTIN, items = itemList)
                 // uploading data to Firebase Database
                 database.reference.child("Bills").child(shopkeeperUid).child(key!!).setValue(bill).addOnCompleteListener {
                     if (it.isSuccessful) {
