@@ -7,15 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
-import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
-import com.shrutislegion.finapt.Customer.Modules.CustomerPendingRequestDetails
+import com.shrutislegion.finapt.Modules.BillInfo
+import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
-import kotlinx.android.synthetic.main.fragment_customer_pending_req.*
 import kotlinx.android.synthetic.main.fragment_customer_pending_req.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +37,7 @@ class CustomerPendingReqFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    lateinit var adapter: CustomerPendingRequestAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,18 +57,29 @@ class CustomerPendingReqFragment : Fragment() {
         //var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.VERTICAL, true)
         view.customerPendingRequestView.layoutManager = LinearLayoutManager(view.context)
 
-        val list = ArrayList<CustomerPendingRequestDetails>()
+        val list = ArrayList<BillInfo>()
 
-        val req: CustomerPendingRequestDetails = CustomerPendingRequestDetails(
-        "ShopName",
-        "category",
-        12
-        )
-        for (i in 1..20) {
-            list.add(CustomerPendingRequestDetails("Shopname", "category",12))
-        }
+        val auth = Firebase.auth
+        val ref = FirebaseDatabase.getInstance().reference.child("Customer Pending Requests").child(auth.currentUser!!.uid)
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (dss in snapshot.children){
+                        list.add((dss.getValue<BillInfo>())!!)
+                        // Toast.makeText(view.context, list.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
         // This will pass the ArrayList to our Adapter
-        val adapter = CustomerPendingRequestAdapter(list)
+        adapter = CustomerPendingRequestAdapter(list)
 
         // Setting the Adapter with the recyclerview
         customerPendingRequestView.adapter = adapter

@@ -2,9 +2,10 @@
 
 package com.shrutislegion.finapt.Modules
 
-data class BillInfo (
+data class BillInfo(
     var billID: String? = null,
     var pending: Boolean? = true,
+    var accepted: Boolean? = null,
     var sentTo: String = "",
     var date: String = "",
     var totalAmount: String = "",
@@ -12,5 +13,5 @@ data class BillInfo (
     var category: String = "",
     var invoice: String = "",
     var GSTIN: String? = null,
-    var items: ArrayList<ItemInfo>
+    var items: ArrayList<ItemInfo>? = null
 )
