@@ -100,14 +100,14 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
             }
             else {
 //                if(holder.add.text == "Add") {
-                    totalAmount += (temp * temp_qtn)
-                    Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
-                    holder.add.setBackgroundColor(android.graphics.Color.BLACK)
-                    holder.add.text = "Edit"
-                    holder.quantity.isEnabled = false
-                    var item_detail_add: ItemInfo = itemList[pos]
+                totalAmount += (temp * temp_qtn)
+                Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
+                holder.add.setBackgroundColor(android.graphics.Color.BLACK)
+                holder.add.text = "Edit"
+                holder.quantity.isEnabled = false
+                var item_detail_add: ItemInfo = itemList[pos]
 //                    item_detail_add.itemQuantity = temp_qtn
-                    selectedList.add(itemList[pos])
+                selectedList.add(itemList[pos])
 //                }
 //                else {
 //                    totalAmount -= (temp * temp_qtn)

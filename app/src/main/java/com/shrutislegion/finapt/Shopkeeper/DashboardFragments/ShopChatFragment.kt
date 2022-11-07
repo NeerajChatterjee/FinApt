@@ -25,16 +25,6 @@ import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopChatUserFragmentAdapter
 import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.FragmentShopChatBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ShopChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @Suppress("DEPRECATION")
 class ShopChatFragment : Fragment() {
 
@@ -98,11 +88,6 @@ class ShopChatFragment : Fragment() {
                                                     val info =
                                                         dss.getValue<LoggedInUserInfo>()
                                                     if (info!!.id == userIds[1]) {
-                                                        Toast.makeText(
-                                                            context,
-                                                            "${userIds[0]}  ==  ${userIds[1]}",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
                                                         storeUsers.add(info)
                                                     }
                                                 }
@@ -126,13 +111,6 @@ class ShopChatFragment : Fragment() {
                 }
 
             })
-
-//        binding.messageShopFragmentFAB.setOnClickListener {
-//
-//            //  show all the users excluding the current signed in user
-//            requireFragmentManager().beginTransaction().replace(R.id.shopChatFragmentFrameLayout, ShowAllUsersFragment()).commitAllowingStateLoss()
-//
-//        }
 
         Handler(Looper.getMainLooper()).postDelayed({
 

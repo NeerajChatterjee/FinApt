@@ -36,10 +36,6 @@ class ShopkeeperDashboard : AppCompatActivity() {
         val binding: ActivityShopkeeperDashboardBinding = ActivityShopkeeperDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        if(registrationActivityObject.registrationActivity != null){
-//            registrationActivityObject.registrationActivity!!.finish()
-//        }
-
         val intent = Intent("finish_activity")
         sendBroadcast(intent)
 

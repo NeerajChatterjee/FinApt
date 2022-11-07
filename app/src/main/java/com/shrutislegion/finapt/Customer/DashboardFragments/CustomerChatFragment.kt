@@ -1,7 +1,6 @@
 package com.shrutislegion.finapt.Customer.DashboardFragments
 
 import android.content.Context
-import android.location.GnssAntennaInfo.Listener
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -25,20 +24,36 @@ import com.shrutislegion.finapt.Modules.LoggedInUserInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.ShopHomeFragment
 import com.shrutislegion.finapt.databinding.FragmentCustomerChatBinding
-import com.shrutislegion.finapt.databinding.FragmentShopChatBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CustomerChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @Suppress("DEPRECATION")
 class CustomerChatFragment : Fragment() {
+
+    var storeUsers: ArrayList<LoggedInUserInfo> = ArrayList<LoggedInUserInfo>()
+    lateinit var adapter: CustomerChatUserFragmentAdapter
+    lateinit var auth: FirebaseAuth
+
+    // To override LinearLayoutManager by Wrapper, as it crashes the application sometimes
+    inner class LinearLayoutManagerWrapper : LinearLayoutManager {
+        constructor(context: Context?) : super(context) {}
+        constructor(context: Context?, orientation: Int, reverseLayout: Boolean) : super(
+            context,
+            orientation,
+            reverseLayout
+        ) {
+        }
+
+        constructor(
+            context: Context?,
+            attrs: AttributeSet?,
+            defStyleAttr: Int,
+            defStyleRes: Int
+        ) : super(context, attrs, defStyleAttr, defStyleRes) {
+        }
+
+        override fun supportsPredictiveItemAnimations(): Boolean {
+            return false
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +65,68 @@ class CustomerChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding: FragmentCustomerChatBinding = FragmentCustomerChatBinding.inflate(inflater, container, false)
+        auth = Firebase.auth
+
+        var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.VERTICAL, false)
+        binding.customerChatFragmentRV!!.layoutManager = linearLayoutManager
+        binding.customerChatFragmentRV.isNestedScrollingEnabled = false
+
+        FirebaseDatabase.getInstance().reference
+            .child("Chats").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(item in snapshot.children){
+                            val userIds: List<String> = item.key!!.split(",")
+                            if(auth.currentUser!!.uid == userIds[0]){
+                                FirebaseDatabase.getInstance().reference.child("Logged In Users")
+                                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                            if(dataSnapshot.exists()){
+                                                for(dss in dataSnapshot.children) {
+                                                    val info =
+                                                        dss.getValue<LoggedInUserInfo>()
+                                                    if (info!!.id == userIds[1]) {
+                                                        storeUsers.add(info)
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                            Toast.makeText(context, getString(R.string.unable_to_fetch), Toast.LENGTH_SHORT).show()
+                                            fragmentManager!!.beginTransaction().replace(R.id.customerChatFragmentFrameLayout, ShopHomeFragment()).commitAllowingStateLoss()
+                                        }
+
+                                    })
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context, getString(R.string.unable_to_fetch), Toast.LENGTH_SHORT).show()
+                    requireFragmentManager().beginTransaction().replace(R.id.customerChatFragmentFrameLayout, ShopHomeFragment()).commitAllowingStateLoss()
+                }
+
+            })
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            if(storeUsers.isEmpty()){
+                binding.noChatHistoryTextView!!.visibility = View.VISIBLE
+                binding.progressBarCustomerChat!!.visibility = View.GONE
+            }
+            else {
+                adapter = CustomerChatUserFragmentAdapter(storeUsers, container!!.context)
+                binding.customerChatFragmentRV.adapter = adapter
+
+                adapter.notifyDataSetChanged()
+
+                binding.progressBarCustomerChat!!.visibility = View.GONE
+                binding.customerChatFragmentRV.visibility = View.VISIBLE
+            }
+
+        }, 2500)
 
         return binding.root
 

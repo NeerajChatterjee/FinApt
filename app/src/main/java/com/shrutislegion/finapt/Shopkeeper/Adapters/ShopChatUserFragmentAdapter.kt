@@ -15,7 +15,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.LoggedInUserInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.ShopChatDetailsActivity
@@ -54,7 +53,7 @@ class ShopChatUserFragmentAdapter(var storeUsers: ArrayList<LoggedInUserInfo>, v
             .child(FirebaseAuth.getInstance().currentUser!!.uid + "," + model.id)
             .orderByChild("messageTime")
             .limitToLast(1)
-            .addListenerForSingleValueEvent(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.hasChildren()){
                         for(messageInfo in snapshot.children){

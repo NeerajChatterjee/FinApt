@@ -106,4 +106,10 @@
     <string name="you_have_been_missed">Welcome Back! You Have Been Missed!</string>
     <string name="track_your_success">Track Your Success!</string>
     <string name="welcome_on_board">Welcome On Board!</string>
+    <string name="item">Item</string>
+    <string name="add">ADD</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="add_more_item">+Add More Item</string>
+    <string name="edit">EDIT</string>
+    <string name="add_items">Add Items</string>
 </resources>

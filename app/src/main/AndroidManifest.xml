@@ -24,33 +24,40 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Shopkeeper.InventoryActivities.ShopRemoveItemsActivity"
-            android:label="@string/remove_items"
+            android:name=".Customer.CustomerChatDetailsActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Shopkeeper.InventoryActivities.ShopRemoveItemsActivity"
+            android:exported="false"
+            android:label="@string/remove_items">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Shopkeeper.InventoryActivities.ShopEditItemsActivity"
-            android:label="@string/add_item"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/add_item">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Shopkeeper.InventoryActivities.ShopCheckItemsActivity"
-            android:label="@string/check_item_s"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/check_item_s">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Shopkeeper.InventoryActivities.ShopAddItemsActivity"
-            android:label="@string/add_item"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/add_item">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

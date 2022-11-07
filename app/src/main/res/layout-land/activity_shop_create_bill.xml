@@ -39,7 +39,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/invoiceNoLayout"
@@ -92,16 +92,6 @@
                 android:layout_marginTop="5dp"
                 android:text="+Add More Item"
                 />
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/removeItems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/addItemView"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:text="Remove Item"
-                />
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/categoryLayout"
@@ -117,7 +107,7 @@
                     app:startIconTint="?attr/colorControlNormal"
                     app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/removeItems"
+                    app:layout_constraintTop_toBottomOf="@id/addMoreItems"
                     app:boxStrokeColor="@color/color_primary"
                     app:boxStrokeWidth="2dp"
                     tools:ignore="MissingConstraints">

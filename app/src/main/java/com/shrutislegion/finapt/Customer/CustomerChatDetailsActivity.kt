@@ -1,12 +1,12 @@
-package com.shrutislegion.finapt.Shopkeeper
+package com.shrutislegion.finapt.Customer
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -16,15 +16,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Adapters.ChatDetailsAdapter
 import com.shrutislegion.finapt.Modules.ChatMessageInfo
 import com.shrutislegion.finapt.R
-import com.shrutislegion.finapt.databinding.ActivityShopChatDetailsBinding
+import com.shrutislegion.finapt.databinding.ActivityCustomerChatDetailsBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ShopChatDetailsActivity : AppCompatActivity() {
+class CustomerChatDetailsActivity : AppCompatActivity() {
 
     var receiverId: String? = null
     var storeMessage: ArrayList<ChatMessageInfo> = ArrayList<ChatMessageInfo>()
@@ -58,9 +57,9 @@ class ShopChatDetailsActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        setContentView(R.layout.activity_shop_chat_details)
+        setContentView(R.layout.activity_customer_chat_details)
 
-        val binding: ActivityShopChatDetailsBinding = ActivityShopChatDetailsBinding.inflate(layoutInflater)
+        val binding: ActivityCustomerChatDetailsBinding = ActivityCustomerChatDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // To get the shared intent data
@@ -74,22 +73,23 @@ class ShopChatDetailsActivity : AppCompatActivity() {
             .load(userImgUrl)
             .override(600, 400)
             .placeholder(R.drawable.ic_account)
-            .into(binding.shopChatUserProfileImage)
+            .into(binding.customerChatUserProfileImage)
 
-        binding.shopChatUserName.text = userName.toString()
+        binding.customerChatUserName.text = userName.toString()
 
         adapter = ChatDetailsAdapter(storeMessage, this)
-        binding.shopChatDetailsRV.adapter = adapter
+        binding.customerChatDetailsRV.adapter = adapter
 
         val linearLayoutManager = LinearLayoutManagerWrapper(this, LinearLayoutManager.VERTICAL, false)
-        binding.shopChatDetailsRV.layoutManager = linearLayoutManager
+        binding.customerChatDetailsRV.layoutManager = linearLayoutManager
 
         val senderId = FirebaseAuth.getInstance().currentUser!!.uid
 
         FirebaseDatabase.getInstance().reference
             .child("Chats")
             .child("$senderId,$receiverId")
-            .addValueEventListener(object: ValueEventListener{
+            .addValueEventListener(object: ValueEventListener {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         storeMessage.clear()
@@ -105,19 +105,19 @@ class ShopChatDetailsActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@ShopChatDetailsActivity, "Unable to load chats", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CustomerChatDetailsActivity, "Unable to load chats", Toast.LENGTH_SHORT).show()
                 }
 
             })
 
-        binding.shopChatDetailsSendButton.setOnClickListener {
+        binding.customerChatDetailsSendButton.setOnClickListener {
 
-            val msg = binding.shopChatDetailsMessage.text.toString()
+            val msg = binding.customerChatDetailsMessage.text.toString()
 
             if(msg.trim().isNotEmpty()){
                 val msgData = ChatMessageInfo(senderId+"", receiverId+"", msg+"", Date().time)
 
-                binding.shopChatDetailsMessage.setText("")
+                binding.customerChatDetailsMessage.setText("")
 
                 FirebaseDatabase.getInstance().reference
                     .child("Chats")
@@ -132,13 +132,13 @@ class ShopChatDetailsActivity : AppCompatActivity() {
                             .setValue(msgData).addOnSuccessListener {
                             }
                             .addOnFailureListener {
-                                Toast.makeText(this@ShopChatDetailsActivity, "Message not sent", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@CustomerChatDetailsActivity, "Message not sent", Toast.LENGTH_SHORT).show()
                             }
                     }
             }
         }
 
-        binding.shopChatUserPhoneCall.setOnClickListener {
+        binding.customerChatUserPhoneCall.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_DIAL)
             var contactNumber = ""
 
@@ -153,14 +153,14 @@ class ShopChatDetailsActivity : AppCompatActivity() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(this@ShopChatDetailsActivity, "Unable to place call", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CustomerChatDetailsActivity, "Unable to place call", Toast.LENGTH_SHORT).show()
                     }
 
                 })
 
         }
 
-        binding.shopBackArrowButton.setOnClickListener {
+        binding.customerBackArrowButton.setOnClickListener {
             finish()
         }
 
