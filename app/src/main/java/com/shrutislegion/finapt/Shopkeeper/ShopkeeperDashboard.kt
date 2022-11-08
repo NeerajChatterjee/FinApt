@@ -2,23 +2,41 @@
 
 package com.shrutislegion.finapt.Shopkeeper
 
-import android.app.Fragment
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import com.shrutislegion.finapt.Modules.ItemInfo
+import com.shrutislegion.finapt.Notifications.MyReceiver
+import com.shrutislegion.finapt.Notifications.channelId
+import com.shrutislegion.finapt.Notifications.notificationId
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.*
 import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.ActivityShopkeeperDashboardBinding
-import com.shrutislegion.finapt.databinding.FragmentShopChatBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
+@Suppress("DEPRECATION")
 class ShopkeeperDashboard : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var bottomNav: ChipNavigationBar
@@ -28,6 +46,7 @@ class ShopkeeperDashboard : AppCompatActivity() {
     companion object {
         const val EXTRA_FRAGMENT = "name_extra"
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopkeeper_dashboard)
@@ -124,5 +143,23 @@ class ShopkeeperDashboard : AppCompatActivity() {
                 }
             }
         }
+
+        try {
+            val i = Intent(applicationContext, MyReceiver::class.java) // intent to be launched
+
+            val pendingIntent = PendingIntent.getBroadcast(
+                applicationContext,
+                0,  // id (optional)
+                i,  // intent to launch
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Date(System.currentTimeMillis()).time, 1000, pendingIntent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 }

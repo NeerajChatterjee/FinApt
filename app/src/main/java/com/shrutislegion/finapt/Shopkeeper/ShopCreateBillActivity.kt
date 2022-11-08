@@ -3,23 +3,34 @@
 package com.shrutislegion.finapt.Shopkeeper
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.ProgressDialog
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.Modules.ItemInfo
+import com.shrutislegion.finapt.Notifications.channelId
+import com.shrutislegion.finapt.Notifications.notificationId
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.CreateBillAddItemAdapter
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
@@ -35,6 +46,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
     // Initialising required Variables
     private lateinit var binding: ActivityShopCreateBillBinding
     lateinit var shopkeeper: ShopkeeperInfo
+    lateinit var auth: FirebaseAuth
     val billID: String = ""
     val pending: Boolean = false
     var sentTo: String = ""
@@ -48,13 +60,18 @@ class ShopCreateBillActivity : AppCompatActivity() {
     lateinit var itemList: ArrayList<ItemInfo>
     lateinit var adapter: CreateBillAddItemAdapter
 
-    @SuppressLint("NotifyDataSetChanged")
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_create_bill)
 
         binding = ActivityShopCreateBillBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth
+
+        createNotificationChannel()
 
         val items_category = listOf("Shopping", "Food", "Education", "Others")
         val adapter_category = ArrayAdapter(this, R.layout.list_item, items_category)
@@ -147,17 +164,17 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
 
         binding.addItemView?.adapter = adapter
-        var dialog = ProgressDialog(this)
+        val dialog = ProgressDialog(this)
         // Creating a dialog while the data is uploading
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-        dialog.setTitle("Creating Bill")
-        dialog.setMessage("Please Wait")
+        dialog.setTitle(getString(R.string.creating_bill))
+        dialog.setMessage(getString(R.string.please_wait))
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
         binding.submitBillDetails.setOnClickListener {
             if (binding.invoiceNo == null || category == "" || binding.totalAmount == null) {
-                Toast.makeText(this, "Please Enter All The Required Details", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Please Enter All The Required Details", Toast.LENGTH_SHORT).show()
             }
             else {
                 dialog.show()
@@ -167,14 +184,22 @@ class ShopCreateBillActivity : AppCompatActivity() {
                 invoice = binding.invoiceNo.getText().toString().trim()
                 totalAmount = binding.totalAmount.text.toString().trim()
                 GSTIN = binding.shopkeeperGSTIn.text.toString().trim()
-                Toast.makeText(this, itemList.toString(),Toast.LENGTH_SHORT).show()
+
                 val bill: BillInfo = BillInfo (
                     billID = key, pending = false, sentTo = shopkeeperUid, date = date, totalAmount = totalAmount, shopkeeperUid = shopkeeperUid,  category = category , invoice = invoice, GSTIN = GSTIN, items = itemList)
+
                 // uploading data to Firebase Database
                 database.reference.child("Bills").child(shopkeeperUid).child(key!!).setValue(bill).addOnCompleteListener {
                     if (it.isSuccessful) {
                         dialog.dismiss()
+
+                        updateInventory(bill)
+
+                        checkInventoryAndNotify()
+
                         Toast.makeText(this, "Bill Created", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, ShopkeeperDashboard::class.java))
+                        finish()
                     }
                     else {
                         dialog.dismiss()
@@ -185,14 +210,119 @@ class ShopCreateBillActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun updateInventory(bill: BillInfo) {
+        val itemsBought = bill.items
+
+        val reference = FirebaseDatabase.getInstance().reference.child("All Items").child(auth.currentUser!!.uid)
+
+        for(item in itemsBought){
+
+            var previousQuantity: Int = 0
+
+            reference.child(item.itemID!!)
+                .addListenerForSingleValueEvent(object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        previousQuantity = snapshot.getValue<ItemInfo>()!!.itemQuantity!!
+                        Toast.makeText(this@ShopCreateBillActivity, previousQuantity.toString(), Toast.LENGTH_SHORT).show()
+                        val updatedItemInfo = ItemInfo(item.itemID, item.itemName, item.itemPrice, previousQuantity - item.itemQuantity!!)
+
+                        reference.child(item.itemID).setValue(updatedItemInfo)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+
+        }
+
+    }
+
+    private fun checkInventoryAndNotify() {
+
+        val itemNames = ArrayList<String>()
+        val itemQuantities = ArrayList<String>()
+
+        FirebaseDatabase.getInstance().reference.child("All Items").child(auth.currentUser!!.uid)
+            .addChildEventListener(object: ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    val itemChanged =  snapshot.getValue<ItemInfo>()!!
+                    if(itemChanged.itemQuantity!! <= 5){
+                        itemNames.add(itemChanged.itemName!!)
+                        itemQuantities.add(itemChanged.itemQuantity!!.toString())
+                    }
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            if(itemNames.isNotEmpty()) {
+
+                val title = getString(R.string.inventory_alerts)
+                var message = ""
+
+                for (i in 0 until itemNames.size) {
+                    message += "${itemNames[i]} has ${itemQuantities[i]} units\n"
+                }
+
+                sendNotification(title, message)
+
+                itemNames.clear()
+                itemQuantities.clear()
+            }
+        }, 2000)
+
+    }
+
+    private fun sendNotification(title: String, message: String) {
+
+        val intent = Intent(this, ShopkeeperDashboard::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.lightening)
+            .setContentTitle(title)
+            .setContentText(getString(R.string.items_are_going_out_of_stocks))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(message))
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationId, builder.build())
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel() {
+        val name = "Notification Channel"
+        val desc = "A description of Channel"
+
+        val channel = NotificationChannel(channelId, name, NotificationManager.IMPORTANCE_DEFAULT)
+        channel.description = desc
+
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+
+    }
 }
-//        - Bills
-//            - Shopkeeper uid#1
-//                    - Bill key#1
-//                        - senTo: String
-//                        - rest bill details
-//                    - Bill key#2
-//            - Shopkeeper uid#2
-//                    - Bill key#1
-//                        - senTo: String
-//                        - rest details

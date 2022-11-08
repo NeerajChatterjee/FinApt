@@ -81,11 +81,11 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
 
         currUser = FirebaseAuth.getInstance().currentUser!!.uid
 
-        val items_gender = listOf("Male", "Female", "Others")
-        val items_state = listOf("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal")
+        val itemsGender = listOf("Male", "Female", "Others")
+        val itemsState = listOf("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal")
 
-        val adapter_gender = ArrayAdapter(this, R.layout.list_item, items_gender)
-        (binding.autoCompleteTxtGender as? AutoCompleteTextView)?.setAdapter(adapter_gender)
+        val adapterGender = ArrayAdapter(this, R.layout.list_item, itemsGender)
+        (binding.autoCompleteTxtGender as? AutoCompleteTextView)?.setAdapter(adapterGender)
 
         binding.autoCompleteTxtGender.setOnItemClickListener { parent, view, position, id ->
 
@@ -94,8 +94,8 @@ class ShopkeeperCreateProfileActivity : AppCompatActivity() {
 
         }
 
-        val adapter_state = ArrayAdapter(this, R.layout.list_item, items_state)
-        (binding.autoCompleteTxtState as? AutoCompleteTextView)?.setAdapter(adapter_state)
+        val adapterState = ArrayAdapter(this, R.layout.list_item, itemsState)
+        (binding.autoCompleteTxtState as? AutoCompleteTextView)?.setAdapter(adapterState)
 
         binding.autoCompleteTxtState.setOnItemClickListener { parent, view, position, id ->
 

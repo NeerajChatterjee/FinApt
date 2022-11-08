@@ -112,4 +112,13 @@
     <string name="add_more_item">+Add More Item</string>
     <string name="edit">EDIT</string>
     <string name="add_items">Add Items</string>
+    <string name="we_waited_so_long_for_you">We waited so long for you😀..Let\'s FinApt!</string>
+    <string name="items_are_going_out_of_stocks">Items are going less on stocks</string>
+    <string name="inventory_alerts">Inventory Alert⚠</string>
+    <string name="creating_bill">Creating Bill</string>
+    <string name="shop_owner">Shop Owner</string>
+    <string name="long_gone_days_for_tally_sheets_or_paperwork_manage_your_bills_and_inventory_here_let_s_begin">Long gone days for tally sheets or paperwork, manage your bills and inventory here. Let\'s Begin!</string>
+    <string name="personal_ntracker">Personal\nTracker</string>
+    <string name="track_your_expenses_and_categorize_according_in_shopping_food_etc_join_us">Track your expenses and categorize according in Shopping, Food,.etc. Join us.</string>
+    <string name="already_a_user_click_here_to_sign_in">Already a user? Click here to Sign In</string>
 </resources>

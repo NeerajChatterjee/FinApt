@@ -2,16 +2,22 @@
 
 package com.shrutislegion.finapt
 
-import android.app.ProgressDialog
+import android.annotation.SuppressLint
+import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,10 +34,18 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.CustomerDashboard
 import com.shrutislegion.finapt.Customer.CustomerCreateProfileActivity
+import com.shrutislegion.finapt.Notifications.channelId
+import com.shrutislegion.finapt.Notifications.messageExtra
+import com.shrutislegion.finapt.Notifications.notificationId
+import com.shrutislegion.finapt.Notifications.titleExtra
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperCreateProfileActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import com.shrutislegion.finapt.databinding.ActivitySignInBinding
 import kotlinx.android.synthetic.main.activity_sign_in.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
@@ -41,6 +55,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var binding: ActivitySignInBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -73,6 +88,8 @@ class SignInActivity : AppCompatActivity() {
         dialog.setMessage(getString(R.string.please_wait))
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
+
+        createNotificationChannel()
 
         // Sign in with Email and Password
         binding.signInButton.setOnClickListener {
@@ -276,6 +293,8 @@ class SignInActivity : AppCompatActivity() {
 
                     custReference.child(Firebase.auth.currentUser!!.uid).child("phoneVerified")
                         .addListenerForSingleValueEvent(object: ValueEventListener{
+                            @SuppressLint("SimpleDateFormat")
+                            @RequiresApi(Build.VERSION_CODES.O)
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 if(snapshot.exists()){
 
@@ -288,6 +307,18 @@ class SignInActivity : AppCompatActivity() {
                                         ).show()
                                         binding.loadingAnimation.cancelAnimation()
                                         binding.loadingAnimation.visibility = View.GONE
+
+//                                        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+//                                        val formatted = LocalDateTime.now().format(formatter)
+//                                        var timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(formatted)!!.time
+//
+//                                        Log.e("tag", "Current time is: ${System.currentTimeMillis()}")
+//                                        Log.e("tag", "Current time is timeStamp: ${timeStamp}")
+//                                        timeStamp += 200000
+//                                        scheduleNotification(timeStamp, "Signed in as Customer", "Welcome to our app!")
+
+                                        sendNotification()
+
                                         val intent =
                                             Intent(this@SignInActivity, CustomerDashboard::class.java)
                                         startActivity(intent)
@@ -361,6 +392,8 @@ class SignInActivity : AppCompatActivity() {
                                         binding.loadingAnimation.cancelAnimation()
                                         binding.loadingAnimation.visibility = View.GONE
 
+                                        sendNotification()
+
                                         val intent =
                                             Intent(this@SignInActivity, ShopkeeperDashboard::class.java)
                                         startActivity(intent)
@@ -411,6 +444,43 @@ class SignInActivity : AppCompatActivity() {
                 binding.signInConstraintLayout.visibility = View.VISIBLE
             }
         })
+    }
+
+    private fun sendNotification() {
+
+        val intent = Intent(this, SplashScreen::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.welcome_card)
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.lightening)
+            .setContentTitle("Happy Moment!")
+            .setContentText(getString(R.string.we_waited_so_long_for_you))
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationId, builder.build())
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel() {
+        val name = "Notification Channel"
+        val desc = "A description of Channel"
+
+        val channel = NotificationChannel(channelId, name, NotificationManager.IMPORTANCE_DEFAULT)
+        channel.description = desc
+
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+
     }
 
     override fun onDestroy() {

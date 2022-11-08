@@ -106,7 +106,7 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
                 holder.add.text = "Edit"
                 holder.quantity.isEnabled = false
                 var item_detail_add: ItemInfo = itemList[pos]
-//                    item_detail_add.itemQuantity = temp_qtn
+                item_detail_add.itemQuantity = temp_qtn
                 selectedList.add(itemList[pos])
 //                }
 //                else {

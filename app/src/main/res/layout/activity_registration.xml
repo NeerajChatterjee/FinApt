@@ -8,10 +8,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            >
 
 
             <!--    <com.google.android.material.imageview.ShapeableImageView-->
@@ -48,7 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="20dp"
                 android:text="@string/track_your_success"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textColor="@color/color_primary"
                 android:fontFamily="@font/nunito_bold"/>
             <com.google.android.material.textview.MaterialTextView
@@ -60,16 +65,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="20dp"
                 android:text="@string/welcome_on_board"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/color_primary"
                 android:fontFamily="@font/nunito_semibold"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shop"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintWidth_percent="0.45"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="15dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="15dp"
@@ -90,14 +96,14 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shop Owner"
+                        android:text="@string/shop_owner"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Long gone days for tally sheets or paperwork, manage your bills and inventory here. Let's Begin!"
+                        android:text="@string/long_gone_days_for_tally_sheets_or_paperwork_manage_your_bills_and_inventory_here_let_s_begin"
                         android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -107,45 +113,16 @@
                         android:layout_marginTop="20dp"
                         android:src="@drawable/ic_baseline_arrow_right_alt_24" />
                 </LinearLayout>
-                <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--            android:layout_width="match_parent"-->
-                <!--            android:layout_height="match_parent">-->
-                <!--            -->
-                <!--            <com.google.android.material.textview.MaterialTextView-->
-                <!--                android:id="@+id/shopText"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                app:layout_constraintTop_toTopOf="parent"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                android:layout_marginStart="10dp"-->
-                <!--                android:layout_marginTop="5dp"-->
-                <!--                android:text="Shop Owner"-->
-                <!--                android:fontFamily="@font/nunito_extrabold"-->
-                <!--                />-->
-                <!--            <com.google.android.material.textview.MaterialTextView-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                app:layout_constraintTop_toBottomOf="@id/shopText"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                android:layout_marginStart="10dp"-->
-                <!--                android:layout_marginVertical="5dp"-->
-                <!--                android:text="Long gone days for tally sheets or paperwork, manage your bills and inventory here. Let's Begin!"-->
-                <!--                android:fontFamily="@font/nunito_semibold"-->
-                <!--                />-->
-                <!--            -->
-                <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cust"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintWidth_percent="0.45"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_margin="20dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="15dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="15dp"
@@ -167,14 +144,14 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Personal\nTracker"
+                        android:text="@string/personal_ntracker"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Track your expenses and categorize according in Shopping, Food,.etc. Join us."
+                        android:text="@string/track_your_expenses_and_categorize_according_in_shopping_food_etc_join_us"
                         android:textSize="15sp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -193,10 +170,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/cust"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="Already a user? Click here to Sign In"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/already_a_user_click_here_to_sign_in"
                 android:textColor="@color/color_primary_variant"
                 android:fontFamily="@font/nunito_semibolditalic"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

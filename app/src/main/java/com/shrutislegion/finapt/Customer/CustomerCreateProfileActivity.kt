@@ -88,11 +88,11 @@ class CustomerCreateProfileActivity : AppCompatActivity() {
         currUser = FirebaseAuth.getInstance().currentUser!!.uid
 
 
-        val items_gender = listOf("Male", "Female", "Others")
-        val items_state = listOf("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal")
+        val itemsGender = listOf("Male", "Female", "Others")
+        val itemsState = listOf("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal")
 
-        val adapter_gender = ArrayAdapter(this, R.layout.list_item, items_gender)
-        (auto_complete_txt_gender as? AutoCompleteTextView)?.setAdapter(adapter_gender)
+        val adapterGender = ArrayAdapter(this, R.layout.list_item, itemsGender)
+        (auto_complete_txt_gender as? AutoCompleteTextView)?.setAdapter(adapterGender)
 
         auto_complete_txt_gender.setOnItemClickListener { parent, view, position, id ->
 
@@ -101,8 +101,8 @@ class CustomerCreateProfileActivity : AppCompatActivity() {
 
         }
 
-        val adapter_state = ArrayAdapter(this, R.layout.list_item, items_state)
-        (auto_complete_txt_state as? AutoCompleteTextView)?.setAdapter(adapter_state)
+        val adapterState = ArrayAdapter(this, R.layout.list_item, itemsState)
+        (auto_complete_txt_state as? AutoCompleteTextView)?.setAdapter(adapterState)
 
         auto_complete_txt_state.setOnItemClickListener { parent, view, position, id ->
 
