@@ -93,6 +93,11 @@
     <string name="quantity">Quantity</string>
     <string name="remove_items">Remove Items</string>
     <string name="edit_item_details">Edit Item Details</string>
+    <string name="unable_to_fetch">Unable to fetch. Please try again</string>
+    <string name="message">Message</string>
+    <string name="no_chat_history_start_by_clicking_on_the_icon_below">No chat history\nStart by clicking on the icon below</string>
+    <string name="send">Send</string>
+    <string name="type_a_message">Type a message...</string>
     <string name="hello">Hello!</string>
     <string name="send_nbill">Send\nBill</string>
     <string name="update_n_inventory">Update\nInventory</string>
@@ -101,6 +106,12 @@
     <string name="you_have_been_missed">Welcome Back! You Have Been Missed!</string>
     <string name="track_your_success">Track Your Success!</string>
     <string name="welcome_on_board">Welcome On Board!</string>
+    <string name="item">Item</string>
+    <string name="add">ADD</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="add_more_item">+Add More Item</string>
+    <string name="edit">EDIT</string>
+    <string name="add_items">Add Items</string>
     <string name="enter_receiver_s_phone_number">Enter Receiver\'s Phone Number</string>
     <string name="pending">Pending</string>
     <string name="accepted">Accepted</string>
