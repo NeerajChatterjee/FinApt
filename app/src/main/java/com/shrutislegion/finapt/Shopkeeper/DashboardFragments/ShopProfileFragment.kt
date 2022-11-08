@@ -63,7 +63,7 @@ class ShopProfileFragment : Fragment() {
                     // fetching the user data from database
                     user = (snapshot.getValue<ShopkeeperInfo>() as ShopkeeperInfo?)!!
                     // setting the data to the respective views in the layout
-                    binding.shopkeeperName.setText(user.name)
+                    binding.shopkeeperName.text = user.name
                     binding.shopName.setText(user.shopName)
                     binding.gstIn.setText(user.gstIn)
                     binding.mobileNumber.setText(user.phone)
