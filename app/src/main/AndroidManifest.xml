@@ -85,7 +85,8 @@
         </activity>
         <activity
             android:name=".Shopkeeper.ShopBillsHistoryActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Billing History">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

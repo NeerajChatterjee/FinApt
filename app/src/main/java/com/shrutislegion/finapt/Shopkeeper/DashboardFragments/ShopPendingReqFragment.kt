@@ -5,7 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopBillHistoryAdapter
+import kotlinx.android.synthetic.main.fragment_shop_pending_req.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +34,8 @@ class ShopPendingReqFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var bills: ArrayList<BillInfo>
+    lateinit var adapter: ShopBillHistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +49,36 @@ class ShopPendingReqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_pending_req, container, false)
+        val view = inflater.inflate(R.layout.fragment_shop_pending_req, container, false)
+        bills = ArrayList<BillInfo>()
+        view.pendingReqView!!.layoutManager = LinearLayoutManager(view.context)
+
+        val auth = Firebase.auth
+        val database = Firebase.database
+        val ref = FirebaseDatabase.getInstance().reference.child("Bills").child(auth.currentUser!!.uid)
+        if(ref != null) {
+            ref.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (dss in snapshot.children) {
+                        val value = (dss.getValue<BillInfo>() as BillInfo?)!!
+                        if(value.pending == true) bills.add(value)
+                        else {
+                            if (value.accepted == false) bills.add(value)
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+        // This will pass the ArrayList to our Adapter
+        adapter = ShopBillHistoryAdapter(bills)
+        // Setting the Adapter with the recyclerview
+        view.pendingReqView!!.adapter = adapter
+        return view
     }
 
     companion object {

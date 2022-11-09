@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.item_edit_dialogue.view.*
 
 class InventoryEditAdapter (val options: ArrayList<ItemInfo>) : RecyclerView.Adapter<InventoryEditAdapter.myViewHolder>(){
 
-    //lateinit var dialogPlus: DialogPlus
-
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // creating viewHolder and getting all the required views by their Ids
         // shopName, category, totalAmount, isAccepted, phone, billID, shopkeeperUID, timeStampBillSend

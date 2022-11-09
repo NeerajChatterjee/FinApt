@@ -88,6 +88,9 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
             //temp_qtn = Integer.parseInt(holder.quantity.text.toString())
             if(holder.quantity.text.toString() != "") {
                 temp_qtn = Integer.parseInt(holder.quantity.text.toString())
+                if(temp_qtn > itemList[pos].itemQuantity!!.toInt() ) {
+                    Toast.makeText(holder.quantity.context, "The Selected Items is out of stock, the current quantity is " + itemList[pos].itemQuantity.toString(), Toast.LENGTH_SHORT).show()
+                }
             }
             //Toast.makeText(holder.itemName.context, holder.quantity.text, Toast.LENGTH_SHORT).show()
         }
@@ -100,14 +103,14 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
             }
             else {
 //                if(holder.add.text == "Add") {
-                totalAmount += (temp * temp_qtn)
-                Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
-                holder.add.setBackgroundColor(android.graphics.Color.BLACK)
-                holder.add.text = "Edit"
-                holder.quantity.isEnabled = false
-                var item_detail_add: ItemInfo = itemList[pos]
-                item_detail_add.itemQuantity = temp_qtn
-                selectedList.add(itemList[pos])
+                    totalAmount += (temp * temp_qtn)
+                    Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
+                    holder.add.setBackgroundColor(android.graphics.Color.BLACK)
+                    holder.add.text = holder.itemName.context.getString(R.string.added)
+                    holder.quantity.isEnabled = false
+                    var item_detail_add: ItemInfo = itemList[pos]
+                    item_detail_add.itemQuantity = temp_qtn
+                    selectedList.add(itemList[pos])
 //                }
 //                else {
 //                    totalAmount -= (temp * temp_qtn)

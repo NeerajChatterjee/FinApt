@@ -52,9 +52,12 @@ class ShopkeeperDashboard : AppCompatActivity() {
         setContentView(R.layout.activity_shopkeeper_dashboard)
         auth = Firebase.auth
 
+//        if(registrationActivityObject.registrationActivity != null){
+//            registrationActivityObject.registrationActivity!!.finish()
+//        }
+        supportActionBar!!.hide()
         val binding: ActivityShopkeeperDashboardBinding = ActivityShopkeeperDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val intent = Intent("finish_activity")
         sendBroadcast(intent)
 
@@ -78,38 +81,37 @@ class ShopkeeperDashboard : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
             binding.messageShopFragmentFAB.visibility = View.GONE
-            supportActionBar!!.title = "Home"
         }
         else if(frag == "2"){
             bottomNav.setItemSelected(R.id.shopPendingRequest,true)
             supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment()).commitAllowingStateLoss()
+
             binding.messageShopFragmentFAB.visibility = View.GONE
-            supportActionBar!!.title = "Requests"
         }
         else if(frag == "3"){
             bottomNav.setItemSelected(R.id.shopPastBills,true)
             supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment()).commitAllowingStateLoss()
+
             binding.messageShopFragmentFAB.visibility = View.GONE
-            supportActionBar!!.title = "Past Bills"
         }
         else if(frag == "4"){
             bottomNav.setItemSelected(R.id.shopChat,true)
             supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment()).commitAllowingStateLoss()
+
             binding.messageShopFragmentFAB.visibility = View.VISIBLE
-            supportActionBar!!.title = "Chat"
         }
         else if(frag == "5"){
             bottomNav.setItemSelected(R.id.shopProfile,true)
             supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
+
             binding.messageShopFragmentFAB.visibility = View.GONE
-            supportActionBar!!.title = "Profile"
         }
         // By default the home page should be selected on opening the app
         else if(savedInstanceState==null){
             bottomNav.setItemSelected(R.id.shopHome,true)
             supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
+
             binding.messageShopFragmentFAB.visibility = View.GONE
-            supportActionBar!!.title = "Home"
         }
 
         // Listener on the bottomNav, and selecting the fragment according to their ids

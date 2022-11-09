@@ -121,4 +121,13 @@
     <string name="personal_ntracker">Personal\nTracker</string>
     <string name="track_your_expenses_and_categorize_according_in_shopping_food_etc_join_us">Track your expenses and categorize according in Shopping, Food,.etc. Join us.</string>
     <string name="already_a_user_click_here_to_sign_in">Already a user? Click here to Sign In</string>
+    <string name="enter_receiver_s_phone_number">Enter Receiver\'s Phone Number</string>
+    <string name="pending">Pending</string>
+    <string name="accepted">Accepted</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="rejected">Rejected</string>
+    <string name="customer_doesnt_exists">Customer Doesn\'t Exists. Try another contact number.</string>
+    <string name="billed_to">Billed To:</string>
+    <string name="items">Items</string>
+    <string name="added">Added</string>
 </resources>
