@@ -93,7 +93,7 @@ class ShowAllUsersFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            adapter = ShopChatUserFragmentAdapter(storeUsers, container!!.context)
+            adapter = ShopChatUserFragmentAdapter(1, storeUsers, container!!.context)
             binding.chatAllUsersFragmentRV.adapter = adapter
 
             adapter.notifyDataSetChanged()

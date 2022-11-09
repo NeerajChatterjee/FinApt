@@ -1,46 +1,134 @@
 package com.shrutislegion.finapt.Shopkeeper.Adapters
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
+import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.Customer.Modules.CustomerPendingRequestDetails
+import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class RecentBillsAdapter (val options: ArrayList<String>) : RecyclerView.Adapter<RecentBillsAdapter.myViewHolder>() {
+class RecentBillsAdapter (val options: ArrayList<BillInfo>) : RecyclerView.Adapter<RecentBillsAdapter.myViewHolder>() {
 
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // creating viewHolder and getting all the required views by their Ids
-        // shopName, category, totalAmount, isAccepted, phone, billID, shopkeeperUID, timeStampBillSend
-        val name = itemView.findViewById<TextView>(R.id.name)
-
+        var custName: TextView = itemView.findViewById(R.id.custName)
+        var number: TextView = itemView.findViewById(R.id.phoneNumber)
+        var category: TextView = itemView.findViewById(R.id.category)
+        var sentTime: TextView = itemView.findViewById(R.id.shopRecentSendTimeText)
+        var status: TextView = itemView.findViewById(R.id.status)
+        var totalAmount: TextView = itemView.findViewById(R.id.totalAmount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
-//        val view =
-//            LayoutInflater.from(parent.context)
-//                .inflate(com.google.firebase.database.R.layout.item_customer_pending_request, parent, false)
-//        return myViewHolder(view)
+        
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recent_bills, parent, false)
         return myViewHolder(view)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-        val itemmodel = options[position]
-        holder.name.text = "name"
+        val itemModel = options[position]
+
+        val auth = Firebase.auth
+        var customerUid = ""
+
+        if (itemModel.sentTo == auth.currentUser!!.uid) {
+
+            holder.number.text = holder.custName.context.getString(R.string.to_self)
+            val formatter = SimpleDateFormat("dd-MM-yyyy, hh:mm a")
+            val formatted = formatter.format(Date(itemModel.date.toLong()))
+            holder.sentTime.text = formatted
+
+            val ref = FirebaseDatabase.getInstance().reference.child("Shopkeepers")
+                .child(auth.currentUser!!.uid)
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val value = snapshot.getValue<ShopkeeperInfo>()!!.name
+                        holder.custName.text = value
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+        } else {
+            holder.number.text = itemModel.sentTo
+            val formatter = SimpleDateFormat("dd-MM-yyyy hh:mm a")
+            val formatted = formatter.format(Date(itemModel.date.toLong()))
+            holder.sentTime.text = formatted
+
+            val ref = FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers")
+                .child(itemModel.sentTo)
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        customerUid = snapshot.getValue<String>() as String
+
+                        val newRef = FirebaseDatabase.getInstance().reference.child("Customers")
+                            .child(customerUid)
+                        newRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists()) {
+                                    val value = snapshot.getValue<CustomerInfo>()!!
+                                    holder.custName.text = value.name
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.e("tag", error.message)
+                            }
+//
+                        })
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("tag", error.message)
+                }
+
+            })
+        }
+
+        if (itemModel.pending == true) {
+            holder.status.text = holder.status.context.getString(R.string.pending)
+            holder.status.setTextColor(Color.RED)
+        } else {
+            //Toast.makeText(holder.status.context, itemModel.accepted.toString(), Toast.LENGTH_SHORT).show()
+            if (itemModel.accepted == true) {
+                holder.status.text = holder.status.context.getString(R.string.accepted)
+                holder.status.setTextColor(Color.GREEN)
+            } else {
+                holder.status.text = holder.status.context.getString(R.string.rejected)
+                holder.status.setTextColor(Color.RED)
+
+            }
+        }
+        holder.category.text = itemModel.category
+        holder.totalAmount.text = itemModel.totalAmount
     }
-//    (
-//        holder: myViewHolder,
-//        position: Int,
-//        model: CustomerPendingRequestDetails
-//    ) {
-//        holder.shopName.setText(model.shopName)
-//        holder.category.setText(model.category)
-//        holder.totalAmount.setText(model.totalAmount)
-//    }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {

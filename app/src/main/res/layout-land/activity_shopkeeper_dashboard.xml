@@ -29,5 +29,28 @@
         app:cnb_menuResource="@menu/shop_dash_menu"
         tools:ignore="MissingClass" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/messageShopFragmentFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_message_24"
+        app:tint="@color/white"
+        android:backgroundTint="@color/color_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:pressedTranslationZ="6dp"
+        android:visibility="visible"
+        app:rippleColor="@color/white"
+        tools:ignore="MissingClass"
+        android:contentDescription="@string/message" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

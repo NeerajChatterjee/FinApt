@@ -2,10 +2,11 @@ package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -19,6 +20,7 @@ import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopBillHistoryAdapter
 import kotlinx.android.synthetic.main.fragment_shop_pending_req.view.*
+
 
 class ShopPendingReqFragment : Fragment() {
 
@@ -39,21 +41,18 @@ class ShopPendingReqFragment : Fragment() {
 
         val auth = Firebase.auth
         val database = Firebase.database
-        val ref = FirebaseDatabase.getInstance().reference.child("Bills").child(auth.currentUser!!.uid).addValueEventListener(object : ValueEventListener {
+        val ref = FirebaseDatabase.getInstance().reference.child("Bills").child(auth.currentUser!!.uid).orderByChild("date").addValueEventListener(object : ValueEventListener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (dss in snapshot.children) {
                         val value = (dss.getValue<BillInfo>() as BillInfo?)!!
                         if(value.pending == true) bills.add(value)
-                        else {
-                            if (value.accepted == false) bills.add(value)
-                        }
                     }
+                    bills.reverse()
                     adapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
         // This will pass the ArrayList to our Adapter
@@ -62,4 +61,6 @@ class ShopPendingReqFragment : Fragment() {
         view.pendingReqView!!.adapter = adapter
         return view
     }
+
+
 }

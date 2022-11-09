@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Shopkeeper.DashboardFragments.ShopPastBillsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/customerPendingReqNestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/billsText"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_primary"
-            android:padding="15dp"
-            android:text="Bills"
-            android:textColor="#fff"
-            android:textSize="25dp"
-            android:fontFamily="@font/nunito_bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <!-- TODO: Update blank fragment layout -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/acceptedReqView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/billsText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            >
 
-</FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/acceptedReqView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/item_shop_bill_history"
+                tools:itemCount="10"
+                android:paddingBottom="60dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

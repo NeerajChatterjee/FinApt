@@ -16,6 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
@@ -25,16 +26,6 @@ import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import kotlinx.android.synthetic.main.fragment_customer_pending_req.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CustomerPendingReqFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CustomerPendingReqFragment : Fragment() {
 
     lateinit var adapter: CustomerPendingRequestAdapter
@@ -57,7 +48,8 @@ class CustomerPendingReqFragment : Fragment() {
 
         val auth = Firebase.auth
         val ref = FirebaseDatabase.getInstance().reference.child("Customer Pending Requests").child(auth.currentUser!!.uid)
-        ref.addValueEventListener(object : ValueEventListener {
+
+        ref.orderByChild("date").addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
@@ -66,6 +58,7 @@ class CustomerPendingReqFragment : Fragment() {
                         list.add((dss.getValue<BillInfo>())!!)
                         // Toast.makeText(view.context, list.toString(), Toast.LENGTH_SHORT).show()
                     }
+                    list.reverse()
                     adapter.notifyDataSetChanged()
                 }
 

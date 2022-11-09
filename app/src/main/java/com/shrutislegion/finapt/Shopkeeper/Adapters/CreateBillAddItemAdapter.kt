@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,6 +37,7 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
         val itemName = itemView.findViewById<AutoCompleteTextView>(R.id.itemName)
         val price = itemView.findViewById<TextView>(R.id.price)
         val quantity = itemView.findViewById<EditText>(R.id.quantity)
+        val quantityLayout: TextInputLayout = itemView.findViewById<TextInputLayout>(R.id.quantityLayout)
         val add = itemView.findViewById<Button>(R.id.add)
 
     }
@@ -89,17 +91,27 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
             if(holder.quantity.text.toString() != "") {
                 temp_qtn = Integer.parseInt(holder.quantity.text.toString())
                 if(temp_qtn > itemList[pos].itemQuantity!!.toInt() ) {
+                    holder.quantityLayout.isErrorEnabled = true
+                    holder.quantity.error = "Quantity not available"
                     Toast.makeText(holder.quantity.context, "The Selected Items is out of stock, the current quantity is " + itemList[pos].itemQuantity.toString(), Toast.LENGTH_SHORT).show()
                 }
+                else if(temp_qtn == 0){
+                    holder.quantityLayout.isErrorEnabled = true
+                    holder.quantity.error = "Quantity should be greater than 0"
+                }
+                else{
+                    holder.quantityLayout.isErrorEnabled = false
+                }
             }
-            //Toast.makeText(holder.itemName.context, holder.quantity.text, Toast.LENGTH_SHORT).show()
         }
-        //val q: Int = Integer.parseInt(temp_qtn.toString())
 
         holder.add.setOnClickListener {
             holder.add.setBackgroundColor(android.graphics.Color.parseColor("#661212"))
             if(holder.itemName.text == null || holder.price.text == null || holder.quantity.text == null ||  holder.quantity.text.toString() == "") {
                 Toast.makeText(holder.itemName.context, "Please add all the required details first", Toast.LENGTH_SHORT).show()
+            }
+            else if(holder.quantityLayout.isErrorEnabled){
+                Toast.makeText(holder.itemName.context, "Error Error Everywhere.. Please update quantity!", Toast.LENGTH_SHORT).show()
             }
             else {
 //                if(holder.add.text == "Add") {

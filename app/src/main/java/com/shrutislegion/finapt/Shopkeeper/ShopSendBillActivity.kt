@@ -115,7 +115,7 @@ class ShopSendBillActivity : AppCompatActivity() {
         // getting current date
         date = Calendar.getInstance().timeInMillis.toString()
 
-        Toast.makeText(this, date, Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, date, Toast.LENGTH_SHORT).show()
 
         binding.customerPhoneNumber!!.doOnTextChanged{ text, start, before, count ->
 
