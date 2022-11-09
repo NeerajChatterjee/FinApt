@@ -62,6 +62,7 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
             itemmodel.pending = false
             FirebaseDatabase.getInstance().reference.child("Bills").child(itemmodel.shopkeeperUid.toString()).child(itemmodel.billID.toString()).setValue(itemmodel).addOnSuccessListener {
                 Toast.makeText(holder.accept.context, "Accepted", Toast.LENGTH_SHORT).show()
+
             }
         }
         holder.reject.setOnClickListener {
