@@ -33,6 +33,7 @@ import com.shrutislegion.finapt.Notifications.notificationId
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.CreateBillAddItemAdapter
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
+import com.shrutislegion.finapt.SplashScreen
 import com.shrutislegion.finapt.databinding.ActivityShopCreateBillBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -137,7 +138,6 @@ class ShopCreateBillActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })
@@ -153,7 +153,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
         dialog.setCanceledOnTouchOutside(false)
 
         binding.submitBillDetails.setOnClickListener {
-            if (binding.invoiceNo == null || category == "" || binding.totalAmount == null) {
+            if (binding.invoiceNo.text == null || category == "" || binding.totalAmount.text == null) {
                 Toast.makeText(this, "Please Enter All The Required Details", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -161,7 +161,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
                 // generating random key
                 val key = database.reference.child("Bills").child(shopkeeperUid).push().key
                 // getting data from user
-                invoice = binding.invoiceNo.getText().toString().trim()
+                invoice = binding.invoiceNo.text.toString().trim()
                 totalAmount = binding.totalAmount.text.toString().trim()
                 GSTIN = binding.shopkeeperGSTIn.text.toString().trim()
 
@@ -272,7 +272,7 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
     private fun sendNotification(title: String, message: String) {
 
-        val intent = Intent(this, ShopkeeperDashboard::class.java).apply {
+        val intent = Intent(this, SplashScreen::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
@@ -305,3 +305,20 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
     }
 }
+
+
+// After pressing accept in the pending requests, add the BillInfo in this
+//- ExpensesWithCategories
+//    - Customer UID #1
+//        - Clothing
+//            - Bill Info #1 (Accepted ones only) -> Bill Info will have date updated category
+//            - Bill Info #2 (Accepted ones only)
+//        - Housing
+//            - Bill Info #1 (Accepted ones only) -> Bill Info will have date and updated category
+//            - Bill Info #2 (Accepted ones only)
+//    - Customer UID #2
+//
+//- All Expenses
+//    - Customer UID #1
+//        - Bill Info #1 (Accepted ones only) -> Bill Info will have date and updated category
+//        - Bill Info #2 (Accepted ones only)

@@ -38,6 +38,10 @@ class MyReceiver: BroadcastReceiver() {
         auth = Firebase.auth
         createNotificationChannel(context)
 
+        if(auth.currentUser == null){
+            return
+        }
+
         getCurrentItemsInfo()
 
         Handler(Looper.getMainLooper()).postDelayed({

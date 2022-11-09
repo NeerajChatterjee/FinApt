@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Shopkeeper.Adapters
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -20,7 +20,6 @@ import com.google.firebase.ktx.Firebase
 import com.orhanobut.dialogplus.DialogPlus
 import com.orhanobut.dialogplus.ViewHolder
 import com.shrutislegion.finapt.CommonAdapters.ViewBillItemDetailsAdapter
-import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.Modules.ItemInfo
@@ -51,6 +50,7 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
         return myViewHolder(view)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         val itemmodel = options[position]
         val auth = Firebase.auth
@@ -135,6 +135,7 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
                 .setContentHolder(ViewHolder(R.layout.item_view_bill))
                 .setExpanded(true, 1500)
                 .create()
+
             val newView = dialogPlus.holderView
             newView.invoiceNo.text = itemmodel.invoice
             FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(itemmodel.shopkeeperUid.toString())

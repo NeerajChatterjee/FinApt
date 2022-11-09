@@ -157,7 +157,7 @@ class ShopkeeperDashboard : AppCompatActivity() {
             )
 
             val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Date(System.currentTimeMillis()).time, 1000, pendingIntent)
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Date(System.currentTimeMillis()).time, AlarmManager.INTERVAL_HALF_DAY, pendingIntent)
 
         } catch (e: Exception) {
             e.printStackTrace()

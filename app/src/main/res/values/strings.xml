@@ -130,4 +130,20 @@
     <string name="billed_to">Billed To:</string>
     <string name="items">Items</string>
     <string name="added">Added</string>
+    <string name="select_category">Select Category</string>
+    <string name="shopping">Shopping</string>
+    <string name="food_beverages"><![CDATA[Food & Beverages]]></string>
+    <string name="medicines">Medicines</string>
+    <string name="housing">Housing</string>
+    <string name="groceries">Groceries</string>
+    <string name="clothing">Clothing</string>
+    <string name="personal">Personal</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="others">Others</string>
+    <string name="transportation">Transportation</string>
+    <string name="add_to_expenses">ADD TO EXPENSES</string>
+    <string name="please_select_category_to_add">Please select a category to add it to expenses!</string>
+    <string name="_12_45_pm">12:45 PM</string>
+    <string name="medical_healthcare"><![CDATA[Medical & Healthcare]]></string>
+    <string name="education">Education</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Shopkeeper
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -90,6 +91,7 @@ class ShopChatDetailsActivity : AppCompatActivity() {
             .child("Chats")
             .child("$senderId,$receiverId")
             .addValueEventListener(object: ValueEventListener{
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         storeMessage.clear()
