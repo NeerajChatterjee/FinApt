@@ -17,13 +17,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.shrutislegion.finapt.Adapters.ChatDetailsAdapter
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ChatMessageInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.databinding.ActivityCustomerChatDetailsBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CustomerChatDetailsActivity : AppCompatActivity() {
+class CustomerChatDetailsActivity : AppCompat() {
 
     var receiverId: String? = null
     var storeMessage: ArrayList<ChatMessageInfo> = ArrayList<ChatMessageInfo>()

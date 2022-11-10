@@ -25,7 +25,7 @@ import com.shrutislegion.finapt.Customer.CustomerCreateProfileActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : AppCompat() {
     lateinit var auth: FirebaseAuth
     lateinit var database: FirebaseDatabase
     override fun onCreate(savedInstanceState: Bundle?) {

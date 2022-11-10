@@ -6,11 +6,12 @@ import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.databinding.ActivityShopAddItemsBinding
 
-class ShopAddItemsActivity : AppCompatActivity() {
+class ShopAddItemsActivity : AppCompat() {
 
     lateinit var view: ActivityShopAddItemsBinding
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_verify_otpactivity.*
 import java.util.concurrent.TimeUnit
 
 @Suppress("DEPRECATION")
-class VerifyOTPActivity : AppCompatActivity() {
+class VerifyOTPActivity : AppCompat() {
 
     lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     lateinit var dialog: ProgressDialog

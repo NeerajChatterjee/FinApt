@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.VerifyOTPActivity
@@ -46,7 +47,7 @@ import javax.net.ssl.*
 
 
 @Suppress("DEPRECATION")
-class CustomerCreateProfileActivity : AppCompatActivity() {
+class CustomerCreateProfileActivity : AppCompat() {
 
     // Initialising required Variables
     lateinit var mRequestQueue: RequestQueue

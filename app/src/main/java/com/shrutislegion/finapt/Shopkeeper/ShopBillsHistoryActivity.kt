@@ -13,13 +13,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopBillHistoryAdapter
 import com.shrutislegion.finapt.databinding.ActivityShopBillsHistoryBinding
 
-class ShopBillsHistoryActivity : AppCompatActivity() {
+class ShopBillsHistoryActivity : AppCompat() {
     lateinit var binding: ActivityShopBillsHistoryBinding
     lateinit var bills: ArrayList<BillInfo>
     lateinit var adapter: ShopBillHistoryAdapter
