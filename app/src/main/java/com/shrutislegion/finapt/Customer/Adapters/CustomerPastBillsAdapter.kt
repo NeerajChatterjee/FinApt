@@ -40,12 +40,12 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
 
         // creating viewHolder and getting all the required views by their Ids
         // shopName, category, totalAmount, isAccepted, phone, billID, shopkeeperUID, timeStampBillSend
-        val shopName = itemView.findViewById<TextView>(R.id.shopName)
-        val number = itemView.findViewById<TextView>(R.id.phoneNumber)
-        val category = itemView.findViewById<TextView>(R.id.category)
-        val totalAmount = itemView.findViewById<TextView>(R.id.totalAmount)
+        val shopName: TextView = itemView.findViewById<TextView>(R.id.shopName)
+        val number: TextView =  itemView.findViewById<TextView>(R.id.phoneNumber)
+        val category: TextView = itemView.findViewById<TextView>(R.id.category)
+        val totalAmount: TextView = itemView.findViewById<TextView>(R.id.totalAmount)
         //val status = itemView.findViewById<TextView>(R.id.status)
-        val viewBill = itemView.findViewById<Button>(R.id.viewBill)
+        val viewBill: TextView = itemView.findViewById<Button>(R.id.viewBill)
         val sentTime: TextView = itemView.findViewById<TextView>(R.id.customerPRSendTimeText)
     }
 
@@ -79,7 +79,7 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
         val formatted = formatter.format(Date(itemModel.date.toLong()))
         holder.sentTime.text = formatted
 
-        val ref = FirebaseDatabase.getInstance().reference.child("Shopkeeper").child(shopkeeperUid)
+        val ref = FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(shopkeeperUid)
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -123,8 +123,7 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
                     }
 
                 })
-            if (itemModel.sentTo == auth.currentUser!!.uid) {
-                FirebaseDatabase.getInstance().reference.child("Customers")
+            FirebaseDatabase.getInstance().reference.child("Customers")
                     .child(CustomerUid.toString())
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -143,7 +142,7 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
                         }
 
                     })
-            }
+            
             val itemList: ArrayList<ItemInfo> = itemModel.items as ArrayList<ItemInfo>
             adapter = ViewBillItemDetailsAdapter(itemList)
             adapter.notifyDataSetChanged()

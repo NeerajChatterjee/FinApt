@@ -163,6 +163,7 @@
     <string name="now_is_the_time_to_upgrade">लंबी टैली एक्सेल शीट के प्रबंधन से तंग आ चुके हैं? अब अपग्रेड करने का समय है !!</string>
     <string name="create_an_expense">एक खर्च बनाएँ</string>
     <string name="remarks_optional">टिप्पणियां (वैकल्पिक)</string>
+    <style name="name">Name</style>
 
 
 </resources>
