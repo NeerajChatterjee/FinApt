@@ -78,7 +78,7 @@ class PieChartActivity : AppCompatActivity() {
                         map[expense.toString()] = total
                         overAllTotal +=total
                     }
-                    Toast.makeText(this@PieChartActivity, map.toString(), Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@PieChartActivity, map.toString(), Toast.LENGTH_SHORT).show()
                     val keys = ArrayList<String>(map.keys)
                     //Toast.makeText(this, keys.count().toString(), Toast.LENGTH_SHORT).show()
                     val entries: ArrayList<PieEntry> = ArrayList()
