@@ -27,17 +27,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inventory"
         android:layout_marginHorizontal="30dp"
-        android:text="Add new Item"
+        android:text="@string/check_item_details"
         android:textStyle="normal"
         android:textSize="15sp" />
 
+    <TableRow
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkItems"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/itemsText"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                android:text="@string/items"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/color_primary"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/priceText"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/itemsText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/price_per_item"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/color_primary"
+                />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/priceText"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/color_primary"
+                android:text="Quantity"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </TableRow>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/inventoryView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/checkItems"
+        app:layout_constraintTop_toBottomOf="@id/table"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

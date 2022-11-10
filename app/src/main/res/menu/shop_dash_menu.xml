@@ -6,7 +6,7 @@
     <item
         android:id="@+id/shopHome"
         android:title="Home"
-        android:icon="@drawable/ic_track"
+        android:icon="@drawable/ic_home"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
         app:cnb_textColor = "#000000"
@@ -15,7 +15,7 @@
     <item
         android:id="@+id/shopPendingRequest"
         android:title="Requests"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_request"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
         app:cnb_textColor = "#000000"
@@ -23,7 +23,7 @@
     <item
         android:id="@+id/shopPastBills"
         android:title="Bills"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_baseline_local_printshop_24"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
         app:cnb_textColor = "#000000"
@@ -32,7 +32,7 @@
     <item
         android:id="@+id/shopChat"
         android:title="Chat"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_chats"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
         app:cnb_textColor = "#000000"
@@ -41,7 +41,7 @@
     <item
         android:id="@+id/shopProfile"
         android:title="Profile"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_baseline_person_24"
         app:cnb_backgroundColor = "@color/white"
         app:cnb_iconColor = "#000000"
         app:cnb_textColor = "#000000"

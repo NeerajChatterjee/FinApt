@@ -57,27 +57,12 @@ class SplashScreen : AppCompat() {
 
 
         // Check if the user is null and direct it to Registration Activity
-        if(user == null){
-            Toast.makeText(
-                this@SplashScreen,
-                "null",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        else{
-            Toast.makeText(
-                this@SplashScreen,
-                auth.currentUser!!.uid,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
         // If the user is not null, and if user is email verified then direct it to the respective DashBoards.
         if (user != null && user.isEmailVerified) {
 
             val id = auth.currentUser!!.uid
             val custReference = database.reference.child("Customers")
-            Toast.makeText(this@SplashScreen, id, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this@SplashScreen, id, Toast.LENGTH_SHORT).show()
             // Read from the database
             custReference.addValueEventListener(object : ValueEventListener {
 
@@ -117,11 +102,7 @@ class SplashScreen : AppCompat() {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if(snapshot.exists()){
                                 if(snapshot.value == true){
-                                    Toast.makeText(
-                                        this@SplashScreen,
-                                        "Signed In as Customers",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+//                                    Toast.makeText(this@SplashScreen, "Signed In as Customers", Toast.LENGTH_SHORT).show()
                                     val intent = Intent(this@SplashScreen, CustomerDashboard::class.java)
                                     startActivity(intent)
                                     finish()

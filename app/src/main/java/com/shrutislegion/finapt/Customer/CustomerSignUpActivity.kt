@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -54,6 +55,23 @@ class CustomerSignUpActivity : AppCompat() {
         setContentView(R.layout.activity_customer_sign_up)
         binding = ActivityCustomerSignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Adding Animations
+        val topAnim = AnimationUtils.loadAnimation(this , R.anim.topanim)
+        val rightAnim = AnimationUtils.loadAnimation(this, R.anim.rightanim)
+        val leftAnim = AnimationUtils.loadAnimation(this, R.anim.leftanim)
+        val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottomanimation)
+
+        // Setting Animations
+        binding.profileAnim!!.animation = topAnim
+        binding.helloText!!.animation = topAnim
+        binding.missedText!!.animation = topAnim
+        binding.emailLayout!!.animation = rightAnim
+        binding.passwordLayout.animation = leftAnim
+        binding.signUpButton!!.animation = bottomAnim
+        binding.orLinearLayout!!.animation = bottomAnim
+        binding.googleSignUp!!.animation = bottomAnim
+
         database = FirebaseDatabase.getInstance()
         val dialog = ProgressDialog(this)
         // Creating a dialog while the user is being added to the Firebase storage
@@ -165,7 +183,7 @@ class CustomerSignUpActivity : AppCompat() {
         when {
             idToken != null -> {
 
-                binding.customerSignUpConstraintLayout.visibility = View.GONE
+                binding.customerSignUpConstraintLayout!!.visibility = View.GONE
                 binding.loadingAnimation.setAnimation(R.raw.loading)
                 binding.loadingAnimation.visibility = View.VISIBLE
                 binding.loadingAnimation.playAnimation()
@@ -187,7 +205,7 @@ class CustomerSignUpActivity : AppCompat() {
                     .addOnFailureListener {
                         Log.e("tag", "${it.message}")
 
-                        binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                        binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                         binding.loadingAnimation.visibility = View.GONE
                         binding.loadingAnimation.cancelAnimation()
 
@@ -197,7 +215,7 @@ class CustomerSignUpActivity : AppCompat() {
             else -> {
                 // Shouldn't happen.
                 Log.d(TAG, "No ID token!")
-                binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                 binding.loadingAnimation.visibility = View.GONE
                 binding.loadingAnimation.cancelAnimation()
                 Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show()
@@ -233,7 +251,7 @@ class CustomerSignUpActivity : AppCompat() {
 
                 userSignOut()
 
-                binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                 binding.loadingAnimation.visibility = View.GONE
                 binding.loadingAnimation.cancelAnimation()
 
@@ -261,7 +279,7 @@ class CustomerSignUpActivity : AppCompat() {
                                     finish()
                                 }
                                 .addOnFailureListener {
-                                    binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                                    binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                                     binding.loadingAnimation.visibility = View.GONE
                                     binding.loadingAnimation.cancelAnimation()
                                 }
@@ -279,7 +297,7 @@ class CustomerSignUpActivity : AppCompat() {
 
                     userSignOut()
 
-                    binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                    binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                     binding.loadingAnimation.visibility = View.GONE
                     binding.loadingAnimation.cancelAnimation()
 
@@ -318,7 +336,7 @@ class CustomerSignUpActivity : AppCompat() {
                     unlinkGoogleProvider(auth.currentUser!!.providerData) // unlinks Google as a provider
                     userSignOut()
 
-                    binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                    binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                     binding.loadingAnimation.visibility = View.GONE
                     binding.loadingAnimation.cancelAnimation()
 
@@ -352,7 +370,7 @@ class CustomerSignUpActivity : AppCompat() {
                     unlinkGoogleProvider(auth.currentUser!!.providerData)
                     userSignOut()
 
-                    binding.customerSignUpConstraintLayout.visibility = View.VISIBLE
+                    binding.customerSignUpConstraintLayout!!.visibility = View.VISIBLE
                     binding.loadingAnimation.visibility = View.GONE
                     binding.loadingAnimation.cancelAnimation()
 

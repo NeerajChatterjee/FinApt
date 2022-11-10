@@ -71,8 +71,9 @@
                 android:text="@string/_12_45_pm"
                 android:textColor="@color/black"
                 android:textSize="15sp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/category" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/status"
