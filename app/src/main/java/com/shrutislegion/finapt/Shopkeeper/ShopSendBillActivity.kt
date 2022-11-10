@@ -91,7 +91,7 @@ class ShopSendBillActivity : AppCompat() {
         option.add("view")
         val adapter = CreateBillAddItemAdapter(option)
         { it, selectedList ->
-            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
             binding.totalAmount.setText(it.toString())
             itemList.add(selectedList)
             //Toast.makeText(this, itemList.toString(), Toast.LENGTH_SHORT).show()
@@ -271,7 +271,8 @@ class ShopSendBillActivity : AppCompat() {
         dialog.setCanceledOnTouchOutside(false)
 
         binding.send.setOnClickListener {
-            if (binding.invoiceNo.text == null || category == "" || binding.totalAmount.text == null) {
+            if (binding.invoiceNo.text == null || category == "" || binding.totalAmount.text == null || (binding.customerPhoneNumber.text.toString().trim().length <= 9)
+                || binding.customerPhoneNumber.text.toString().trim().length >= 11) {
                 Toast.makeText(this, "Please Enter All The Required Details", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -408,7 +409,7 @@ class ShopSendBillActivity : AppCompat() {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.lightening)

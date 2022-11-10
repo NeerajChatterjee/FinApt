@@ -202,4 +202,7 @@
     <string name="date">Date:</string>
     <string name="remarks">Remarks:</string>
     <string name="Null">Null</string>
+    <string name="name">Name</string>
+    <string name="check_item_details">Check Item Details</string>
+    <string name="we_are_delighted_to_see_you_here">We are delighted to see you here!</string>
 </resources>

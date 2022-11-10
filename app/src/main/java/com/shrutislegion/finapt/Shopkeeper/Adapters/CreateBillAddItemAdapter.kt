@@ -116,7 +116,7 @@ class CreateBillAddItemAdapter(val options: ArrayList<String>, private var onIte
             else {
 //                if(holder.add.text == "Add") {
                     totalAmount += (temp * temp_qtn)
-                    Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(holder.itemName.context, totalAmount.toString(), Toast.LENGTH_SHORT).show()
                     holder.add.setBackgroundColor(android.graphics.Color.BLACK)
                     holder.add.text = holder.itemName.context.getString(R.string.added)
                     holder.quantity.isEnabled = false

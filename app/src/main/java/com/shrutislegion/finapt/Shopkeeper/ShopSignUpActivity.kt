@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -58,6 +59,22 @@ class ShopSignUpActivity : AppCompat() {
         binding = ActivityShopSignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Adding Animations
+        val topAnim = AnimationUtils.loadAnimation(this , R.anim.topanim)
+        val rightAnim = AnimationUtils.loadAnimation(this, R.anim.rightanim)
+        val leftAnim = AnimationUtils.loadAnimation(this, R.anim.leftanim)
+        val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottomanimation)
+
+        // Setting Animations
+        binding.profileAnim!!.animation = topAnim
+        binding.helloText!!.animation = topAnim
+        binding.missedText!!.animation = topAnim
+        binding.emailLayout!!.animation = rightAnim
+        binding.passwordLayout.animation = leftAnim
+        binding.signUpButton.animation = bottomAnim
+        binding.orLinearLayout.animation = bottomAnim
+        binding.googleSignUp.animation = bottomAnim
+
         database = FirebaseDatabase.getInstance()
         var dialog = ProgressDialog(this)
         // Creating a dialog while the user is being added to the Firebase storage
@@ -74,7 +91,7 @@ class ShopSignUpActivity : AppCompat() {
                 imm?.hideSoftInputFromWindow(view.windowToken, 0)
             }
 
-            if(binding.email.text == null || binding.email.text.toString().trim().isEmpty() || binding.email.text.toString().trim().length <= 10){
+            if(binding.email!!.text == null || binding.email!!.text.toString().trim().isEmpty() || binding.email!!.text.toString().trim().length <= 10){
                 Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
             }
             else if(binding.password.text == null || binding.password.text.toString().trim().isEmpty()){
@@ -84,7 +101,7 @@ class ShopSignUpActivity : AppCompat() {
 
                 dialog.show()
                 auth.createUserWithEmailAndPassword(
-                    binding.email.text.toString().trim(),
+                    binding.email!!.text.toString().trim(),
                     binding.password.text.toString().trim()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -92,7 +109,7 @@ class ShopSignUpActivity : AppCompat() {
                         val id = it.result.user?.uid
                         val user = Firebase.auth.currentUser
                         val shopkeeper: ShopkeeperInfo = ShopkeeperInfo(
-                            binding.email.text.toString(),
+                            binding.email!!.text.toString(),
                             binding.password.text.toString(),
                             user!!.uid
                         )

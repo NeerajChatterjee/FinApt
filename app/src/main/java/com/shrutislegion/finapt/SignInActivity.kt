@@ -116,7 +116,7 @@ class SignInActivity : AppCompat() {
                         // Checking if email is verified or not
                         if (auth.currentUser!!.isEmailVerified) {
                             val id = auth.currentUser!!.uid
-                            Toast.makeText(this@SignInActivity, id, Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this@SignInActivity, id, Toast.LENGTH_SHORT).show()
 
                             // Read from the database
                             binding.signInConstraintLayout.visibility = View.GONE

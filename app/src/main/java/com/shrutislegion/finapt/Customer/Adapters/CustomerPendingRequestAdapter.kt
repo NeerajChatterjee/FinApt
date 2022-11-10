@@ -153,24 +153,25 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
 
                 }
             }
+        }
 
-            holder.reject.setOnClickListener {
+        holder.reject.setOnClickListener {
 
-                itemModel.accepted = false
-                itemModel.pending = false
-                FirebaseDatabase.getInstance().reference.child("Bills")
-                    .child(itemModel.shopkeeperUid.toString()).child(itemModel.billID.toString())
-                    .setValue(itemModel).addOnSuccessListener {
+            itemModel.accepted = false
+            itemModel.pending = false
+            FirebaseDatabase.getInstance().reference.child("Bills")
+                .child(itemModel.shopkeeperUid.toString()).child(itemModel.billID.toString())
+                .setValue(itemModel).addOnSuccessListener {
                     Toast.makeText(holder.accept.context, "Rejected", Toast.LENGTH_SHORT).show()
                 }
 
-                FirebaseDatabase.getInstance().reference.child("Customer Pending Requests")
-                    .child(Firebase.auth.currentUser!!.uid)
-                    .child(itemModel.billID.toString()).removeValue().addOnSuccessListener {
-                        Log.e("tag", "Successfully removed from pending requests")
-                    }
-            }
+            FirebaseDatabase.getInstance().reference.child("Customer Pending Requests")
+                .child(Firebase.auth.currentUser!!.uid)
+                .child(itemModel.billID.toString()).removeValue().addOnSuccessListener {
+                    Log.e("tag", "Successfully removed from pending requests")
+                }
         }
+
         holder.viewBill.setOnClickListener {
             val adapter: ViewBillItemDetailsAdapter
             val dialogPlus = DialogPlus.newDialog ( holder.viewBill.context!! )
