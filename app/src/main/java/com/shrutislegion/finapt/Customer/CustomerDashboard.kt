@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Customer.DashboardFragments.*
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
@@ -21,7 +22,7 @@ import com.shrutislegion.finapt.databinding.ActivityCustomerDashboardBinding
 import kotlinx.android.synthetic.main.activity_customer_dashboard.*
 
 @Suppress("DEPRECATION", "UNSAFE_CALL_ON_PARTIALLY_DEFINED_RESOURCE")
-class CustomerDashboard : AppCompatActivity() {
+class CustomerDashboard : AppCompat() {
     lateinit var auth: FirebaseAuth
     lateinit var bottomNav: ChipNavigationBar
 

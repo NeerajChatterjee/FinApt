@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.VerifyOTPActivity
@@ -37,7 +38,7 @@ import org.json.JSONException
 import java.util.concurrent.TimeUnit
 
 @Suppress("DEPRECATION")
-class ShopkeeperCreateProfileActivity : AppCompatActivity() {
+class ShopkeeperCreateProfileActivity : AppCompat() {
 
     // Initialising required Variables
     lateinit var mRequestQueue: RequestQueue

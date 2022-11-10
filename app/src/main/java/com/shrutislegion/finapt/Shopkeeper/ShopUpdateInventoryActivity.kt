@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.InventoryActivities.*
 import com.shrutislegion.finapt.databinding.ActivityShopUpdateInventoryBinding
 
 
-class ShopUpdateInventoryActivity : AppCompatActivity() {
+class ShopUpdateInventoryActivity : AppCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_update_inventory)

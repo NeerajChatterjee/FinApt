@@ -2,6 +2,7 @@
 
 package com.shrutislegion.finapt
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
@@ -16,32 +17,33 @@ import com.shrutislegion.finapt.IntroSlideAdapters.IntroSliderAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
-    private val introSliderAdapter = IntroSliderAdapter(
-        listOf(
-            IntroSlide(
-                "Welcome to FinApt",
-                "Sexy Tag Line!!",
-                R.drawable.slide1
-            ),
-            IntroSlide(
-                "Manage Your Expenses",
-                "Get control over your Money",
-                R.drawable.slide2
-            ),
-            IntroSlide(
-                "Track Sales and Profits",
-                "Fed up of managing long tally excel sheets? Now's the time to upgrade!!",
-                R.drawable.slide3
-            )
-        )
-    )
-
+class MainActivity : AppCompat() {
+    lateinit var introSliderAdapter: IntroSliderAdapter
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         getSupportActionBar()?.hide()
+        introSliderAdapter = IntroSliderAdapter(
+            listOf(
+                IntroSlide(
+                    resources.getString(R.string.welcome_to_finapt),
+                    resources.getString(R.string.for_your_financial_fitness),
+                    R.drawable.slide1
+                ),
+                IntroSlide(
+                    resources.getString(R.string.manage_your_expenses),
+                    resources.getString(R.string.get_control_over_your_money),
+                    R.drawable.slide2
+                ),
+                IntroSlide(
+                    resources.getString(R.string.track_sales_and_profits),
+                    resources.getString(R.string.now_is_the_time_to_upgrade),
+                    R.drawable.slide3
+                )
+            )
+        )
 
         introSliderViewPager.adapter = introSliderAdapter
         setupIndicators()
@@ -68,6 +70,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, RegistrationActivity::class.java))
             finish()
 
+        }
+        val lang = LanguageManager(this)
+        hindi.setOnClickListener {
+            lang.updateResources("hi")
+            hindi.setTextColor(R.color.color_primary)
+            recreate()
+        }
+        english.setOnClickListener {
+            lang.updateResources("en")
+            english.setTextColor(R.color.color_primary)
+            recreate()
         }
     }
     private fun setupIndicators(){

@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Adapters.ChatDetailsAdapter
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ChatMessageInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.ShowAllUsersFragment
@@ -26,7 +27,7 @@ import com.shrutislegion.finapt.databinding.ActivityShopChatDetailsBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ShopChatDetailsActivity : AppCompatActivity() {
+class ShopChatDetailsActivity : AppCompat() {
 
     var receiverId: String? = null
     var storeMessage: ArrayList<ChatMessageInfo> = ArrayList<ChatMessageInfo>()

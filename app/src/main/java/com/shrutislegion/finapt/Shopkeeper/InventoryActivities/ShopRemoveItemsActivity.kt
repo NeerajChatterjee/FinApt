@@ -10,12 +10,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.InventoryRemoveAdapter
 import com.shrutislegion.finapt.databinding.ActivityShopRemoveItemsBinding
 
-class ShopRemoveItemsActivity : AppCompatActivity() {
+class ShopRemoveItemsActivity : AppCompat() {
 
     lateinit var view: ActivityShopRemoveItemsBinding
     lateinit var itemList: ArrayList<ItemInfo>

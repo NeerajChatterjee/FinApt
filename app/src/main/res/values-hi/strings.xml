@@ -120,7 +120,7 @@
     <string name="shop_owner">दूकान का मालिक</string>
     <string name="long_gone_days_for_tally_sheets_or_paperwork_manage_your_bills_and_inventory_here_let_s_begin">टैली शीट या कागजी कार्रवाई के लिए लंबे समय से चले गए, अपने बिल और सूची का प्रबंधन यहां करें। चलो शुरू करें!</string>
     <string name="personal_ntracker">व्यक्तिगत\nट्रैकर</string>
-    <string name="track_your_expenses_and_categorize_according_in_shopping_food_etc_join_us">अपने खर्चों को ट्रैक करें और खरीदारी, भोजन आदि के अनुसार वर्गीकृत करें। हमसे जुड़ें।</string>
+    <string name="track_your_expenses_and_categorize_according_in_shopping_food_etc_join_us">\nअपने खर्चों को ट्रैक करें और खरीदारी, भोजन आदि के अनुसार वर्गीकृत करें।\nहमसे जुड़ें।</string>
     <string name="already_a_user_click_here_to_sign_in">पहले से ही एक उपयोगकर्ता? साइन इन करने के लिए यहाँ क्लिक करें</string>
     <string name="enter_receiver_s_phone_number">रिसीवर का फोन नंबर दर्ज करें</string>
     <string name="pending">लंबित</string>
@@ -153,6 +153,14 @@
     <string name="recently_uploaded_bills">हाल ही में अपलोड किए गए बिल</string>
     <string name="total_expense">कुल खर्च:</string>
     <string name="pendingg">लंबित</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="welcome_to_finapt">फिनएप्ट में आपका स्वागत है</string>
+    <string name="for_your_financial_fitness">आपकी वित्तीय फिटनेस के लिए!</string>
+    <string name="manage_your_expenses">अपने खर्चों का प्रबंधन करें</string>
+    <string name="get_control_over_your_money">अपने पैसे पर नियंत्रण प्राप्त करें</string>
+    <string name="track_sales_and_profits">ट्रैक बिक्री और लाभ</string>
+    <string name="now_is_the_time_to_upgrade">लंबी टैली एक्सेल शीट के प्रबंधन से तंग आ चुके हैं? अब अपग्रेड करने का समय है !!</string>
 
 
 </resources>

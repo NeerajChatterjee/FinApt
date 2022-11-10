@@ -17,7 +17,7 @@ import com.shrutislegion.finapt.Customer.CustomerSignUpActivity
 import com.shrutislegion.finapt.Shopkeeper.ShopSignUpActivity
 import kotlinx.android.synthetic.main.activity_registration.*
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompat() {
     var database = Firebase.database
     var registrationActivity: Activity? = null
 
