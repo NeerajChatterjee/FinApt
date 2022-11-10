@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.Notifications.MyReceiver
 import com.shrutislegion.finapt.Notifications.channelId
@@ -37,7 +38,7 @@ import kotlin.collections.ArrayList
 
 
 @Suppress("DEPRECATION")
-class ShopkeeperDashboard : AppCompatActivity() {
+class ShopkeeperDashboard : AppCompat() {
     lateinit var auth: FirebaseAuth
     lateinit var bottomNav: ChipNavigationBar
 

@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.SignInActivity
@@ -39,7 +40,7 @@ import kotlinx.android.synthetic.main.activity_shop_sign_up.*
 import kotlinx.android.synthetic.main.activity_shop_sign_up.view.*
 
 @Suppress("DEPRECATION")
-class ShopSignUpActivity : AppCompatActivity() {
+class ShopSignUpActivity : AppCompat() {
     private lateinit var binding: ActivityShopSignUpBinding
     // Initialize Firebase Auth
     var auth: FirebaseAuth = Firebase.auth

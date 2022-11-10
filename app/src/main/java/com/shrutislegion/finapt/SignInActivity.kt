@@ -48,7 +48,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Suppress("DEPRECATION")
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AppCompat() {
 
     val RC_SIGN_IN = 1
     private val TAG = "SIGN_IN_ACTIVITY"

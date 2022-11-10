@@ -25,6 +25,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.Notifications.channelId
@@ -39,7 +40,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
-class ShopSendBillActivity : AppCompatActivity() {
+class ShopSendBillActivity : AppCompat() {
     // Initialising required Variables
     private lateinit var binding: ActivityShopSendBillBinding
     lateinit var shopkeeper: ShopkeeperInfo

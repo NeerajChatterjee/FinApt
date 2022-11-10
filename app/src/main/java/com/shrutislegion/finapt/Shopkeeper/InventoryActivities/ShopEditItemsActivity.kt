@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.orhanobut.dialogplus.DialogPlus
 import com.orhanobut.dialogplus.ViewHolder
+import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.InventoryEditAdapter
@@ -19,7 +20,7 @@ import com.shrutislegion.finapt.Shopkeeper.Adapters.InventoryRemoveAdapter
 import com.shrutislegion.finapt.databinding.ActivityShopEditItemsBinding
 import com.shrutislegion.finapt.databinding.ActivityShopRemoveItemsBinding
 
-class ShopEditItemsActivity : AppCompatActivity() {
+class ShopEditItemsActivity : AppCompat() {
 
     lateinit var view: ActivityShopEditItemsBinding
     lateinit var itemList: ArrayList<ItemInfo>

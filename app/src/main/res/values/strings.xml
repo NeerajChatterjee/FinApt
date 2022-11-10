@@ -151,4 +151,12 @@
     <string name="recently_uploaded_bills">Recently Uploaded Bills</string>
     <string name="total_expense">Total Expense:</string>
     <string name="pendingg">Pending</string>
+    <string name="hindi">Hindi</string>
+    <string name="english">English</string>
+    <string name="welcome_to_finapt">Welcome to FinApt</string>
+    <string name="for_your_financial_fitness">For Your Financial Fitness!</string>
+    <string name="manage_your_expenses">Manage Your Expenses</string>
+    <string name="get_control_over_your_money">Get control over your Money</string>
+    <string name="track_sales_and_profits">Track Sales and Profits</string>
+    <string name="now_is_the_time_to_upgrade">Fed up of managing long tally excel sheets? Now\'s the time to upgrade!!</string>
 </resources>
