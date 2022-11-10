@@ -149,4 +149,6 @@
     <string name="edit_item_s">EDIT ITEM(S)</string>
     <string name="to_self">To Self</string>
     <string name="recently_uploaded_bills">Recently Uploaded Bills</string>
+    <string name="total_expense">Total Expense:</string>
+    <string name="pendingg">Pending</string>
 </resources>

@@ -147,5 +147,12 @@
     <string name="_12_45_pm">12:45 अपराह्न</string>
     <string name="medical_healthcare">चिकित्सा और स्वास्थ्य </string>
     <string name="education">शिक्षा</string>
+    <string name="add_item_s">सामगंरियां जोड़ें</string>
+    <string name="edit_item_s">आइटम संपादित करें</string>
+    <string name="to_self">आत्म के लिए</string>
+    <string name="recently_uploaded_bills">हाल ही में अपलोड किए गए बिल</string>
+    <string name="total_expense">कुल खर्च:</string>
+    <string name="pendingg">लंबित</string>
+
 
 </resources>
