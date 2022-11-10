@@ -98,7 +98,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ADD ITEM(S)"
+                        android:text="@string/add_item_s"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -126,7 +126,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addItemsCardView"
                 app:strokeColor="@color/slate_300"
-                android:backgroundTint="#E91E63"
+                android:backgroundTint="@color/edit_items_color"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -139,7 +139,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="EDIT ITEM(S)"
+                        android:text="@string/edit_item_s"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -169,7 +169,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editItemsCardView"
                 app:strokeColor="@color/slate_300"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="@color/billing_history_color"
                 app:strokeWidth="1dp">
 
                 <LinearLayout

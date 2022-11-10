@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Adapters.ChatDetailsAdapter
 import com.shrutislegion.finapt.Modules.ChatMessageInfo
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.ActivityShopChatDetailsBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -70,6 +71,13 @@ class ShopChatDetailsActivity : AppCompatActivity() {
         var userLastMsg = intent.getStringExtra("EXTRA_USERLASTMSG")
         var userImgUrl = intent.getStringExtra("EXTRA_USERIMGURL")
         receiverId = intent.getStringExtra("EXTRA_RECEIVERID")
+        val check = intent.getStringExtra("EXTRA_CHECK")
+
+//        if(check == "1"){
+//            // remove the ShowAllUsersFragment
+//            Toast.makeText(this, "removing..", Toast.LENGTH_SHORT).show()
+//                supportFragmentManager.beginTransaction().remove(supportFragmentManager.findFragmentByTag("ShowAllUsers")).commit()
+//        }
 
         Glide.with(this)
             .load(userImgUrl)

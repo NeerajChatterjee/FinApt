@@ -1,12 +1,16 @@
 package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,9 +23,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.protobuf.Value
 import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
 import com.shrutislegion.finapt.Customer.Modules.CustomerPendingRequestDetails
+import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.RecentBillsAdapter
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
@@ -37,17 +43,32 @@ import kotlinx.android.synthetic.main.fragment_customer_pending_req.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ShopHomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ShopHomeFragment : Fragment() {
+
+    lateinit var adapter: RecentBillsAdapter
+
+    // To override LinearLayoutManager by Wrapper, as it crashes the application sometimes
+    inner class LinearLayoutManagerWrapper : LinearLayoutManager {
+        constructor(context: Context?) : super(context) {}
+        constructor(context: Context?, orientation: Int, reverseLayout: Boolean) : super(
+            context,
+            orientation,
+            reverseLayout
+        ) {
+        }
+
+        constructor(
+            context: Context?,
+            attrs: AttributeSet?,
+            defStyleAttr: Int,
+            defStyleRes: Int
+        ) : super(context, attrs, defStyleAttr, defStyleRes) {
+        }
+
+        override fun supportsPredictiveItemAnimations(): Boolean {
+            return false
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +82,8 @@ class ShopHomeFragment : Fragment() {
         //val view: View = inflater.inflate(R.layout.fragment_shop_home, container, false)
 
         val binding: FragmentShopHomeBinding = FragmentShopHomeBinding.inflate(inflater, container, false)
+
+        var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Adding Animations
         val topAnim = AnimationUtils.loadAnimation(context, R.anim.topanim)
@@ -111,16 +134,33 @@ class ShopHomeFragment : Fragment() {
             startActivity(Intent(context, ShopBillsHistoryActivity::class.java))
         }
 
-        binding.recentBills.layoutManager = LinearLayoutManager(context)
-        val list = ArrayList<String>()
+        binding.recentBills.layoutManager = linearLayoutManager
+        val list = ArrayList<BillInfo>()
 
-        val req: String = "String"
+        FirebaseDatabase.getInstance().reference.child("Bills").child(auth.currentUser!!.uid)
+            .orderByChild("Date").limitToLast(5)
+            .addValueEventListener(object : ValueEventListener{
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
+                    if(snapshot.exists()){
+                        for(dss in snapshot.children){
+                            val currentBillInfo = dss.getValue<BillInfo>()!!
+                            list.add(currentBillInfo)
+                        }
+                        list.reverse()
+                        adapter.notifyDataSetChanged()
+                    }
+                }
 
-        for (i in 1..5) {
-            list.add("String")
-        }
-        // This will pass the ArrayList to our Adapter
-        val adapter = RecentBillsAdapter(list)
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+
+        adapter = RecentBillsAdapter(list)
 
         // Setting the Adapter with the recyclerview
         binding.recentBills.adapter = adapter

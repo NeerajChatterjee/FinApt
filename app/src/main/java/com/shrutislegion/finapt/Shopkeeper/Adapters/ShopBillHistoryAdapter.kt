@@ -26,6 +26,7 @@ import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import kotlinx.android.synthetic.main.item_view_bill.view.*
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -43,6 +44,7 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
         val totalAmount = itemView.findViewById<TextView>(R.id.totalAmount)
         val status = itemView.findViewById<TextView>(R.id.status)
         val viewBill = itemView.findViewById<Button>(R.id.viewBill)
+        val sentTime: TextView = itemView.findViewById<TextView>(R.id.shopPRSendTimeText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
@@ -50,13 +52,16 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
         return myViewHolder(view)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-        val itemmodel = options[position]
+        val itemModel = options[position]
         val auth = Firebase.auth
         var customerUid = ""
-        if(itemmodel.sentTo == auth.currentUser!!.uid){
+        if(itemModel.sentTo == auth.currentUser!!.uid){
             holder.number.text = "To Self"
+            val formatter = SimpleDateFormat("dd-MM-yyyy hh:mm a")
+            val formatted = formatter.format(Date(itemModel.date.toLong()))
+            holder.sentTime.text = formatted
             val ref = FirebaseDatabase.getInstance().reference.child("Shopkeepers")
                 .child(auth.currentUser!!.uid)
             ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -69,15 +74,18 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
 
             })
         }
         else {
-            holder.number.text = itemmodel.sentTo
+            holder.number.text = itemModel.sentTo
+            val formatter = SimpleDateFormat("dd-MM-yyyy hh:mm a")
+            val formatted = formatter.format(Date(itemModel.date.toLong()))
+            holder.sentTime.text = formatted
+            
             val ref = FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers")
-                .child(itemmodel.sentTo)
+                .child(itemModel.sentTo)
             ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -110,13 +118,13 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
 
             })
         }
-        if(itemmodel.pending == true) {
+        if(itemModel.pending == true) {
             holder.status.text = holder.status.context.getString(R.string.pending)
             holder.status.setTextColor(Color.RED)
         }
         else {
-            //Toast.makeText(holder.status.context, itemmodel.accepted.toString(), Toast.LENGTH_SHORT).show()
-            if (itemmodel.accepted == true) {
+            //Toast.makeText(holder.status.context, itemModel.accepted.toString(), Toast.LENGTH_SHORT).show()
+            if (itemModel.accepted == true) {
                 holder.status.text = holder.status.context.getString(R.string.accepted)
                 holder.status.setTextColor(Color.GREEN)
             }
@@ -126,8 +134,8 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
 
             }
         }
-        holder.category.text = itemmodel.category
-        holder.totalAmount.text = itemmodel.totalAmount
+        holder.category.text = itemModel.category
+        holder.totalAmount.text = itemModel.totalAmount
 
         holder.viewBill.setOnClickListener {
             val adapter: ViewBillItemDetailsAdapter
@@ -137,8 +145,8 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
                 .create()
 
             val newView = dialogPlus.holderView
-            newView.invoiceNo.text = itemmodel.invoice
-            FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(itemmodel.shopkeeperUid.toString())
+            newView.invoiceNo.text = itemModel.invoice
+            FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(itemModel.shopkeeperUid.toString())
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
@@ -148,7 +156,7 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
                             newView.shopkeeperAddress.text = shopkeeper.address
                             newView.shopkeeperPhoneNumber.text = shopkeeper.phone
                             newView.shopkeeperEmail.text = shopkeeper.mail
-                            if (itemmodel.sentTo == auth.currentUser!!.uid) {
+                            if (itemModel.sentTo == auth.currentUser!!.uid) {
                                 newView.custName.text = shopkeeper.shopName
                                 newView.customerAddress.text = shopkeeper.address
                                 newView.customerPhoneNumber.text = shopkeeper.phone
@@ -162,7 +170,7 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
                     }
 
                 })
-            if (itemmodel.sentTo != auth.currentUser!!.uid) {
+            if (itemModel.sentTo != auth.currentUser!!.uid) {
                 FirebaseDatabase.getInstance().reference.child("Customers")
                     .child(customerUid.toString())
                     .addValueEventListener(object : ValueEventListener {
@@ -183,20 +191,20 @@ class ShopBillHistoryAdapter(val options: ArrayList<BillInfo>)
 
                     })
             }
-            val itemList: ArrayList<ItemInfo> = itemmodel.items as ArrayList<ItemInfo>
+            val itemList: ArrayList<ItemInfo> = itemModel.items as ArrayList<ItemInfo>
             adapter = ViewBillItemDetailsAdapter(itemList)
             adapter.notifyDataSetChanged()
-            newView.totalAmount.text = itemmodel.totalAmount
-            newView.date.text = SimpleDateFormat("dd/MM/yyyy").format(Date(itemmodel.date.toLong()))
+            newView.totalAmount.text = itemModel.totalAmount
+            newView.date.text = SimpleDateFormat("dd/MM/yyyy").format(Date(itemModel.date.toLong()))
             newView.itemDetailsView.layoutManager = LinearLayoutManager(newView.context)
             newView.itemDetailsView.adapter = adapter
             newView.status.isClickable = false
-            if(itemmodel.pending == true) {
+            if(itemModel.pending == true) {
                 newView.status.text = "Pending"
                 newView.status.setBackgroundColor(Color.RED)
             }
             else {
-                if (itemmodel.accepted == true) {
+                if (itemModel.accepted == true) {
                     newView.status.text = "Accepted"
                     newView.status.setBackgroundColor(Color.GREEN)
                 }

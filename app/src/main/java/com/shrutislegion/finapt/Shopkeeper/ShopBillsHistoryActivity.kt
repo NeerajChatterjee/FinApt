@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Shopkeeper
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -34,21 +35,20 @@ class ShopBillsHistoryActivity : AppCompatActivity() {
         val auth = Firebase.auth
         val database = Firebase.database
         val ref = FirebaseDatabase.getInstance().reference.child("Bills").child(auth.currentUser!!.uid)
-        if(ref != null) {
-            ref.addValueEventListener(object : ValueEventListener {
+            .orderByChild("date").addValueEventListener(object : ValueEventListener {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (dss in snapshot.children) {
                         val value = (dss.getValue<BillInfo>() as BillInfo?)!!
                         bills.add(value)
                     }
+                    bills.reverse()
                     adapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
-        }
         // This will pass the ArrayList to our Adapter
         adapter = ShopBillHistoryAdapter(bills)
         // Setting the Adapter with the recyclerview

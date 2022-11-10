@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -22,8 +23,10 @@ import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.LoggedInUserInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopChatUserFragmentAdapter
+import com.shrutislegion.finapt.Shopkeeper.ShopkeeperDashboard
 import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.FragmentShopChatBinding
+import kotlinx.android.synthetic.main.activity_shopkeeper_dashboard.*
 
 @Suppress("DEPRECATION")
 class ShopChatFragment : Fragment() {
@@ -59,6 +62,7 @@ class ShopChatFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -119,7 +123,7 @@ class ShopChatFragment : Fragment() {
                 binding.progressBarShopChat!!.visibility = View.GONE
             }
             else {
-                adapter = ShopChatUserFragmentAdapter(storeUsers, container!!.context)
+                adapter = ShopChatUserFragmentAdapter(0, storeUsers, container!!.context)
                 binding.shopChatFragmentRV.adapter = adapter
 
                 adapter.notifyDataSetChanged()

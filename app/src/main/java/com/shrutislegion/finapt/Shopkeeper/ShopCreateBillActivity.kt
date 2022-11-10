@@ -116,10 +116,9 @@ class ShopCreateBillActivity : AppCompatActivity() {
 
 
         // getting current date
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val currentDate = sdf.format(Date())
-        val timeStamp = SimpleDateFormat("dd/M/yyyy hh:mm:ss").parse(currentDate)!!.time
-        date = "$timeStamp"
+        // getting current date
+        date = Calendar.getInstance().timeInMillis.toString()
+
         items.add(0, "one")
         items.add(1, "one")
         items.add(2, "one")

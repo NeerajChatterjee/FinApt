@@ -20,7 +20,7 @@ import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.ShopChatDetailsActivity
 
 
-class ShopChatUserFragmentAdapter(var storeUsers: ArrayList<LoggedInUserInfo>, val context: Context): RecyclerView.Adapter<ShopChatUserFragmentAdapter.ViewHolder>() {
+class ShopChatUserFragmentAdapter(val check:Int, var storeUsers: ArrayList<LoggedInUserInfo>, val context: Context): RecyclerView.Adapter<ShopChatUserFragmentAdapter.ViewHolder>() {
 
     class ViewHolder(ItemView: View): RecyclerView.ViewHolder(ItemView) {
         var chatUserProfileImage: ImageView = itemView.findViewById<ImageView>(R.id.shopChatUserProfileImage)
@@ -37,7 +37,6 @@ class ShopChatUserFragmentAdapter(var storeUsers: ArrayList<LoggedInUserInfo>, v
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val model =storeUsers[position]
 
         Glide.with(holder.chatUserLastMessage.context)
@@ -76,6 +75,7 @@ class ShopChatUserFragmentAdapter(var storeUsers: ArrayList<LoggedInUserInfo>, v
             intent.putExtra("EXTRA_USERLASTMSG", model.lastMessage.toString())
             intent.putExtra("EXTRA_USERIMGURL", model.photoUrl.toString())
             intent.putExtra("EXTRA_RECEIVERID", model.id.toString())
+            intent.putExtra("EXTRA_CHECK", "$check")
 
 
             holder.pChatCardView.context.startActivity(intent)

@@ -30,16 +30,6 @@
         app:cnb_menuResource="@menu/cust_dash_menu"
         tools:ignore="MissingClass" />
 
-    <com.google.android.material.button.MaterialButton
-        android:visibility="gone"
-        android:id="@+id/signOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/sign_out"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/messageCustomerFragmentFAB"
         android:layout_width="wrap_content"
