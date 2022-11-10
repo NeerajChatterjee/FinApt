@@ -146,4 +146,6 @@
     <string name="_12_45_pm">12:45 PM</string>
     <string name="medical_healthcare"><![CDATA[Medical & Healthcare]]></string>
     <string name="education">Education</string>
+    <string name="total_expense">Total Expense:</string>
+    <string name="pendingg">Pending</string>
 </resources>

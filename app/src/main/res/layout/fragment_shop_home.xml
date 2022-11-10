@@ -171,7 +171,7 @@
                 app:cardElevation="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createBillForOwnCardView"
-                android:backgroundTint="#EF5A8D"
+                android:backgroundTint="@color/light_pink"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 
@@ -220,7 +220,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/updateInventoryCardView"
                 app:layout_constraintTop_toBottomOf="@+id/sendBillToCusCardView"
-                android:backgroundTint="#FFC107"
+                android:backgroundTint="@color/light_yellow"
                 app:strokeColor="@color/slate_300"
                 app:strokeWidth="1dp">
 

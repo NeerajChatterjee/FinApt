@@ -226,16 +226,16 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
             newView.itemDetailsView.adapter = adapter
             newView.status.isClickable = false
             if(itemModel.pending == true) {
-                newView.status.text = "Pending"
+                newView.status.text = newView.context.getString(R.string.pendingg)
                 newView.status.setBackgroundColor(Color.RED)
             }
             else {
                 if (itemModel.accepted == true) {
-                    newView.status.text = "Accepted"
+                    newView.status.text = newView.context.getText(R.string.accepted)
                     newView.status.setBackgroundColor(Color.GREEN)
                 }
                 else {
-                    newView.status.text = "Rejected"
+                    newView.status.text = newView.context.getText(R.string.rejected)
                     newView.status.setBackgroundColor(Color.BLACK)
                 }
             }

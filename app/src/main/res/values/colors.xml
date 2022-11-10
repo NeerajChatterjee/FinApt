@@ -14,4 +14,6 @@
     <color name="slate_300">#cbd5e1</color>
     <color name="color_helper_text">#A60606</color>
     <color name="nude"></color>
+    <color name="light_pink">#EF5A8D</color>
+    <color name="light_yellow">#FFC107</color>
 </resources>
