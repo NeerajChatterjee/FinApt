@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Shopkeeper.ShopCreateBillActivity">
+    tools:context=".Customer.CustomerAddExpenseActivity">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/head"
+        android:id="@+id/customerCreateExpenseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/create_n_bill"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/create_an_expense"
         android:fontFamily="@font/nunito_extrabold"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textColor="@color/black"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <View
         android:id="@+id/view"
@@ -25,25 +25,25 @@
         android:layout_height="3dp"
         android:layout_marginTop="15dp"
         android:background="@color/slate_300"
-        app:layout_constraintTop_toBottomOf="@+id/head"
+        app:layout_constraintTop_toBottomOf="@+id/customerCreateExpenseTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.8"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/invoiceNoLayout"
+                android:id="@+id/addExpenseInvNoLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/invoiceNo"
+                    android:id="@+id/addExpenseInvoiceNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
@@ -72,52 +72,10 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/addItemText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/invoiceNoLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/add_items"
-                android:layout_marginHorizontal="30dp"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/addItemView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/addItemText"
-                app:layout_constraintStart_toStartOf="parent">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/addMoreItems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/addItemView"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
-                android:text="+Add More Item"
-                />
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/removeItems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/addItemView"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:text="Remove Item"
-                />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/categoryLayout"
+                android:id="@+id/addExpenseCategoryLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:helperText="@string/helper_text"
@@ -128,13 +86,13 @@
                 app:startIconTint="?attr/colorControlNormal"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMoreItems"
+                app:layout_constraintTop_toBottomOf="@id/addExpenseInvNoLayout"
                 app:boxStrokeColor="@color/color_primary"
                 app:boxStrokeWidth="2dp"
                 tools:ignore="MissingConstraints">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textCategory"
+                    android:id="@+id/addExpenseTextCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
@@ -142,28 +100,27 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/shopkeeperGSTInLayout"
+                android:id="@+id/addExpenseRemarksLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="30dp"
-                android:hint="@string/enter_your_gstin"
+                android:hint="@string/remarks_optional"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/ic_baseline_approval_24"
                 app:startIconTint="?attr/colorControlNormal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categoryLayout"
+                app:layout_constraintTop_toBottomOf="@+id/addExpenseCategoryLayout"
                 app:boxStrokeColor="@color/color_primary"
                 app:boxStrokeWidth="2dp"
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/shopkeeperGSTIn"
+                    android:id="@+id/addExpenseRemarks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:maxLines="1"
@@ -172,9 +129,8 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/totalAmountLayout"
+                android:id="@+id/addExpenseTotalAmountLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,35 +144,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shopkeeperGSTInLayout"
+                app:layout_constraintTop_toBottomOf="@id/addExpenseRemarksLayout"
                 app:boxStrokeColor="@color/color_primary"
                 app:boxStrokeWidth="2dp"
                 tools:ignore="MissingConstraints">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/totalAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:editable="false"
-                    android:inputType="none"
-                    tools:ignore="Deprecated,InvalidId" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addExpenseTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                tools:ignore="Deprecated,InvalidId" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/submitBillDetails"
-                android:layout_width="match_parent"
+                android:id="@+id/addExpenseSubmitButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/totalAmountLayout"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="10dp"
+                app:layout_constraintTop_toBottomOf="@id/addExpenseTotalAmountLayout"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginHorizontal="100dp"
-                android:text="@string/submit"
+                android:text="@string/add_to_expenses"
                 android:fontFamily="@font/nunito_bold"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

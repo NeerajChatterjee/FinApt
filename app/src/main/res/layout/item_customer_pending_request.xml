@@ -47,7 +47,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/category"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shopName" />
 
@@ -73,7 +73,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/total_amount"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category" />
@@ -87,7 +87,7 @@
                 android:inputType="number"
                 tools:text="12345"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/totalAmountText"
                 app:layout_constraintTop_toBottomOf="@+id/category" />

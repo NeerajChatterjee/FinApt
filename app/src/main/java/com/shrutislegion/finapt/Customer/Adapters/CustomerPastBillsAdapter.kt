@@ -1,5 +1,6 @@
 package com.shrutislegion.finapt.Customer.Adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,6 +54,7 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
         return myViewHolder(view)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
 
         val itemModel = options[position]
@@ -73,12 +75,11 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
                 TODO("Not yet implemented")
             }
         })
-        val formatter = SimpleDateFormat("dd-MM-yyyy hh:mm a")
+        val formatter = SimpleDateFormat("dd-MM-yyyy, hh:mm a")
         val formatted = formatter.format(Date(itemModel.date.toLong()))
         holder.sentTime.text = formatted
 
-
-            val ref = FirebaseDatabase.getInstance().reference.child("Shopkeeper").child(shopkeeperUid)
+        val ref = FirebaseDatabase.getInstance().reference.child("Shopkeeper").child(shopkeeperUid)
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -90,26 +91,9 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
 
             })
-//        if(itemmodel.pending == true) {
-//            holder.status.text = holder.status.context.getString(R.string.pending)
-//            holder.status.setTextColor(Color.RED)
-//        }
-//        else {
-//            //Toast.makeText(holder.status.context, itemmodel.accepted.toString(), Toast.LENGTH_SHORT).show()
-//            if (itemmodel.accepted == true) {
-//                holder.status.text = holder.status.context.getString(R.string.accepted)
-//                holder.status.setTextColor(Color.GREEN)
-//            }
-//            else {
-//                holder.status.text = holder.status.context.getString(R.string.rejected)
-//                holder.status.setTextColor(Color.RED)
-//
-//            }
-//        }
         holder.category.text = itemModel.category
         holder.totalAmount.text = itemModel.totalAmount
 

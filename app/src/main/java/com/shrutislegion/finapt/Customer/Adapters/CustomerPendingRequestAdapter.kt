@@ -76,7 +76,8 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
         })
         holder.category.text = itemModel.category
         holder.totalAmount.text = itemModel.totalAmount
-        val formatter = SimpleDateFormat("dd-MM-yyyy hh:mm a")
+
+        val formatter = SimpleDateFormat("dd-MM-yyyy, hh:mm a")
         val formatted = formatter.format(Date(itemModel.date.toLong()))
         holder.sentTime.text = formatted
 
@@ -192,7 +193,6 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
                     }
 
                 })

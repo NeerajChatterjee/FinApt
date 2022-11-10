@@ -23,12 +23,20 @@
         android:theme="@style/Theme.FinApt"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".Customer.CustomerAddExpenseActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
-        <receiver android:name=".Notifications.Notification"
-            android:enabled="true"/>
-
-        <receiver android:name=".Notifications.MyReceiver"
-            android:enabled="true"/>
+        <receiver
+            android:name=".Notifications.Notification"
+            android:enabled="true" />
+        <receiver
+            android:name=".Notifications.MyReceiver"
+            android:enabled="true" />
 
         <activity
             android:name=".Customer.CustomerChatDetailsActivity"

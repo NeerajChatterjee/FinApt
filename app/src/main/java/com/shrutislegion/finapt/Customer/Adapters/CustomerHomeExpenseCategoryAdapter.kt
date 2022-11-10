@@ -26,12 +26,12 @@ class CustomerHomeExpenseCategoryAdapter (val options: HashMap<String, Int>)
         return myViewHolder(view)
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         val itemModel = options
         val keys = ArrayList<String>(options.keys)
         holder.expenseCategory.text = keys[position]
-        holder.totalExpense.text = itemModel[keys[position]].toString()
+        holder.totalExpense.text = "₹${itemModel[keys[position]]}"
         val color = position + 1
 //        holder.layoutPosition
         if (color%4 == 1) {

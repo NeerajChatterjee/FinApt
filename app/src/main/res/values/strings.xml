@@ -143,12 +143,14 @@
     <string name="add_to_expenses">ADD TO EXPENSES</string>
     <string name="please_select_category_to_add">Please select a category to add it to expenses!</string>
     <string name="_12_45_pm">12:45 PM</string>
-    <string name="medical_healthcare"><![CDATA[Medical & Healthcare]]></string>
+    <string name="medical_healthcare">Healthcare</string>
     <string name="education">Education</string>
     <string name="add_item_s">ADD ITEM(S)</string>
     <string name="edit_item_s">EDIT ITEM(S)</string>
     <string name="to_self">To Self</string>
     <string name="recently_uploaded_bills">Recently Uploaded Bills</string>
-    <string name="total_expense">Total Expense:</string>
+    <string name="total_expense">Total Expenses:</string>
     <string name="pendingg">Pending</string>
+    <string name="create_an_expense">Create an expense</string>
+    <string name="remarks_optional">Remarks (optional)</string>
 </resources>
