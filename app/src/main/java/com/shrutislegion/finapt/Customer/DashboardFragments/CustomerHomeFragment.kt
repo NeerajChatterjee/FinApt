@@ -20,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Adapters.CustomerHomeExpenseCategoryAdapter
 import com.shrutislegion.finapt.Customer.CustomerAddExpenseActivity
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.Customer.PieChartActivity
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.databinding.FragmentCustomerHomeBinding
@@ -44,7 +45,10 @@ class CustomerHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentCustomerHomeBinding = FragmentCustomerHomeBinding.inflate(inflater, container, false)
         val auth = Firebase.auth
-
+        binding.pieChart!!.setOnClickListener {
+            val intent = Intent(context, PieChartActivity::class.java)
+            startActivity(intent)
+        }
         FirebaseDatabase.getInstance().reference.child("Customers").child(auth.currentUser!!.uid).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){

@@ -205,4 +205,5 @@
     <string name="name">Name</string>
     <string name="check_item_details">Check Item Details</string>
     <string name="we_are_delighted_to_see_you_here">We are delighted to see you here!</string>
+    <string name="expense_representation_by_pie_chart">Expense Representation by Pie Chart</string>
 </resources>
