@@ -39,6 +39,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito_semibold"
+                tools:text="@string/mobile_number"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopName" />
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +62,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shopName" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/customerPRSendTimeText"
@@ -62,7 +75,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shopName" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/totalAmountText"

@@ -89,8 +89,41 @@ class CustomerCreateProfileActivity : AppCompat() {
         currUser = FirebaseAuth.getInstance().currentUser!!.uid
 
 
-        val itemsGender = listOf("Male", "Female", "Others")
-        val itemsState = listOf("Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal")
+        val itemsGender = listOf(getString(R.string.male), getString(R.string.female), getString(R.string.others))
+
+        val itemsState = listOf(
+            getString(R.string.andhra_pradesh),
+            getString(R.string.arunachal_pradesh),
+            getString(R.string.assam),
+            getString(R.string.bihar),
+            getString(R.string.chandigarh),
+            getString(R.string.chattisgarh),
+            getString(R.string.delhi),
+            getString(R.string.goa),
+            getString(R.string.gujarat),
+            getString(R.string.haryana),
+            getString(R.string.himachal_pradesh),
+            getString(R.string.jammu_and_kashmir),
+            getString(R.string.jharkhand),
+            getString(R.string.karnataka),
+            getString(R.string.kerala),
+            getString(R.string.madhya_pradesh),
+            getString(R.string.maharastra),
+            getString(R.string.manipur),
+            getString(R.string.meghalaya),
+            getString(R.string.mizoram),
+            getString(R.string.nagaland),
+            getString(R.string.odisha),
+            getString(R.string.punjab),
+            getString(R.string.rajasthan),
+            getString(R.string.sikkim),
+            getString(R.string.tamil_nadu),
+            getString(R.string.telangana),
+            getString(R.string.tripura),
+            getString(R.string.uttar_pradesh),
+            getString(R.string.uttarakhand),
+            getString(R.string.west_bengal)
+        )
 
         val adapterGender = ArrayAdapter(this, R.layout.list_item, itemsGender)
         (auto_complete_txt_gender as? AutoCompleteTextView)?.setAdapter(adapterGender)

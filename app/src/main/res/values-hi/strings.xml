@@ -163,6 +163,46 @@
     <string name="now_is_the_time_to_upgrade">लंबी टैली एक्सेल शीट के प्रबंधन से तंग आ चुके हैं? अब अपग्रेड करने का समय है !!</string>
     <string name="create_an_expense">एक खर्च बनाएँ</string>
     <string name="remarks_optional">टिप्पणियां (वैकल्पिक)</string>
-
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="andhra_pradesh">आंध्र प्रदेश</string>
+    <string name="arunachal_pradesh">अरुणाचल प्रदेश</string>
+    <string name="assam">असम</string>
+    <string name="bihar">बिहार</string>
+    <string name="chandigarh">चंडीगढ़</string>
+    <string name="chattisgarh">छत्तीसगढ</string>
+    <string name="delhi">दिल्ली</string>
+    <string name="goa">गोवा</string>
+    <string name="gujarat">गुजरात</string>
+    <string name="haryana">हरयाणा</string>
+    <string name="himachal_pradesh">हिमाचल प्रदेश</string>
+    <string name="jammu_and_kashmir">जम्मू और कश्मीर</string>
+    <string name="jharkhand">झारखंड</string>
+    <string name="karnataka">कर्नाटक</string>
+    <string name="kerala">केरल</string>
+    <string name="madhya_pradesh">मध्य प्रदेश</string>
+    <string name="maharastra">महाराष्ट्र</string>
+    <string name="manipur">मणिपुर</string>
+    <string name="meghalaya">मेघालय</string>
+    <string name="mizoram">मिजोरम</string>
+    <string name="nagaland">नगालैंड</string>
+    <string name="odisha">उड़ीसा</string>
+    <string name="punjab">पंजाब</string>
+    <string name="rajasthan">राजस्थान</string>
+    <string name="sikkim">सिक्किम</string>
+    <string name="tamil_nadu">तमिलनाडु</string>
+    <string name="telangana">तेलंगाना</string>
+    <string name="tripura">त्रिपुरा</string>
+    <string name="uttar_pradesh">उतार प्रदेश</string>
+    <string name="uttarakhand">उत्तराखंड</string>
+    <string name="west_bengal">पश्चिम बंगाल</string>
+    <string name="self_expense">स्व व्यय</string>
+    <string name="expense_added_successfully">व्यय सफलतापूर्वक जोड़ा गया</string>
+    <string name="invoice">इनवॉइस</string>
+    <string name="items_details">आइटम विवरण:</string>
+    <string name="price">कीमत</string>
+    <string name="date">दिनांक:</string>
+    <string name="remarks">टिप्पणियां:</string>
+    <string name="Null">कुछ नहीं</string>
 
 </resources>

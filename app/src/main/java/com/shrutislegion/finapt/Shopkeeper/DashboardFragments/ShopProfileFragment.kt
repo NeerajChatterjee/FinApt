@@ -18,9 +18,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.LanguageManager
+import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.Shopkeeper.Modules.ShopkeeperInfo
 import com.shrutislegion.finapt.databinding.FragmentShopProfileBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -76,8 +79,21 @@ class ShopProfileFragment : Fragment() {
             }
         })
 
-            // implementing logout button for the user
-            binding.signOut.setOnClickListener {
+        val lang = LanguageManager(requireContext())
+        binding.hindi.setOnClickListener {
+            lang.updateResources("hi")
+            hindi.setTextColor(requireActivity().resources.getColor(R.color.color_primary))
+            requireActivity().recreate()
+        }
+
+        binding.english.setOnClickListener {
+            lang.updateResources("en")
+            english.setTextColor(requireActivity().resources.getColor(R.color.color_primary))
+            requireActivity().recreate()
+        }
+
+        // implementing logout button for the user
+        binding.signOut.setOnClickListener {
             auth.signOut()
 
             val intent = Intent(context, RegistrationActivity::class.java)

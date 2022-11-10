@@ -64,6 +64,7 @@
         android:layout_marginBottom="25dp"/>
 
     <TextView
+        android:id="@+id/hindi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/globe"
@@ -74,6 +75,7 @@
         android:text="@string/hindi"
         />
     <TextView
+        android:id="@+id/english"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/globe"

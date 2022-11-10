@@ -44,7 +44,6 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
         val number = itemView.findViewById<TextView>(R.id.phoneNumber)
         val category = itemView.findViewById<TextView>(R.id.category)
         val totalAmount = itemView.findViewById<TextView>(R.id.totalAmount)
-        //val status = itemView.findViewById<TextView>(R.id.status)
         val viewBill = itemView.findViewById<Button>(R.id.viewBill)
         val sentTime: TextView = itemView.findViewById<TextView>(R.id.customerPRSendTimeText)
     }
@@ -54,79 +53,143 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
         return myViewHolder(view)
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "NotifyDataSetChanged", "SetTextI18n")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
 
         val itemModel = options[position]
         val auth = Firebase.auth
-        var shopkeeperUid = itemModel.shopkeeperUid
-        var CustomerUid = ""
-        val newRef = FirebaseDatabase.getInstance().reference.child("AllPhoneNumbers")
-            .child(itemModel.sentTo)
-        newRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    CustomerUid = snapshot.getValue<String>() as String
+        val shopkeeperUid = itemModel.shopkeeperUid
+        val customerUid = auth.currentUser!!.uid
 
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
         val formatter = SimpleDateFormat("dd-MM-yyyy, hh:mm a")
         val formatted = formatter.format(Date(itemModel.date.toLong()))
         holder.sentTime.text = formatted
 
-        val ref = FirebaseDatabase.getInstance().reference.child("Shopkeeper").child(shopkeeperUid)
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        if(shopkeeperUid == customerUid){
+
+            val ref = FirebaseDatabase.getInstance().reference.child("Customers").child(customerUid)
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val customer = snapshot.getValue<CustomerInfo>()!!
+                        holder.shopName.text = customer.name
+                        holder.number.text = holder.viewBill.context.getString(R.string.self_expense)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("tag", error.message)
+                }
+
+            })
+        }
+        else{
+
+            val ref = FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(shopkeeperUid)
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val shopkeeper = snapshot.getValue<ShopkeeperInfo>() as ShopkeeperInfo
                         holder.shopName.text = shopkeeper.shopName
-                        holder.number.text = shopkeeper.phone.toString()
+                        holder.number.text = shopkeeper.phone
                     }
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+                    Log.e("tag", error.message)
                 }
 
             })
+        }
+
         holder.category.text = itemModel.category
         holder.totalAmount.text = itemModel.totalAmount
 
         holder.viewBill.setOnClickListener {
+
             val adapter: ViewBillItemDetailsAdapter
             val dialogPlus = DialogPlus.newDialog ( holder.viewBill.context!! )
                 .setContentHolder(ViewHolder(R.layout.item_view_bill))
                 .setExpanded(true, 1500)
                 .create()
             val newView = dialogPlus.holderView
-            newView.invoiceNo.text = itemModel.invoice
-            FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(itemModel.shopkeeperUid.toString())
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            val shopkeeper = snapshot.getValue<ShopkeeperInfo>()!!
-                            //Toast.makeText(newView.context, shopkeeper.toString(), Toast.LENGTH_SHORT).show()
-                            newView.shopName.text = shopkeeper.shopName
-                            newView.shopkeeperAddress.text = shopkeeper.address
-                            newView.shopkeeperPhoneNumber.text = shopkeeper.phone
-                            newView.shopkeeperEmail.text = shopkeeper.mail
-                        }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
+            if(shopkeeperUid == customerUid){
 
-                })
-            if (itemModel.sentTo == auth.currentUser!!.uid) {
+                newView.invoiceNo.text = itemModel.invoice
                 FirebaseDatabase.getInstance().reference.child("Customers")
-                    .child(CustomerUid.toString())
+                    .child(customerUid)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                val customer = snapshot.getValue<CustomerInfo>() as CustomerInfo
+
+                                newView.shopName.text = customer.name
+                                newView.shopkeeperAddress.text = customer.address
+                                newView.shopkeeperPhoneNumber.text = customer.phone
+                                newView.shopkeeperEmail.text = customer.mail
+
+                                newView.custName.text = customer.name
+                                newView.customerAddress.text = customer.address
+                                newView.customerPhoneNumber.text = customer.phone
+                                newView.customerEmail.text = customer.mail
+
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.e("tag", error.message)
+                        }
+
+                    })
+
+                newView.totalAmount.text = itemModel.totalAmount
+                newView.date.text = SimpleDateFormat("dd/MM/yyyy").format(Date(itemModel.date.toLong()))
+                newView.status.isClickable = false
+                newView.gstInTextView.text = holder.category.context.getString(R.string.remarks)
+                newView.gstIn.text = itemModel.GSTIN.toString()
+
+                if(itemModel.pending == true) {
+                    newView.status.text = holder.viewBill.context.getString(R.string.pending)
+                    newView.status.setBackgroundColor(Color.RED)
+                }
+                else {
+                    if (itemModel.accepted == true) {
+                        newView.status.text = holder.viewBill.context.getString(R.string.accepted)
+                        newView.status.setBackgroundColor(Color.GREEN)
+                    }
+                    else {
+                        newView.status.text = holder.viewBill.context.getString(R.string.rejected)
+                        newView.status.setBackgroundColor(Color.BLACK)
+                    }
+                }
+                dialogPlus.show()
+            }
+            else{
+
+                newView.invoiceNo.text = itemModel.invoice
+                FirebaseDatabase.getInstance().reference.child("Shopkeepers").child(itemModel.shopkeeperUid.toString())
                     .addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                val shopkeeper = snapshot.getValue<ShopkeeperInfo>()!!
+                                //Toast.makeText(newView.context, shopkeeper.toString(), Toast.LENGTH_SHORT).show()
+                                newView.shopName.text = shopkeeper.shopName
+                                newView.shopkeeperAddress.text = shopkeeper.address
+                                newView.shopkeeperPhoneNumber.text = shopkeeper.phone
+                                newView.shopkeeperEmail.text = shopkeeper.mail
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.e("tag", error.message)
+                        }
+
+                    })
+
+                FirebaseDatabase.getInstance().reference.child("Customers")
+                    .child(customerUid)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()) {
                                 val customer = snapshot.getValue<CustomerInfo>() as CustomerInfo
@@ -139,34 +202,46 @@ class CustomerPastBillsAdapter (val options: ArrayList<BillInfo>)
                         }
 
                         override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
+                            Log.e("tag", error.message)
                         }
 
                     })
-            }
-            val itemList: ArrayList<ItemInfo> = itemModel.items as ArrayList<ItemInfo>
-            adapter = ViewBillItemDetailsAdapter(itemList)
-            adapter.notifyDataSetChanged()
-            newView.totalAmount.text = itemModel.totalAmount
-            newView.date.text = SimpleDateFormat("dd/MM/yyyy").format(Date(itemModel.date.toLong()))
-            newView.itemDetailsView.layoutManager = LinearLayoutManager(newView.context)
-            newView.itemDetailsView.adapter = adapter
-            newView.status.isClickable = false
-            if(itemModel.pending == true) {
-                newView.status.text = "Pending"
-                newView.status.setBackgroundColor(Color.RED)
-            }
-            else {
-                if (itemModel.accepted == true) {
-                    newView.status.text = "Accepted"
-                    newView.status.setBackgroundColor(Color.GREEN)
+
+                val itemList: ArrayList<ItemInfo> = itemModel.items as ArrayList<ItemInfo>
+                adapter = ViewBillItemDetailsAdapter(itemList)
+                adapter.notifyDataSetChanged()
+                newView.totalAmount.text = itemModel.totalAmount
+                newView.date.text = SimpleDateFormat("dd/MM/yyyy").format(Date(itemModel.date.toLong()))
+                newView.itemDetailsView.layoutManager = LinearLayoutManager(newView.context)
+                newView.itemDetailsView.adapter = adapter
+                newView.status.isClickable = false
+                newView.gstInTextView.text = holder.category.context.getString(R.string.gstin)
+
+                if(itemModel.GSTIN.toString().isEmpty()){
+                    newView.gstIn.text = holder.category.context.getString(R.string.Null)
+                }
+                else{
+                    newView.gstIn.text = itemModel.GSTIN.toString()
+                }
+
+                if(itemModel.pending == true) {
+                    newView.status.text = holder.viewBill.context.getString(R.string.pending)
+                    newView.status.setBackgroundColor(Color.RED)
                 }
                 else {
-                    newView.status.text = "Rejected"
-                    newView.status.setBackgroundColor(Color.BLACK)
+                    if (itemModel.accepted == true) {
+                        newView.status.text = holder.viewBill.context.getString(R.string.accepted)
+                        newView.status.setBackgroundColor(Color.GREEN)
+                    }
+                    else {
+                        newView.status.text = holder.viewBill.context.getString(R.string.rejected)
+                        newView.status.setBackgroundColor(Color.BLACK)
+                    }
                 }
+                dialogPlus.show()
             }
-            dialogPlus.show()
+
+
         }
 
     }

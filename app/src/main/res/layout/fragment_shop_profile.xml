@@ -356,16 +356,49 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/signOut"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/globe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/pinCodeLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/icon_globe"
+                android:layout_marginBottom="25dp"/>
+
+            <TextView
+                android:id="@+id/hindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/globe"
+                app:layout_constraintTop_toBottomOf="@id/pinCodeLayout"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_italic"
+                android:text="@string/hindi"
+                />
+            <TextView
+                android:id="@+id/english"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@+id/globe"
+                app:layout_constraintTop_toBottomOf="@id/pinCodeLayout"
+                android:fontFamily="@font/nunito_italic"
+                android:text="@string/english"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signOut"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/globe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="20dp"
                 android:elevation="7dp"
                 android:layout_marginBottom="80dp"
                 android:text="@string/shopkeeper_logout"

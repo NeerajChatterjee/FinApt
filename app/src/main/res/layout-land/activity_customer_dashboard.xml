@@ -46,9 +46,9 @@
         app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89"
+        app:layout_constraintVertical_bias="0.8"
         app:pressedTranslationZ="6dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:rippleColor="@color/white"
         tools:ignore="MissingClass"
         android:contentDescription="@string/message" />

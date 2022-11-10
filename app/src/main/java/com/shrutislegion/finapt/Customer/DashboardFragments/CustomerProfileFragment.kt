@@ -2,6 +2,7 @@
 
 package com.shrutislegion.finapt.Customer.DashboardFragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.icu.text.MessageFormat.format
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
@@ -20,25 +22,18 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Customer.Modules.CustomerInfo
+import com.shrutislegion.finapt.LanguageManager
+import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.databinding.FragmentCustomerProfileBinding
 import kotlinx.android.synthetic.main.activity_customer_dashboard.*
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.internal.Util.format
 import okhttp3.internal.http.HttpDate.format
 import java.lang.String.format
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CustomerProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @Suppress("DEPRECATION")
 class CustomerProfileFragment : Fragment() {
     lateinit var user: CustomerInfo
@@ -61,6 +56,7 @@ class CustomerProfileFragment : Fragment() {
         val custReference = database.reference.child("Customers").child(auth.currentUser!!.uid)
         // finding user in database
         custReference.addListenerForSingleValueEvent(object : ValueEventListener{
+            @SuppressLint("SimpleDateFormat")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     // fetching user data from the database
@@ -89,6 +85,19 @@ class CustomerProfileFragment : Fragment() {
             }
 
         })
+
+        val lang = LanguageManager(requireContext())
+        binding.hindi.setOnClickListener {
+            lang.updateResources("hi")
+            hindi.setTextColor(requireActivity().resources.getColor(R.color.color_primary))
+            requireActivity().recreate()
+        }
+
+        binding.english.setOnClickListener {
+            lang.updateResources("en")
+            english.setTextColor(requireActivity().resources.getColor(R.color.color_primary))
+            requireActivity().recreate()
+        }
 
         // implementing logout button for the user
         binding.signOut.setOnClickListener {

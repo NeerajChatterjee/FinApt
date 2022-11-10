@@ -6,34 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Customer.CustomerAddExpenseActivity">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/customerCreateExpenseTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/create_an_expense"
-        android:fontFamily="@font/nunito_extrabold"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="30dp"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/slate_300"
-        app:layout_constraintTop_toBottomOf="@+id/customerCreateExpenseTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -41,6 +17,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/customerCreateExpenseTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/create_an_expense"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="40sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/slate_300"
+                app:layout_constraintTop_toBottomOf="@+id/customerCreateExpenseTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addExpenseInvNoLayout"
@@ -58,7 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
                 app:boxStrokeColor="@color/color_primary"
                 app:boxStrokeWidth="2dp"
                 tools:ignore="MissingConstraints">

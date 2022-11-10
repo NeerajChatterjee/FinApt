@@ -115,8 +115,6 @@ class ShopCreateBillActivity : AppCompat() {
             }
         }
 
-
-        // getting current date
         // getting current date
         date = Calendar.getInstance().timeInMillis.toString()
 
