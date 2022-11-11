@@ -17,6 +17,7 @@ import com.shrutislegion.finapt.AppCompat
 import com.shrutislegion.finapt.Customer.DashboardFragments.*
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
+import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.ShopHomeFragment
 import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.ActivityCustomerDashboardBinding
 import kotlinx.android.synthetic.main.activity_customer_dashboard.*
@@ -58,38 +59,38 @@ class CustomerDashboard : AppCompat() {
         if(frag == "1") {
             bottomNav.setItemSelected(R.id.customerHome, true)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
+                .replace(R.id.customer_fragment_container, CustomerHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Home"
         }
         else if(frag == "2"){
             bottomNav.setItemSelected(R.id.customerPendingRequest,true)
-            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment(), "PENDING_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Requests"
         }
         else if(frag == "3"){
             bottomNav.setItemSelected(R.id.customerPastBills,true)
-            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment(), "BILLS_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Past Bills"
         }
         else if(frag == "4"){
             bottomNav.setItemSelected(R.id.customerChat,true)
-            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment(), "CHAT_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.VISIBLE
             supportActionBar!!.title = "Chats"
         }
         else if(frag == "5"){
             bottomNav.setItemSelected(R.id.customerProfile,true)
-            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment(), "PROFILE_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Profile"
         }
         // By default the home page should be selected on opening the app
         else if(savedInstanceState==null){
             bottomNav.setItemSelected(R.id.customerHome,true)
-            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
             binding.messageCustomerFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Home"
         }
@@ -99,32 +100,46 @@ class CustomerDashboard : AppCompat() {
             var fragment: Fragment? = null
             when(it){
                 R.id.customerHome ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
                     binding.messageCustomerFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Home"
                 }
                 R.id.customerPendingRequest -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPendingReqFragment(), "PENDING_FRAGMENT").commitAllowingStateLoss()
                     binding.messageCustomerFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Requests"
                 }
                 R.id.customerPastBills -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerPastBillsFragment(), "BILLS_FRAGMENT").commitAllowingStateLoss()
                     binding.messageCustomerFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Bills"
                 }
                 R.id.customerChat -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerChatFragment(), "CHAT_FRAGMENT").commitAllowingStateLoss()
                     binding.messageCustomerFragmentFAB.visibility = View.VISIBLE
                     supportActionBar!!.title = "Chats"
                 }
                 R.id.customerProfile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerProfileFragment(), "PROFILE_FRAGMENT").commitAllowingStateLoss()
                     binding.messageCustomerFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Profile"
                 }
             }
 
+        }
+    }
+
+    override fun onBackPressed() {
+
+        val myFragment: CustomerHomeFragment? =
+            supportFragmentManager.findFragmentByTag("HOME_FRAGMENT") as CustomerHomeFragment?
+        if (myFragment != null && myFragment.isVisible) {
+            super.onBackPressed()
+        }
+        else{
+            supportFragmentManager.beginTransaction().replace(R.id.customer_fragment_container, CustomerHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
+            supportActionBar!!.title = "Home"
+            bottomNav.setItemSelected(R.id.customerHome, true)
         }
     }
 }

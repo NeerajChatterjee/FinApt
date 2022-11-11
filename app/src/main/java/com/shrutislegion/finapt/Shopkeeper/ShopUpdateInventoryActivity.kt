@@ -33,25 +33,21 @@ class ShopUpdateInventoryActivity : AppCompat() {
         binding.checkItemsCardView.setOnClickListener {
             val intent = Intent(this, ShopCheckItemsActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         binding.addItemsCardView.setOnClickListener {
             val intent = Intent(this, ShopAddItemsActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         binding.editItemsCardView.setOnClickListener {
             val intent = Intent(this, ShopEditItemsActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         binding.removeItemsCardView.setOnClickListener {
             val intent = Intent(this, ShopRemoveItemsActivity::class.java)
             startActivity(intent)
-            finish()
 //            // set an id to the layout
 //            fragmentLayout.id = R.id.shop_updateInventory_fragment_container // some positive integer
 //

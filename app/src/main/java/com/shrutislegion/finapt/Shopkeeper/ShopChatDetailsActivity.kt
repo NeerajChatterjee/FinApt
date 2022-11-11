@@ -91,6 +91,8 @@ class ShopChatDetailsActivity : AppCompat() {
         adapter = ChatDetailsAdapter(storeMessage, this)
         binding.shopChatDetailsRV.adapter = adapter
 
+        binding.shopChatDetailsRV.scrollToPosition(storeMessage.size - 1)
+
         val linearLayoutManager = LinearLayoutManagerWrapper(this, LinearLayoutManager.VERTICAL, false)
         binding.shopChatDetailsRV.layoutManager = linearLayoutManager
 
@@ -109,7 +111,7 @@ class ShopChatDetailsActivity : AppCompat() {
                             val messageModel: ChatMessageInfo = dss.getValue<ChatMessageInfo>()!!
                             storeMessage.add(messageModel)
                         }
-
+                        binding.shopChatDetailsRV.scrollToPosition(storeMessage.size - 1)
                         adapter.notifyDataSetChanged()
 
                     }

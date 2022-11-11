@@ -72,7 +72,7 @@ class CustomerChatFragment : Fragment() {
         binding.customerChatFragmentRV.isNestedScrollingEnabled = false
 
         FirebaseDatabase.getInstance().reference
-            .child("Chats").addValueEventListener(object : ValueEventListener {
+            .child("Chats").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         for(item in snapshot.children){

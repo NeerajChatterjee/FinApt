@@ -8,33 +8,19 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.shrutislegion.finapt.AppCompat
-import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.Notifications.MyReceiver
-import com.shrutislegion.finapt.Notifications.channelId
-import com.shrutislegion.finapt.Notifications.notificationId
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.RegistrationActivity
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.*
 import com.shrutislegion.finapt.ShowAllUsersFragment
 import com.shrutislegion.finapt.databinding.ActivityShopkeeperDashboardBinding
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @Suppress("DEPRECATION")
@@ -76,35 +62,35 @@ class ShopkeeperDashboard : AppCompat() {
         if(frag == "1") {
             bottomNav.setItemSelected(R.id.shopHome, true)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
+                .replace(R.id.shop_fragment_container, ShopHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Home"
         }
         else if(frag == "2"){
             bottomNav.setItemSelected(R.id.shopPendingRequest,true)
-            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment(), "PENDING_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Pending Requests"
         }
         else if(frag == "3"){
             bottomNav.setItemSelected(R.id.shopPastBills,true)
-            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment(), "BILLS_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Bills"
         }
         else if(frag == "4"){
             bottomNav.setItemSelected(R.id.shopChat,true)
-            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment(), "CHAT_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.VISIBLE
             supportActionBar!!.title = "Chats"
         }
         else if(frag == "5"){
             bottomNav.setItemSelected(R.id.shopProfile,true)
-            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment(), "PROFILE_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.GONE
             supportActionBar!!.title = "Profile"
@@ -112,7 +98,7 @@ class ShopkeeperDashboard : AppCompat() {
         // By default the home page should be selected on opening the app
         else if(savedInstanceState==null){
             bottomNav.setItemSelected(R.id.shopHome,true)
-            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
 
             binding.messageShopFragmentFAB.visibility = View.GONE
         }
@@ -122,27 +108,28 @@ class ShopkeeperDashboard : AppCompat() {
             var fragment: Fragment? = null
             when(it){
                 R.id.shopHome ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
                     binding.messageShopFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Home"
                 }
                 R.id.shopPendingRequest -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPendingReqFragment(), "PENDING_FRAGMENT").commitAllowingStateLoss()
                     binding.messageShopFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Pending Requests"
                 }
                 R.id.shopPastBills -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopPastBillsFragment(), "BILLS_FRAGMENT").commitAllowingStateLoss()
                     binding.messageShopFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Bills"
                 }
                 R.id.shopChat -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopChatFragment(), "CHAT_FRAGMENT").commitAllowingStateLoss()
                     binding.messageShopFragmentFAB.visibility = View.VISIBLE
                     supportActionBar!!.title = "Chats"
                 }
                 R.id.shopProfile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopProfileFragment(), "PROFILE_FRAGMENT")
+                        .commitAllowingStateLoss()
                     binding.messageShopFragmentFAB.visibility = View.GONE
                     supportActionBar!!.title = "Profile"
                 }
@@ -167,4 +154,19 @@ class ShopkeeperDashboard : AppCompat() {
         }
 
     }
+
+    override fun onBackPressed() {
+
+        val myFragment: ShopHomeFragment? =
+            supportFragmentManager.findFragmentByTag("HOME_FRAGMENT") as ShopHomeFragment?
+        if (myFragment != null && myFragment.isVisible) {
+            super.onBackPressed()
+        }
+        else{
+            supportFragmentManager.beginTransaction().replace(R.id.shop_fragment_container, ShopHomeFragment(), "HOME_FRAGMENT").commitAllowingStateLoss()
+            supportActionBar!!.title = "Home"
+            bottomNav.setItemSelected(R.id.shopHome, true)
+        }
+    }
+
 }

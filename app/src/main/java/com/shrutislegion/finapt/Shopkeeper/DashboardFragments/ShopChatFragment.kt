@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.orhanobut.dialogplus.OnBackPressListener
 import com.shrutislegion.finapt.Modules.LoggedInUserInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopChatUserFragmentAdapter
@@ -78,7 +80,7 @@ class ShopChatFragment : Fragment() {
         binding.shopChatFragmentRV.isNestedScrollingEnabled = false
 
         FirebaseDatabase.getInstance().reference
-            .child("Chats").addValueEventListener(object : ValueEventListener {
+            .child("Chats").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()){
                         for(item in snapshot.children){
@@ -136,4 +138,5 @@ class ShopChatFragment : Fragment() {
 
         return binding.root
     }
+
 }
