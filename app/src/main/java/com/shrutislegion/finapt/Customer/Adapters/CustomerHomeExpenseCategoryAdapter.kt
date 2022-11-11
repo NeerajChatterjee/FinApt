@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +19,12 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
-class CustomerHomeExpenseCategoryAdapter (val options: HashMap<String, Int>)
+class CustomerHomeExpenseCategoryAdapter (val check: String, val options: HashMap<String, Int>)
     : RecyclerView.Adapter<CustomerHomeExpenseCategoryAdapter.myViewHolder>(){
 
 
@@ -59,14 +62,14 @@ class CustomerHomeExpenseCategoryAdapter (val options: HashMap<String, Int>)
         return myViewHolder(view)
     }
 
-    @SuppressLint("ResourceAsColor", "SetTextI18n")
+    @SuppressLint("ResourceAsColor", "SetTextI18n", "SimpleDateFormat", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         val itemModel = options
         val keys = ArrayList<String>(options.keys)
         holder.expenseCategory.text = keys[position]
         holder.totalExpense.text = "₹${itemModel[keys[position]]}"
         val color = position + 1
-//        holder.layoutPosition
+
         if (color%4 == 1) {
             holder.cardView.setCardBackgroundColor(holder.cardView.resources.getColor(R.color.purple_200 , null))
         }
@@ -79,29 +82,130 @@ class CustomerHomeExpenseCategoryAdapter (val options: HashMap<String, Int>)
         else {
             holder.cardView.setCardBackgroundColor(holder.cardView.resources.getColor(R.color.light_yellow, null))
         }
+
         lateinit var adapter: CustomerCategoryRecentBillAdapter
         holder.recentBillView.layoutManager = LinearLayoutManagerWrapper(holder.recentBillView.context, LinearLayoutManager.HORIZONTAL, false)
+
         val bills: ArrayList<BillInfo> = ArrayList<BillInfo>()
+        val allBills: ArrayList<BillInfo> = ArrayList<BillInfo>()
+
         adapter = CustomerCategoryRecentBillAdapter(bills)
-        FirebaseDatabase.getInstance().reference.child("ExpensesWithCategories").child(Firebase.auth.currentUser!!.uid).child(keys[position]).orderByChild("Date").limitToLast(5).addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (dss in snapshot.children){
-                        val bill = dss.getValue<BillInfo>() as BillInfo
-                        bills.add(bill)
+
+        when (check) {
+            "All Time" -> {
+                FirebaseDatabase.getInstance().reference.child("ExpensesWithCategories").child(Firebase.auth.currentUser!!.uid).child(keys[position]).orderByChild("Date").limitToLast(5).addValueEventListener(object: ValueEventListener{
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            bills.clear()
+                            for (dss in snapshot.children){
+                                val bill = dss.getValue<BillInfo>() as BillInfo
+                                bills.add(bill)
+                            }
+                            bills.reverse()
+                            adapter.notifyDataSetChanged()
+                        }
                     }
-                    bills.reverse()
-                    adapter.notifyDataSetChanged()
-                }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+                adapter = CustomerCategoryRecentBillAdapter(bills)
+                holder.recentBillView.adapter = adapter
             }
+            "Monthly" -> {
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_YEAR, -30)
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                FirebaseDatabase.getInstance().reference.child("ExpensesWithCategories").child(Firebase.auth.currentUser!!.uid).child(keys[position]).orderByChild("Date").addValueEventListener(object: ValueEventListener{
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            allBills.clear()
+                            for (dss in snapshot.children){
+                                val bill = dss.getValue<BillInfo>()!!
+
+                                if(bill.date.toLong() >= calendar.timeInMillis){
+                                    bills.add(bill)
+                                }
+                            }
+                            bills.reverse()
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+
+                adapter = CustomerCategoryRecentBillAdapter(bills)
+                holder.recentBillView.adapter = adapter
+
             }
+            "Weekly" -> {
 
-        })
-        holder.recentBillView.adapter = adapter
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_YEAR, -7)
 
+                FirebaseDatabase.getInstance().reference.child("ExpensesWithCategories").child(Firebase.auth.currentUser!!.uid).child(keys[position]).orderByChild("Date").addValueEventListener(object: ValueEventListener{
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            allBills.clear()
+                            for (dss in snapshot.children){
+                                val bill = dss.getValue<BillInfo>()!!
+
+                                if(bill.date.toLong() >= calendar.timeInMillis){
+                                    bills.add(bill)
+                                }
+                            }
+                            bills.reverse()
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+                adapter = CustomerCategoryRecentBillAdapter(bills)
+                holder.recentBillView.adapter = adapter
+
+            }
+            "Today" -> {
+
+                val currentDate = SimpleDateFormat("dd/MM/yyyy").format(Date(Calendar.getInstance().timeInMillis))
+
+                FirebaseDatabase.getInstance().reference.child("ExpensesWithCategories").child(Firebase.auth.currentUser!!.uid).child(keys[position]).orderByChild("Date").addValueEventListener(object: ValueEventListener{
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            allBills.clear()
+                            for (dss in snapshot.children){
+                                val bill = dss.getValue<BillInfo>()!!
+                                val sentDate = SimpleDateFormat("dd/MM/yyyy").format(Date(bill.date.toLong()))
+
+                                if(sentDate == currentDate){
+                                    bills.add(bill)
+                                }
+                            }
+                            bills.reverse()
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+
+                adapter = CustomerCategoryRecentBillAdapter(bills)
+                holder.recentBillView.adapter = adapter
+
+            }
+        }
 
     }
 

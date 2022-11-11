@@ -4,6 +4,8 @@ package com.shrutislegion.finapt.Customer.DashboardFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +26,7 @@ import com.shrutislegion.finapt.Customer.Adapters.CustomerPendingRequestAdapter
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
+import com.shrutislegion.finapt.databinding.FragmentCustomerPendingReqBinding
 import kotlinx.android.synthetic.main.fragment_customer_pending_req.view.*
 
 class CustomerPendingReqFragment : Fragment() {
@@ -38,11 +41,10 @@ class CustomerPendingReqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_customer_pending_req, container, false)
-        var customerPendingRequestView = view.findViewById<RecyclerView>(R.id.customerPendingRequestView)
+        val binding: FragmentCustomerPendingReqBinding = FragmentCustomerPendingReqBinding.inflate(inflater, container, false)
 
         //var linearLayoutManager = LinearLayoutManagerWrapper(context, LinearLayoutManager.VERTICAL, true)
-        view.customerPendingRequestView.layoutManager = LinearLayoutManager(view.context)
+        binding.customerPendingRequestView.layoutManager = LinearLayoutManager(context)
 
         val list = ArrayList<BillInfo>()
 
@@ -73,7 +75,15 @@ class CustomerPendingReqFragment : Fragment() {
         adapter = CustomerPendingRequestAdapter(list)
 
         // Setting the Adapter with the recyclerview
-        customerPendingRequestView.adapter = adapter
+        binding.customerPendingRequestView.adapter = adapter
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.customerPendingReqNestedScrollView.visibility = View.VISIBLE
+
+        },2000)
+
         return view
     }
 }

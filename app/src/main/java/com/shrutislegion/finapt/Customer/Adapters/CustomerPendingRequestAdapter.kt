@@ -55,7 +55,7 @@ class CustomerPendingRequestAdapter(val options: ArrayList<BillInfo>)
         return myViewHolder(view)
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         val itemModel = options[position]
         val ref = FirebaseDatabase.getInstance().reference.child("Shopkeepers")

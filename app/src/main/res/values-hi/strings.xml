@@ -207,5 +207,10 @@
     <string name="name">नाम</string>
     <string name="check_item_details">आइटम विवरण की जाँच करें</string>
     <string name="we_are_delighted_to_see_you_here">हम आपको यहाँ देखकर प्रसन्न हैं!</string>
+    <string name="weekly">साप्ताहिक</string>
+    <string name="today">आज</string>
+    <string name="monthly">महीने के</string>
+    <string name="expense_representation_by_pie_chart">पाई चार्ट द्वारा व्यय निरूपण</string>
+    <string name="all_time">पूरा समय</string>
 
 </resources>

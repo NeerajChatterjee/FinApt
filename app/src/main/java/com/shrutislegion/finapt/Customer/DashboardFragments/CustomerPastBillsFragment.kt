@@ -2,6 +2,8 @@ package com.shrutislegion.finapt.Customer.DashboardFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +24,7 @@ import com.shrutislegion.finapt.Modules.ItemInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopBillHistoryAdapter
 import com.shrutislegion.finapt.Shopkeeper.DashboardFragments.ShopPastBillsFragment
+import com.shrutislegion.finapt.databinding.FragmentCustomerPastBillsBinding
 import kotlinx.android.synthetic.main.fragment_customer_past_bills.view.*
 import kotlinx.android.synthetic.main.fragment_shop_past_bills.view.*
 
@@ -41,10 +44,10 @@ class CustomerPastBillsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_customer_past_bills, container, false)
+        val binding: FragmentCustomerPastBillsBinding = FragmentCustomerPastBillsBinding.inflate(inflater, container, false)
         bills = ArrayList<BillInfo>()
 
-        view.pastBillsView!!.layoutManager = LinearLayoutManager(view.context)
+        binding.pastBillsView.layoutManager = LinearLayoutManager(context)
 
         val auth = Firebase.auth
         FirebaseDatabase.getInstance().reference.child("All Expenses").child(auth.currentUser!!.uid)
@@ -70,7 +73,14 @@ class CustomerPastBillsFragment : Fragment() {
         // This will pass the ArrayList to our Adapter
         adapter = CustomerPastBillsAdapter(bills)
         // Setting the Adapter with the recyclerview
-        view.pastBillsView!!.adapter =  adapter
+        binding.pastBillsView!!.adapter =  adapter
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.customerPastBillsReqNestedScrollView.visibility = View.VISIBLE
+
+        },2000)
 
         return view
     }

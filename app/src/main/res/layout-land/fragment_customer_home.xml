@@ -6,83 +6,128 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Customer.DashboardFragments.CustomerHomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/customerHomeNestedScrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:id="@+id/customerHomeConstraintLayout"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/customerHomeNestedScrollView"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/helloText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"
+                    android:text="@string/hello"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/color_primary"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/nameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/helloText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="user"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:textSize="35sp"
+                    android:textColor="@color/color_primary"
+                    />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/pieChart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/nameText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="20dp"
+                    android:background="@color/white"
+                    >
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="@string/expense_representation_by_pie_chart"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/expenseCategoryView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/pieChart"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="60dp"
+                    android:layout_marginHorizontal="60dp"
+                    tools:listitem="@layout/item_home_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/customerAddSelfExpFAB"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_add_24"
+            app:tint="@color/white"
+            android:backgroundTint="@color/color_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8"
+            app:pressedTranslationZ="6dp"
+            android:visibility="visible"
+            app:rippleColor="@color/white"
+            tools:ignore="MissingClass"
+            android:contentDescription="@string/message" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/helloText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="40dp"
-                android:text="@string/hello"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="20sp"
-                android:textColor="@color/color_primary"
-                />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/nameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/helloText"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="user"
-                android:fontFamily="@font/nunito_extrabold"
-                android:textSize="35sp"
-                android:textColor="@color/color_primary"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/expenseCategoryView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/nameText"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="60dp"
-                android:layout_marginHorizontal="60dp"
-                tools:listitem="@layout/item_home_category"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/customerAddSelfExpFAB"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBarCustomerHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:elevation="20dp"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        app:tint="@color/white"
-        android:backgroundTint="@color/color_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/color_primary"
+        android:padding="6dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        app:pressedTranslationZ="6dp"
-        android:visibility="visible"
-        app:rippleColor="@color/white"
-        tools:ignore="MissingClass"
-        android:contentDescription="@string/message" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

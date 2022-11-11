@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -164,6 +166,14 @@ class ShopHomeFragment : Fragment() {
 
         // Setting the Adapter with the recyclerview
         binding.recentBills.adapter = adapter
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.shopHomeScrollView.visibility = View.VISIBLE
+
+        },2000)
+
         return binding.root
     }
 }

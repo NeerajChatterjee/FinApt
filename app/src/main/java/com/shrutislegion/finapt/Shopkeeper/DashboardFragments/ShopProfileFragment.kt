@@ -65,10 +65,13 @@ class ShopProfileFragment : Fragment() {
                     binding.shopkeeperAddress.setText(user.address)
                     binding.state.setText(user.state)
                     binding.pinCode.setText(user.pincode)
-                    if(user.profilePic != ""){
+
+                    if(user.profilePic == ""){
+                        binding.profilePic.visibility = View.GONE
+                    }
+                    else{
                         // setting Profile Pic using Glide Library
                         context?.let { Glide.with(it).load(user.profilePic).into(binding.profilePic) }
-                        //Toast.makeText(context, user.profilePic, Toast.LENGTH_SHORT)
                     }
 
                 }

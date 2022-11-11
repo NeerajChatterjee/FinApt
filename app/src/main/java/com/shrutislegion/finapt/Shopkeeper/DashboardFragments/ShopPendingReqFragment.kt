@@ -2,6 +2,8 @@ package com.shrutislegion.finapt.Shopkeeper.DashboardFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +61,14 @@ class ShopPendingReqFragment : Fragment() {
         adapter = ShopBillHistoryAdapter(bills)
         // Setting the Adapter with the recyclerview
         view.pendingReqView!!.adapter = adapter
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            view.progressBarCustomerHome.visibility = View.GONE
+            view.customerPendingReqNestedScrollView.visibility = View.VISIBLE
+
+        },2000)
+
         return view
     }
 
