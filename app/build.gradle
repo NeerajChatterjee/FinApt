@@ -113,4 +113,7 @@ dependencies {
 
     // For Custom Dialogue Box
     implementation 'com.orhanobut:dialogplus:1.11@aar'
+
+    // For Pie Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -48,6 +48,13 @@ class CustomerPendingReqFragment : Fragment() {
 
         val list = ArrayList<BillInfo>()
 
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.customerPendingReqNestedScrollView.visibility = View.VISIBLE
+
+        }, 2000)
+
         val auth = Firebase.auth
         val ref = FirebaseDatabase.getInstance().reference.child("Customer Pending Requests").child(auth.currentUser!!.uid)
 
@@ -77,13 +84,6 @@ class CustomerPendingReqFragment : Fragment() {
         // Setting the Adapter with the recyclerview
         binding.customerPendingRequestView.adapter = adapter
 
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            binding.progressBarCustomerHome.visibility = View.GONE
-            binding.customerPendingReqNestedScrollView.visibility = View.VISIBLE
-
-        },2000)
-
-        return view
+        return binding.root
     }
 }

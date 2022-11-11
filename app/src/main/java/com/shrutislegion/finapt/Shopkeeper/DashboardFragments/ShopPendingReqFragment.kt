@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.shrutislegion.finapt.Modules.BillInfo
 import com.shrutislegion.finapt.R
 import com.shrutislegion.finapt.Shopkeeper.Adapters.ShopBillHistoryAdapter
+import com.shrutislegion.finapt.databinding.FragmentShopPendingReqBinding
 import kotlinx.android.synthetic.main.fragment_shop_pending_req.view.*
 
 
@@ -37,9 +38,9 @@ class ShopPendingReqFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_shop_pending_req, container, false)
+        val binding: FragmentShopPendingReqBinding = FragmentShopPendingReqBinding.inflate(inflater, container, false)
         bills = ArrayList<BillInfo>()
-        view.pendingReqView!!.layoutManager = LinearLayoutManager(view.context)
+        binding.pendingReqView.layoutManager = LinearLayoutManager(context)
 
         val auth = Firebase.auth
         val database = Firebase.database
@@ -60,16 +61,16 @@ class ShopPendingReqFragment : Fragment() {
         // This will pass the ArrayList to our Adapter
         adapter = ShopBillHistoryAdapter(bills)
         // Setting the Adapter with the recyclerview
-        view.pendingReqView!!.adapter = adapter
+        binding.pendingReqView.adapter = adapter
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            view.progressBarCustomerHome.visibility = View.GONE
-            view.customerPendingReqNestedScrollView.visibility = View.VISIBLE
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.customerPendingReqNestedScrollView.visibility = View.VISIBLE
 
-        },2000)
+        }, 2000)
 
-        return view
+        return binding.root
     }
 
 

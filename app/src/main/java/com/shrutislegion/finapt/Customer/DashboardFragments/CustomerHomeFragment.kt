@@ -81,7 +81,7 @@ class CustomerHomeFragment : Fragment() {
         binding = FragmentCustomerHomeBinding.inflate(inflater, container, false)
         auth = Firebase.auth
 
-        binding.pieChart.setOnClickListener {
+        binding.pieChart!!.setOnClickListener {
             val intent = Intent(context, PieChartActivity::class.java)
             startActivity(intent)
         }
@@ -105,8 +105,7 @@ class CustomerHomeFragment : Fragment() {
             binding.customerHomeConstraintLayout.visibility = View.VISIBLE
             binding.customerAddSelfExpFAB.visibility = View.VISIBLE
 
-        }
-        , 2000)
+        }, 2000)
 
         map = HashMap<String, Int>()
 
@@ -131,7 +130,7 @@ class CustomerHomeFragment : Fragment() {
                     }
                     adapter.notifyDataSetChanged()
                 }
-                Toast.makeText(context, map.toString(), Toast.LENGTH_SHORT).show()
+                // Toast.makeText(context, map.toString(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onCancelled(error: DatabaseError) {

@@ -47,6 +47,13 @@ class CustomerPastBillsFragment : Fragment() {
         val binding: FragmentCustomerPastBillsBinding = FragmentCustomerPastBillsBinding.inflate(inflater, container, false)
         bills = ArrayList<BillInfo>()
 
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.progressBarCustomerHome.visibility = View.GONE
+            binding.customerPastBillsReqNestedScrollView.visibility = View.VISIBLE
+
+        }, 2000)
+
         binding.pastBillsView.layoutManager = LinearLayoutManager(context)
 
         val auth = Firebase.auth
@@ -75,13 +82,6 @@ class CustomerPastBillsFragment : Fragment() {
         // Setting the Adapter with the recyclerview
         binding.pastBillsView!!.adapter =  adapter
 
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            binding.progressBarCustomerHome.visibility = View.GONE
-            binding.customerPastBillsReqNestedScrollView.visibility = View.VISIBLE
-
-        },2000)
-
-        return view
+        return binding.root
     }
 }

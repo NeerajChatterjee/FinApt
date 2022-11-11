@@ -283,7 +283,7 @@ class ShopSendBillActivity : AppCompat() {
                 invoice = binding.invoiceNo.getText().toString().trim()
                 totalAmount = binding.totalAmount.text.toString().trim()
                 GSTIN = binding.shopkeeperGSTIn.text.toString().trim()
-                Toast.makeText(this, itemList.toString(),Toast.LENGTH_SHORT).show()
+
                 val bill: BillInfo = BillInfo (
                     billID = key, pending = true, false, sentTo = sentTo, date = date, totalAmount = totalAmount, shopkeeperUid = shopkeeperUid,  category = category , invoice = invoice, GSTIN = GSTIN, items = itemList)
                 // uploading data to Firebase Database
